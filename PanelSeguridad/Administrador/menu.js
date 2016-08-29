@@ -242,8 +242,11 @@ function Ruta_Menu() {
 function Advertencia() {
 
     $("#Tree_Menu").mouseenter(function () {
-     
         $("#Dialog_Warning").dialog("open");
         $("#Mensaje_Warning").html("No puede cambiar de pagina hasta no cerrar (" + $("#Title_form").html() + ")");
+    });
+
+    $("#Tree_Menu").mouseout(function () {
+        $("#Dialog_Warning").dialog("close");
     });
 }
