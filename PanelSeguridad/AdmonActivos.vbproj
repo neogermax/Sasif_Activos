@@ -154,6 +154,27 @@
     <Content Include="images\people_online.png" />
     <Content Include="images\search.png" />
     <Content Include="images\user.png" />
+    <Content Include="McCain\Image\activo.png" />
+    <Content Include="McCain\Image\alert.png" />
+    <Content Include="McCain\Image\cabeza2.jpg" />
+    <Content Include="McCain\Image\error.png" />
+    <Content Include="McCain\Image\inactivo.png" />
+    <Content Include="McCain\Image\McCain.png" />
+    <Content Include="McCain\Image\MEN.jpg" />
+    <Content Include="McCain\Image\menu3.jpg" />
+    <Content Include="McCain\Image\sasif1.gif" />
+    <Content Include="McCain\Image\ver.png" />
+    <Content Include="McCain\Image\WOMEN.jpg" />
+    <Content Include="McCain\MCcain.html" />
+    <Content Include="McCain\Script\jquery-1.4.1.js" />
+    <Content Include="McCain\Script\jquery-ui-1.10.4.custom.js" />
+    <Content Include="McCain\Script\jquery.dataTables.min.js" />
+    <Content Include="McCain\Script\jquery.min.js" />
+    <Content Include="McCain\Script\McCain.js" />
+    <Content Include="McCain\Script\SasifMaster.js" />
+    <Content Include="McCain\Style\css_controles.css" />
+    <Content Include="McCain\Style\css_master.css" />
+    <Content Include="McCain\Style\jquery-ui-1.10.4.custom.css" />
     <Content Include="Parametros\Area\Area.aspx" />
     <Content Include="Parametros\Area\Area.js" />
     <Content Include="Parametros\Area\AreaAjax.aspx" />
@@ -929,6 +950,8 @@
     <Content Include="Parametros\Sasif_menu.Master" />
     <Content Include="Contratos\Sasif_menu.Master" />
     <None Include="css\datatables\images\Sorting icons.psd" />
+    <None Include="McCain\Image\Cedula.pdf" />
+    <None Include="McCain\Image\PasadoJudicial.pdf" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

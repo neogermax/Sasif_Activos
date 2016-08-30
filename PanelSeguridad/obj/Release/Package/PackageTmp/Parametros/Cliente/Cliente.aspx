@@ -628,7 +628,12 @@
             <tr>
                 <td colspan="4" align="left">
                     <span class="cssToolTip_ver"><a href="javascript:Direcciones('Read');">
-                        <img alt="Direc" id="Img18" src="../../images/adress_book.png" /></a> <span>Direcciones</span></span>
+                        <img alt="Direc" id="Img18" src="../../images/adress_book.png" /></a> <span class="Spam_AT1">
+                        </span></span><span class="cssToolTip_ver"><a href="javascript:Bancos('Read');">
+                            <img alt="Bank" id="Img19" src="../../images/bank.png" height="60px" width="60px" /></a>
+                            <span class="Spam_AT2"></span></span><span class="cssToolTip_ver"><a href="javascript:Documentos('Read');">
+                                <img alt="Bank" id="Img20" src="../../images/documentos.png" height="60px" width="60px" /></a>
+                                <span class="Spam_AT4"></span></span>
                 </td>
             </tr>
         </table>
@@ -1198,7 +1203,7 @@
             <input id="BtnAddBank" type="button" value="Agregar" onclick="InsertAddBank()" />
         </div>
     </div>
-       <div id="Dialog_Documentos">
+    <div id="Dialog_Documentos">
         <div id="Div3" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
             <table style="width: 100%">
                 <tr>
@@ -1235,5 +1240,4 @@
             <input id="Button2" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
- 
 </asp:Content>
