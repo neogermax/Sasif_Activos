@@ -185,6 +185,5 @@ Public Class Relaciones_FinancierasSQLClass
     End Function
 
 #End Region
-  
 
 End Class

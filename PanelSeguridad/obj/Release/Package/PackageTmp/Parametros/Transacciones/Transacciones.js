@@ -20,21 +20,23 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
-    $("#Select_EmpresaNit").combobox();
-
-    $("#TablaDatos").css("display", "none");
+    $("#TablaDatos_D").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
-  
+
 });
 
 //salida del formulario
@@ -48,22 +50,19 @@ function HabilitarPanel(opcion) {
     switch (opcion) {
 
         case "crear":
-            $("#TablaDatos").css("display", "inline-table");
+            $("#TablaDatos_D").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             Clear();
             estado = opcion;
 
-            $("#Select_EmpresaNit").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", false).prop("disabled", false);
-            $("#Select_EmpresaNit").parent().find("a.ui-button").button("enable");
-
-            $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            $('.C_Chosen').trigger('chosen:updated');
             break;
 
         case "buscar":
-            $("#TablaDatos").css("display", "none");
+            $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TTransacciones").html("");
             estado = opcion;
@@ -71,7 +70,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "modificar":
-            $("#TablaDatos").css("display", "none");
+            $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TTransacciones").html("");
             estado = opcion;
@@ -79,7 +78,7 @@ function HabilitarPanel(opcion) {
             break;
 
         case "eliminar":
-            $("#TablaDatos").css("display", "none");
+            $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TTransacciones").html("");
             estado = opcion;
@@ -265,7 +264,7 @@ function Tabla_modificar() {
 // muestra el registro a editar
 function Editar(index_Nit, index_Transacciones) {
 
-    $("#TablaDatos").css("display", "inline-table");
+    $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayTransacciones) {
@@ -274,20 +273,16 @@ function Editar(index_Nit, index_Transacciones) {
             editID = ArrayTransacciones[itemArray].Transacciones_ID;
 
             $("#Select_EmpresaNit").val(ArrayTransacciones[itemArray].Nit_ID);
-          
+
             $("#Txt_ID").val(ArrayTransacciones[itemArray].Transacciones_ID);
             $("#Txt_ID").attr("disabled", "disabled");
             $("#TxtDescripcion").val(ArrayTransacciones[itemArray].Descripcion);
             $("#Btnguardar").attr("value", "Actualizar");
+            $("#Select_EmpresaNit").attr("disabled", "disabled");
 
-            $("#Select_EmpresaNit").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
-            $("#Select_EmpresaNit").parent().find("a.ui-button").button("disable");
-          
-            for (item in ArrayEmpresaNit) {
-                if (ArrayEmpresaNit[item].ID == editNit_ID) {
-                    $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayEmpresaNit[item].descripcion);
-                }
-            }
+
+            $('.C_Chosen').trigger('chosen:updated');
+
         }
     }
 }
@@ -323,4 +318,6 @@ function Clear() {
     $("#TxtDescripcion").val("");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+    $('.C_Chosen').trigger('chosen:updated');
+
 }

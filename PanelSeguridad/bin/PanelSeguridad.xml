@@ -610,6 +610,11 @@ PanelSeguridad
  funcion que inserta en la tabla Direcciones desde cliente (INSERT)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteAjax.R_ead_Document">
+	<summary>
+ traemos todos los datos para tabla Entidades Financieras DEL CLIENTE SELECCIONADO (READ)
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -655,6 +660,23 @@ PanelSeguridad
 	<summary>
  creamos el objeto lista para la insercion en la BD
  </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosSQLClass.Read_All(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Releciones Financieras parametrizada (READ)
+ </summary>
+	<param name="vp_S_Nit"></param>
+	<param name="vp_S_TypeDoc"></param>
+	<param name="vp_S_Doc"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosSQLClass.list(System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Releciones Financieras para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCodAjax.Consulta_MonedaCod">

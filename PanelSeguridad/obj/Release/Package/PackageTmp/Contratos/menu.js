@@ -15,6 +15,14 @@ $(document).ready(function () {
     $("#Dialog_Warning").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
+        show: {
+            effect: 'fade',
+            duration: 600
+        },
+        hide: {
+            effect: 'fade',
+            duration: 600
+        },
         modal: true
     });
 
@@ -191,8 +199,11 @@ function Ruta_Menu() {
 function Advertencia() {
 
     $("#Tree_Menu").mouseenter(function () {
-
         $("#Dialog_Warning").dialog("open");
         $("#Mensaje_Warning").html("No puede cambiar de pagina hasta no cerrar (" + $("#Title_form").html() + ")");
+    });
+
+    $("#Tree_Menu").mouseout(function () {
+        $("#Dialog_Warning").dialog("close");
     });
 }

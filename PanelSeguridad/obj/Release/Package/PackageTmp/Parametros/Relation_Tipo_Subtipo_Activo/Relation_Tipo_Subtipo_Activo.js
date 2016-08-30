@@ -23,26 +23,22 @@ $(document).ready(function () {
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
-
-
+    
     $("#TablaDatos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
-
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
-
-    $("#Select_Tipo").combobox();
-    $("#Select_SubTipo").combobox();
 
 });
 
@@ -61,8 +57,6 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
-            $('#Select_Tipo').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_SubTipo').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
 
             Clear();
             estado = opcion;
@@ -240,7 +234,7 @@ function Tabla_consulta() {
     $("#container_TTP_Activo").html(html_TP_Activo);
 
     $("#TTP_Activo").dataTable({
-        "bJQueryUI": true, 
+        "bJQueryUI": true,
         "iDisplayLength": 1000,
         "bDestroy": true
     });
@@ -255,10 +249,8 @@ function x() {
 function Clear() {
     $("#Select_Tipo").val("-1");
     $("#Select_SubTipo").val("-1");
-    $('#Select_Tipo').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-    $('#Select_SubTipo').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
-
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+    $('.C_Chosen').trigger('chosen:updated');
+
 }

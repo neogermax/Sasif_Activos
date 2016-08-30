@@ -41,14 +41,18 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
-      
+
     $("#Dialog_Productos").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -60,15 +64,6 @@ $(document).ready(function () {
             background: "black"
         }
     });
-
-    $("#Select_Tipo_P").combobox();
-    $("#Select_Tipo_A").combobox();
-    $("#Select_SubTipo_P").combobox();
-    $("#Select_SubTipo_A").combobox();
-    $("#Select_Crea").combobox();
-    $("#Select_Mod").combobox();
-    $("#Select_Ret").combobox();
-    $("#Select_EmpresaNit").combobox();
 
     Change_Select_Product();
     Change_Select_Active();
@@ -90,17 +85,14 @@ function HabilitarPanel(opcion) {
             $("#Dialog_Productos").dialog("open");
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
+            $("#Select_EmpresaNit").removeAttr("disabled");
+            
             $("#Btnguardar").attr("value", "Guardar");
-            $('#Select_Tipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_Tipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_Crea').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_Mod').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_Ret').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-            $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
             Enabled_Controls();
             Clear();
             estado = opcion;
+            $('.C_Chosen').trigger('chosen:updated');
+
             break;
 
         case "buscar":
@@ -310,34 +302,17 @@ function Editar(index_Tipo_ID, index_Nit) {
                 $("#Select_Crea").val(edit_Crea_ID);
 
 
-            for (item in ArrayTransaccion) {
-                if (ArrayTransaccion[item].ID == edit_Crea_ID) {
-                    $('#Select_Crea').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
-                }
-                if (ArrayTransaccion[item].ID == edit_Mod_ID) {
-                    $('#Select_Mod').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
-                }
-                if (ArrayTransaccion[item].ID == edit_Ret_ID) {
-                    $('#Select_Ret').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTransaccion[item].descripcion);
-                }
-            }
-
             if (edit_TipoP_ID == 0)
                 $("#Select_Tipo_P").val("-1");
             else
                 $("#Select_Tipo_P").val(edit_TipoP_ID);
 
-            for (item in ArrayTipo_P) {
-                if (ArrayTipo_P[item].ID == edit_TipoP_ID) {
-                    $('#Select_Tipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTipo_P[item].descripcion);
-                }
-            }
 
             $("#Select_Tipo_P").trigger("change");
 
             if (edit_SubTipoP_ID != 0) {
                 $("#Select_SubTipo_P").val(edit_SubTipoP_ID);
-                setTimeout("refresh_STP();", 700);
+                setTimeout("refresh_STP(" + edit_SubTipoP_ID + ");", 700);
             }
             else {
                 $("#Select_SubTipo_P").val("-1");
@@ -349,17 +324,11 @@ function Editar(index_Tipo_ID, index_Nit) {
             else
                 $("#Select_Tipo_A").val(edit_TipoA_ID);
 
-            for (item in ArrayTipo_A) {
-                if (ArrayTipo_A[item].ID == edit_TipoA_ID) {
-                    $('#Select_Tipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayTipo_A[item].descripcion);
-                }
-            }
-
             $("#Select_Tipo_A").trigger("change");
 
             if (edit_SubTipoA_ID != 0) {
                 $("#Select_SubTipo_A").val(edit_SubTipoA_ID);
-                setTimeout("refresh_STA();", 700);
+                setTimeout("refresh_STA(" + edit_SubTipoA_ID + ");", 700);
             }
             else {
                 $("#Select_SubTipo_A").val("-1");
@@ -424,40 +393,31 @@ function Editar(index_Tipo_ID, index_Nit) {
 
             $("#Select_EmpresaNit").val(ArrayProductos[itemArray].Nit_ID);
 
-            $("#Select_EmpresaNit").parent().find("input.ui-autocomplete-input").autocomplete("option", "disabled", true).prop("disabled", true);
-            $("#Select_EmpresaNit").parent().find("a.ui-button").button("disable");
 
             $("#Dialog_Productos").dialog("option", "title", "Actualizar Producto");
             $("#Dialog_Productos").dialog("open");
 
+            $("#Select_EmpresaNit").attr("disabled", "disabled");
             $("#Txt_ID").attr("disabled", "disabled");
 
-            for (item in ArrayEmpresaNit) {
-                if (ArrayEmpresaNit[item].ID == editNit_ID) {
-                    $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArrayEmpresaNit[item].descripcion);
-                }
-            }
+            $('.C_Chosen').trigger('chosen:updated');
+
         }
     }
 
 }
 
-//activa la recarga del combo
-function refresh_STP() {
-    for (item in ArraySubTipo_P) {
-        if (ArraySubTipo_P[item].ID == edit_SubTipoP_ID) {
-            $('#Select_SubTipo_P').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArraySubTipo_P[item].descripcion);
-        }
-    }
+
+//funcion de carga Subtipo de producto para edicion
+function refresh_STP(index) {
+    $('#Select_SubTipo_P').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
-//activa la recarga del combo
-function refresh_STA() {
-    for (item in ArraySubTipo_A) {
-        if (ArraySubTipo_A[item].ID == edit_SubTipoA_ID) {
-            $('#Select_SubTipo_A').siblings('.ui-combobox').find('.ui-autocomplete-input').val(ArraySubTipo_A[item].descripcion);
-        }
-    }
+//funcion de carga Subtipo de activo para edicion
+function refresh_STA(index) {
+    $('#Select_SubTipo_A').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
 //grid con el boton eliminar

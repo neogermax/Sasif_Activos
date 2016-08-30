@@ -31,7 +31,9 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#E1").css("display", "none");

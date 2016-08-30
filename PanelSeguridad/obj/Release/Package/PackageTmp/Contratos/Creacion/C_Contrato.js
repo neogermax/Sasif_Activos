@@ -45,14 +45,6 @@ $(document).ready(function () {
         autoOpen: false
     });
 
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
-
-    $('.Numeric_letter').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9a-zA-Z]/g, '');
-    });
-
     $("#Dialog_Activos").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",

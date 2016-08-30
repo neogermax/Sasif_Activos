@@ -29,11 +29,12 @@
             </tr>
             <tr>
                 <td id="TdUser">
-                    <input type="text" id="TxtUser" title="Digite Usuario" />
-                    <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EUser"
-                            src="../images/error.png" />
-                        <span id="S_User"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="TxtUser" />
+                        <span class="Spam_U"></span></span><span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EUser"
+                                src="../images/error.png" />
+                            <span id="S_User"></span></span>
                 </td>
             </tr>
             <tr>
@@ -47,11 +48,12 @@
             </tr>
             <tr>
                 <td id="TdPassword">
-                    <input id="TxtPassword" type="password" title="Digite Contraseña" />
-                    <span class="cssToolTip">
-                        <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EPassword"
-                            src="../images/error.png" />
-                        <span id="S_Pass"></span></span>
+                    <span class="cssToolTip_Form">
+                        <input id="TxtPassword" type="password" />
+                        <span class="Spam_C"></span></span><span class="cssToolTip">
+                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="EPassword"
+                                src="../images/error.png" />
+                            <span id="S_Pass"></span></span>
                 </td>
             </tr>
             <tr>

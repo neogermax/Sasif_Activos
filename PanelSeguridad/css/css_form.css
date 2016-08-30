@@ -182,7 +182,7 @@
     text-align: center;
 }
 
-#container_direccion, #container_Bank
+#container_Document,#container_direccion, #container_Bank
 {
     width: 970px;
     height: 340px;

@@ -75,7 +75,7 @@
                         </td>
                         <td style="width: 100px;">
                             <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_ID" maxlength="7" class="solo-numero" />
+                                <input type="text" id="Txt_ID" maxlength="7" class="Numeric" />
                                 <span class="Spam_AN"></span></span>
                         </td>
                         <td style="width: 40px; padding-bottom: 25px;">
@@ -130,9 +130,9 @@
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
@@ -143,17 +143,17 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
                 </td>
             </tr>
         </table>
     </div>
     <div id="dialog_eliminar" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p id="P1">
+                    <p class="Label_Bold" id="P1">
                         Desea eliminar el siguiente registro?
                     </p>
                 </td>
@@ -162,7 +162,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
                 </td>
             </tr>

@@ -22,16 +22,17 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
 
 });
 
@@ -203,7 +204,7 @@ function Tabla_eliminar() {
     });
 
     $("#TActivo").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -237,7 +238,7 @@ function Tabla_modificar() {
     });
 
     $("#TActivo").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -272,7 +273,7 @@ function Tabla_consulta() {
     $("#container_TSActivo").html(html_Activo);
 
     $("#TActivo").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }

@@ -8,14 +8,16 @@
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-1.10.2.js" type="text/javascript"></script>
-    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
+    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -41,14 +43,14 @@
             <div id="Container_controls">
                 <table id="TablaConsulta">
                     <tr>
-                        <td id="TD1">
+                        <td>
                             <select id="DDLColumns">
                             </select>
                         </td>
-                        <td id="TD2">
-                            <input id="TxtRead" type="text" />
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ESelect"
-                                src="../../images/error.png" />
+                        <td>
+                            <span class="cssToolTip_Form">
+                                <input id="TxtRead" type="text" />
+                                <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
@@ -68,40 +70,62 @@
                 </table>
                 <table id="TablaDatos">
                     <tr>
-                        <td id="TD_ID">
+                        <td style="width: 100px;" class="Label_Bold">
                             Usuario
                         </td>
-                        <td id="TD_TID">
-                            <input type="text" id="Txt_ID" title="Llave Primaria" />
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
-                                src="../../images/error.png" />
+                        <td style="width: 100px;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Txt_ID" maxlength="10" />
+                                <span class="Spam_AST"></span></span>
                         </td>
-                        <td id="TD_name">
+                        <td style="padding-bottom: 25px; width: 50px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                        <td style="width: 100px;" class="Label_Bold">
                             Nombre
                         </td>
-                        <td id="TD_Tname">
-                            <input type="text" id="TxtName" title="Nombre" />
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
-                                src="../../images/error.png" />
+                        <td style="width: 100px;">
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtName" maxlength="50" />
+                                <span class="Spam_AST"></span></span>
+                        </td>
+                        <td style="padding-bottom: 25px; width: 50px;">
+                            <span class="cssToolTip_L">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
-                        <td id="TD_document">
+                        <td class="Label_Bold">
                             Documento
                         </td>
                         <td id="TD_Tdocument">
-                            <input type="text" id="TxtDocument" title="Documento" class="solo-numero" />
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
-                                src="../../images/error.png" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtDocument" maxlength="18" class="Numeric" />
+                                <span class="Spam_AN"></span></span>
                         </td>
-                        <td id="TD_rol">
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
+                        </td>
+                        <td class="Label_Bold">
                             Rol
                         </td>
                         <td id="TD_Trol">
-                            <select id="DDLRol" title="Rol">
+                            <select id="DDLRol" class="C_Chosen">
                             </select>
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
-                                src="../../images/error.png" />
+                        </td>
+                        <td style="padding-bottom: 25px;">
+                            <span class="cssToolTip_L">
+                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
+                                    src="../../images/error.png" />
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
@@ -110,7 +134,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center" id="TD_Button">
+                        <td colspan="6" align="center" id="TD_Button">
                             <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                         </td>
                     </tr>

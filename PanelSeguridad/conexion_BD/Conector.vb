@@ -12,9 +12,11 @@ Public Class Conector
     Dim vg_S_User_SQL_express As String = System.Web.Configuration.WebConfigurationManager.AppSettings("USER").ToString
     Dim vg_S_BD_SQL_express As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
     Dim vg_S_BD_SQL_express_2 As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDParam").ToString
+    Dim vg_S_BD_SQL_express_3 As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
 
     Dim vg_S_StrConexion As String = typeConexion("1")
     Dim vg_S_StrConexion_2 As String = typeConexion("2")
+    Dim vg_S_StrConexion_3 As String = typeConexion("3")
 
 #End Region
 
@@ -117,11 +119,20 @@ Public Class Conector
                                                  ";SSCE:Database Password=" & vg_S_Pass_SLQCOMPACT & ";"
 
         Dim Select_BD As String
-        If vp_S_TypeConex = 1 Then
-            Select_BD = vg_S_BD_SQL_express
-        Else
-            Select_BD = vg_S_BD_SQL_express_2
-        End If
+
+        Select Case vp_S_TypeConex
+
+            Case 1
+                Select_BD = vg_S_BD_SQL_express
+            Case 2
+                Select_BD = vg_S_BD_SQL_express_2
+            Case 3
+                Select_BD = vg_S_BD_SQL_express_3
+            Case Else
+                Select_BD = vg_S_BD_SQL_express
+
+        End Select
+
 
         'Conexion SQL SERVER Express con usuario
         Dim vg_S_StrConexion_SQLSERVER_USER As String = "provider=SQLOLEDB;Data source=" & vg_S_Servidor_SQL_express & _

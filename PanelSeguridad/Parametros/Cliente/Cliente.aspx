@@ -9,6 +9,7 @@
     <script src="ClienteTrasaccionsAjax.js" type="text/javascript"></script>
     <script src="Cliente_Direccion.js" type="text/javascript"></script>
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
+    <script src="Cliente_Documento.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -337,7 +338,9 @@
                                 <img alt="Direc" id="Direccion" style="margin-bottom: 7px;" src="../../images/adress_book.png" /></a>
                                 <span class="Spam_AT1"></span></span><span class="cssToolTip_ver"><a href="javascript:Bancos('Default');">
                                     <img alt="Bank" id="Bancos" src="../../images/bank.png" height="60px" width="60px" /></a>
-                                    <span class="Spam_AT2"></span></span>
+                                    <span class="Spam_AT2"></span></span><span class="cssToolTip_ver"><a href="javascript:Documentos('Default');">
+                                        <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="60px" width="60px" /></a>
+                                        <span class="Spam_AT4"></span></span>
                         </td>
                     </tr>
                 </table>
@@ -1195,4 +1198,42 @@
             <input id="BtnAddBank" type="button" value="Agregar" onclick="InsertAddBank()" />
         </div>
     </div>
+       <div id="Dialog_Documentos">
+        <div id="Div3" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+            <table style="width: 100%">
+                <tr>
+                    <td class="Label_Bold">
+                        Nit Empresa
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_Nit_Doc" maxlength="20" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                    <td class="Label_Bold">
+                        Tipo identificación
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_TypeIden_Doc" maxlength="20" readonly="readonly" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                    <td class="Label_Bold">
+                        Identificación
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_Ident_Doc" maxlength="20" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="container_Document">
+        </div>
+        <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+            <input id="Button2" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
+        </div>
+    </div>
+ 
 </asp:Content>

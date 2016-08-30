@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_CargaRol('cargar_Rol');
-   
+
     $("#ESelect").css("display", "none");
     $("#ImgID").css("display", "none");
     $("#Img1").css("display", "none");
@@ -28,15 +28,15 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
-    });
-
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
 });
@@ -219,7 +219,7 @@ function Tabla_eliminar() {
     });
 
     $("#TUser").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -252,7 +252,7 @@ function Tabla_modificar() {
     });
 
     $("#TUser").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -273,6 +273,9 @@ function Editar(index_User) {
             $("#TxtUser").val(ArrayUser[itemArray].Nick);
             editID = ArrayUser[itemArray].Usuario_ID;
             $("#Btnguardar").attr("value", "Actualizar");
+
+            $('.C_Chosen').trigger('chosen:updated');
+
         }
     }
 }
@@ -288,7 +291,7 @@ function Tabla_consulta() {
     $("#container_TUser").html(html_TUser);
 
     $("#TUser").dataTable({
-       "bJQueryUI": true, "iDisplayLength": 1000,
+        "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
@@ -313,4 +316,6 @@ function Clear() {
     $("#DDLRol").val("-1");
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
 }

@@ -28,11 +28,7 @@ $(document).ready(function () {
         autoOpen: false
     });
 
-    $('.solo-numero').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
-
-});
+ });
 
 //salida del formulario
 function btnSalir() {

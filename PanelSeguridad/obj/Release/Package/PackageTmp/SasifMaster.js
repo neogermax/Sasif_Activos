@@ -4,10 +4,11 @@ $(document).ready(function () {
 
     $(".C_Chosen").chosen({
         width: "100%",
+        placeholder: 'Select an option',
         search_contains: true
     });
 
-    $('.solo-numero').keyup(function () {
+    $('.Numeric').keyup(function () {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
 
@@ -56,6 +57,9 @@ function RevisarAyudas() {
     $(".Spam_AH").html(ArrayAyudas[14].Ayudas_ID + ": " + ArrayAyudas[14].Descripcion);
     $(".Spam_AEXIT_MOD").html(ArrayAyudas[15].Ayudas_ID + ": " + ArrayAyudas[15].Descripcion);
     $(".Spam_ALink").html(ArrayAyudas[16].Ayudas_ID + ": " + ArrayAyudas[16].Descripcion);
+    $(".Spam_U").html(ArrayAyudas[17].Ayudas_ID + ": " + ArrayAyudas[17].Descripcion);
+    $(".Spam_C").html(ArrayAyudas[18].Ayudas_ID + ": " + ArrayAyudas[18].Descripcion);
+    $(".Spam_AT4").html(ArrayAyudas[19].Ayudas_ID + ": " + ArrayAyudas[19].Descripcion);
     
 }
 

@@ -22,16 +22,17 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
-    $('.Numeric').keyup(function () {
-        this.value = (this.value + '').replace(/[^0-9]/g, '');
-    });
 
 });
 

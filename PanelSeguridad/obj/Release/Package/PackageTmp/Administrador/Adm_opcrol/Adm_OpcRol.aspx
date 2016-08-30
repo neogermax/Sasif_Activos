@@ -93,7 +93,7 @@
                             </td>
                             <td id="TD_Tconsecutivo" style="width: 100px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtConsecutivo" maxlength="18" title="Consecutivo" class="solo-numero"
+                                    <input type="text" id="TxtConsecutivo" maxlength="18" title="Consecutivo" class="Numeric"
                                         style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>

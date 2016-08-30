@@ -614,7 +614,7 @@ function transacionAjax_allBank(State, Nit, TypeDoc, Doc, Opc_Link) {
     });
 }
 
-/*------------------------------ crear direcciones---------------------------*/
+/*------------------------------ crear Entidades Financieras---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
 
@@ -662,3 +662,89 @@ function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
         }
     });
 }
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*                                        AJAX DE DOCUMENTOS                                          */
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------ CONSULTA ---------------------------*/
+//trae todas las entidades financieras ancladas al cliente escojido
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
+
+    ArrayDocument = [];
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayDocument = [];
+            }
+            else {
+                ArrayDocument = JSON.parse(result);
+                Tabla_General_Document(Opc_Link);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*------------------------------ crear direcciones---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {
+
+    ListDocument = JSON.stringify(ArrayDocument);
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc,
+            "ListDocument": ListDocument,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "ERROR":
+                    $("#dialog").dialog("option", "title", "Disculpenos :(");
+                    $("#Mensaje_alert").text("No se realizo el ingreso de los Documentos!");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "block");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "none");
+                    break;
+
+                case "CREO":
+
+                    $("#dialog").dialog("option", "title", "Exito");
+                    $("#Mensaje_alert").text("Los Documentos fueron agregados exitosamente! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "block");
+                    $("#WE").css("display", "none");
+                    $("#Dialog_Direcciones").dialog("close");
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+

@@ -148,6 +148,8 @@
     <Content Include="images\add.png" />
     <Content Include="images\adress_book.png" />
     <Content Include="images\bank.png" />
+    <Content Include="images\Descarga.png" />
+    <Content Include="images\documentos.png" />
     <Content Include="images\error_2.png" />
     <Content Include="images\people_online.png" />
     <Content Include="images\search.png" />
@@ -169,6 +171,7 @@
     <Content Include="Parametros\Cliente\ClienteAjax.aspx" />
     <Content Include="Parametros\Cliente\ClienteTrasaccionsAjax.js" />
     <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
+    <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
     <Content Include="Parametros\Fasecolda\Fasecolda.aspx" />
     <Content Include="Parametros\Fasecolda\Fasecolda.js" />
@@ -355,7 +358,6 @@
     <Content Include="SasifMaster_Cosult.js" />
     <Content Include="Scripts\Chosen\chosen.jquery.js" />
     <Content Include="Scripts\Chosen\chosen.jquery.min.js" />
-    <Content Include="Scripts\Chosen\jquery.multiselect.js" />
     <Content Include="Scripts\Chosen\prism.js" />
     <Content Include="Scripts\Dialog\datepicker.js" />
     <Content Include="Scripts\Dialog\jquery-1.10.2.js" />
@@ -543,6 +545,8 @@
     <Compile Include="Parametros\Cliente\ClienteSQLClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesClass.vb" />
     <Compile Include="Parametros\Direcciones\DireccionesSQLClass.vb" />
+    <Compile Include="Parametros\Documentos\DocumentosClass.vb" />
+    <Compile Include="Parametros\Documentos\DocumentosSQLClass.vb" />
     <Compile Include="Parametros\Fasecolda\Fasecolda.aspx.designer.vb">
       <DependentUpon>Fasecolda.aspx</DependentUpon>
     </Compile>
@@ -935,6 +939,8 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <Content Include="Sasif.Master" />
+    <None Include="Repository_Document\Cedula.pdf" />
+    <None Include="Repository_Document\PasadoJudicial.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

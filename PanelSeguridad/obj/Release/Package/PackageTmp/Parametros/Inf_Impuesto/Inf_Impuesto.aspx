@@ -161,9 +161,9 @@
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
@@ -174,17 +174,17 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
                 </td>
             </tr>
         </table>
     </div>
     <div id="dialog_eliminar" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p id="P1">
+                    <p class="Label_Bold" id="P1">
                         Desea eliminar el siguiente registro?
                     </p>
                 </td>
@@ -193,7 +193,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
                 </td>
             </tr>
@@ -487,13 +487,13 @@
                     Telefono 1
                 </td>
                 <td colspan="2">
-                    <input type="text" id="TxtTel1" maxlength="18" class="solo-numero" />
+                    <input type="text" id="TxtTel1" maxlength="18" class="Numeric" />
                 </td>
                 <td class="Label_Bold">
                     Telefono 2
                 </td>
                 <td>
-                    <input type="text" id="TxtTel2" maxlength="18" class="solo-numero" />
+                    <input type="text" id="TxtTel2" maxlength="18" class="Numeric" />
                 </td>
             </tr>
             <tr>
@@ -501,13 +501,13 @@
                     Telefono 3
                 </td>
                 <td colspan="2">
-                    <input type="text" id="TxtTel3" maxlength="18" class="solo-numero" />
+                    <input type="text" id="TxtTel3" maxlength="18" class="Numeric" />
                 </td>
                 <td class="Label_Bold">
                     Telefono 4
                 </td>
                 <td>
-                    <input type="text" id="TxtTel4" maxlength="18" class="solo-numero" />
+                    <input type="text" id="TxtTel4" maxlength="18" class="Numeric" />
                 </td>
             </tr>
             <tr>

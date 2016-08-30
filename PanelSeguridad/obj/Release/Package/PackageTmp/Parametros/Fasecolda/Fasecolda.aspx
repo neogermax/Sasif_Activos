@@ -72,7 +72,7 @@
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
-        <table table style="width: 100%; text-align: center;">
+        <table style="width: 100%; text-align: center;">
             <tr>
                 <td class="Label_Bold">
                     <p id="Mensaje_alert">
@@ -121,7 +121,7 @@
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="Txt_ID" maxlength="5" class="solo-numero" />
+                                    <input type="text" id="Txt_ID" maxlength="5" class="Numeric" />
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="width: 40px; padding-bottom: 25px;">
@@ -183,7 +183,7 @@
                             </td>
                             <td style="width: 100px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtCilindraje" maxlength="6" class="solo-numero" />
+                                    <input type="text" id="TxtCilindraje" maxlength="6" class="Numeric" />
                                     <span class="Spam_AN"></span></span>
                             </td>
                             <td style="width: 40px; padding-bottom: 25px;">

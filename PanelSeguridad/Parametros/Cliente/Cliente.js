@@ -118,6 +118,19 @@ $(document).ready(function () {
         }
     });
 
+    $("#Dialog_Documentos").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1000,
+        height: 520,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
+
     $("#Dialog_C_R_U_D").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",

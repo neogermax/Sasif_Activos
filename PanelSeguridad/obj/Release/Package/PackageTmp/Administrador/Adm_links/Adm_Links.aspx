@@ -105,7 +105,7 @@
                         </td>
                         <td>
                             <span class="cssToolTip_Form">
-                                <input type="text" id="TxtParam1" maxlength="18" title="Parametro 1" class="solo-numero" />
+                                <input type="text" id="TxtParam1" maxlength="18" title="Parametro 1" class="Numeric" />
                                 <span class="Spam_AN"></span></span>
                         </td>
                         <td>

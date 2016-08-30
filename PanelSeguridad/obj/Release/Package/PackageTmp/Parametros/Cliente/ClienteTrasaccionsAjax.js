@@ -50,6 +50,7 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
+
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EntFinan(State) {
@@ -100,7 +101,7 @@ function transacionAjax_TCuenta(State) {
 
         }
     });
-} 
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -258,9 +259,31 @@ function transacionAjax_Cliente_create(State) {
     var ID_D;
     var capture_Nit;
     var CodBank = 0;
+    var Name;
+    var CiudadDocument;
+    var CL;
+    var AV;
+    var TR;
+    var HA;
+    var ME;
+    var EM;
+    var AS;
+    var PR;
+    var EB;
 
     if ($("#Txt_CodBank").val() != "")
         CodBank = $("#Txt_CodBank").val();
+
+    if ($("#TxtNombre").val() != "")
+        Name = $("#TxtNombre").val();
+    else
+        Name = $("#TxtNombreNit").val();
+
+    if ($("#Select_Ciudad_Doc").val() == "-1" || $("#Select_Ciudad_Doc").val() == "")
+        CiudadDocument = 0;
+    else
+        CiudadDocument = $("#Select_Ciudad_Doc").val();
+
 
     if (State == "modificar") {
         ID_N = editNit_ID;
@@ -277,6 +300,50 @@ function transacionAjax_Cliente_create(State) {
         ID_D = $("#Txt_Ident").val();
     }
 
+    if ($('#Check_Cliente').is(':checked'))
+        CL = 'S';
+    else
+        CL = 'N';
+
+    if ($('#Check_Avaluador').is(':checked'))
+        AV = 'S';
+    else
+        AV = 'N';
+
+    if ($('#Check_Transito').is(':checked'))
+        TR = 'S';
+    else
+        TR = 'N';
+
+    if ($('#Check_Hacienda').is(':checked'))
+        HA = 'S';
+    else
+        HA = 'N';
+
+    if ($('#Check_MultiEmpresa').is(':checked'))
+        ME = 'S';
+    else
+        ME = 'N';
+
+    if ($('#Check_Empleado').is(':checked'))
+        EM = 'S';
+    else
+        EM = 'N';
+
+    if ($('#Check_Asesor').is(':checked'))
+        AS = 'S';
+    else
+        AS = 'N';
+
+    if ($('#Check_Proveedor').is(':checked'))
+        PR = 'S';
+    else
+        PR = 'N';
+
+    if ($('#Check_EntBancaria').is(':checked'))
+        EB = 'S';
+    else
+        EB = 'N';
 
     $.ajax({
         url: "ClienteAjax.aspx",
@@ -287,23 +354,25 @@ function transacionAjax_Cliente_create(State) {
             "TypeDocument_ID": ID_TD,
             "Document_ID": ID_D,
             "Digito_Verificacion": $("#TxtVerif").val(),
-            "Nombre": $("#TxtNombre").val(),
+            "Nombre": Name,
             "Nombre_2": $("#TxtNombre_2").val(),
             "Ape_1": $("#Txt_Ape_1").val(),
             "Ape_2": $("#Txt_Ape_2").val(),
             "Pais_ID": $("#Select_Pais").val(),
             "Ciudad_ID": $("#Select_Ciudad").val(),
-            "OP_Cliente": $("#Select_Cliente").val(),
-            "OP_Avaluador": $("#Select_Avaluador").val(),
-            "OP_Transito": $("#Select_Transito").val(),
-            "OP_Hacienda": $("#Select_Hacienda").val(),
-            "OP_Empresa": $("#Select_MultiEmp").val(),
-            "OP_Empleado": $("#Select_Empleado").val(),
-            "OP_Asesor": $("#Select_Asesor").val(),
-            "Other_1": $("#Select_Other_1").val(),
-            "Other_2": $("#Select_Banco").val(),
+            "TipoPersona": $("#Select_TPersona").val(),
+            "Regimen": $("#Select_Regimen").val(),
+            "OP_Cliente": CL,
+            "OP_Avaluador": AV,
+            "OP_Transito": TR,
+            "OP_Hacienda": HA,
+            "OP_Empresa": ME,
+            "OP_Empleado": EM,
+            "OP_Asesor": AS,
+            "Other_1": PR,
+            "Other_2": EB,
             "CodBank": CodBank,
-            "CiuDoc": $("#Select_Ciudad_Doc").val(),
+            "CiuDoc": CiudadDocument,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -545,7 +614,7 @@ function transacionAjax_allBank(State, Nit, TypeDoc, Doc, Opc_Link) {
     });
 }
 
-/*------------------------------ crear direcciones---------------------------*/
+/*------------------------------ crear Entidades Financieras---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
 
@@ -593,3 +662,89 @@ function transacionAjax_Bank_create(State, Nit, TypeDoc, Doc) {
         }
     });
 }
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*                                        AJAX DE DOCUMENTOS                                          */
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------ CONSULTA ---------------------------*/
+//trae todas las entidades financieras ancladas al cliente escojido
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
+
+    ArrayDocument = [];
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayDocument = [];
+            }
+            else {
+                ArrayDocument = JSON.parse(result);
+                Tabla_General_Document(Opc_Link);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*------------------------------ crear direcciones---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {
+
+    ListDocument = JSON.stringify(ArrayDocument);
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc,
+            "ListDocument": ListDocument,
+            "user": User.toUpperCase()
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            switch (result) {
+
+                case "ERROR":
+                    $("#dialog").dialog("option", "title", "Disculpenos :(");
+                    $("#Mensaje_alert").text("No se realizo el ingreso de los Documentos!");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "block");
+                    $("#SE").css("display", "none");
+                    $("#WE").css("display", "none");
+                    break;
+
+                case "CREO":
+
+                    $("#dialog").dialog("option", "title", "Exito");
+                    $("#Mensaje_alert").text("Los Documentos fueron agregados exitosamente! ");
+                    $("#dialog").dialog("open");
+                    $("#DE").css("display", "none");
+                    $("#SE").css("display", "block");
+                    $("#WE").css("display", "none");
+                    $("#Dialog_Direcciones").dialog("close");
+                    break;
+            }
+
+        },
+        error: function () {
+
+        }
+    });
+}
+

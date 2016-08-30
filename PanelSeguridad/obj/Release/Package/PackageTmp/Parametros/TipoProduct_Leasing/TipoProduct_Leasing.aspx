@@ -8,14 +8,16 @@
     <script src="TipoProduct_Leasing.js" type="text/javascript"></script>
     <script src="TipoProduct_LeasingTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-1.10.2.js" type="text/javascript"></script>
-    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
+    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -46,9 +48,9 @@
                             </select>
                         </td>
                         <td id="TD2">
-                            <input id="TxtRead" type="text" />
-                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ESelect"
-                                src="../../images/error.png" />
+                            <span class="cssToolTip_Form">
+                                <input id="TxtRead" type="text" />
+                                <span class="Spam_AST"></span></span>
                         </td>
                         <td colspan="4" align="center" id="TD3">
                             <input id="BtnRead" type="button" value="Buscar" onclick="BtnConsulta();" />
@@ -72,25 +74,29 @@
                             Codigo
                         </td>
                         <td style="width: 100px;">
-                            <input type="text" id="Txt_ID" maxlength="7" class="solo-numero" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Txt_ID" maxlength="7" class="Numeric" />
+                                <span class="Spam_AN"></span></span>
                         </td>
                         <td style="width: 40px; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="ImgID"
                                     src="../../images/error.png" />
-                                <span>Codigo Obligatorio</span></span>
+                                <span class="SpamEG"></span></span>
                         </td>
                         <td class="Label_Bold" style="width: 70px;">
                             Descripción
                         </td>
                         <td style="width: 80px;">
-                            <input type="text" id="TxtDescripcion" maxlength="30" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtDescripcion" maxlength="30" />
+                                <span class="Spam_AST"></span></span>
                         </td>
                         <td style="width: 40px; padding-bottom: 25px;">
-                            <span class="cssToolTip">
+                            <span class="cssToolTip_L">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
                                     src="../../images/error.png" />
-                                <span>Descripción Obligatorio</span></span>
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
@@ -108,9 +114,9 @@
         </div>
     </div>
     <div id="dialog" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
-                <td>
+                <td class="Label_Bold">
                     <p id="Mensaje_alert">
                     </p>
                 </td>
@@ -121,17 +127,17 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnExitD" type="button" value="Salir" style="width: 40%;" onclick="x();" />
                 </td>
             </tr>
         </table>
     </div>
     <div id="dialog_eliminar" title="Basic dialog">
-        <table>
+        <table style="width: 100%; text-align: center;">
             <tr>
                 <td>
-                    <p id="P1">
+                    <p class="Label_Bold" id="P1">
                         Desea eliminar el siguiente registro?
                     </p>
                 </td>
@@ -140,7 +146,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center">
+                <td colspan="2" align="center">
                     <input id="BtnElimin" type="button" value="Confirmar" onclick="BtnElimina();" />
                 </td>
             </tr>
