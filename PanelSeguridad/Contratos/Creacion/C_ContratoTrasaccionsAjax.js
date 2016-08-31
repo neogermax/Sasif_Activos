@@ -97,7 +97,7 @@ function transacionAjax_Hijo_Cliente(State, Index) {
             else {
                 Array_Hijo_Cliente = JSON.parse(result);
                 charge_CatalogList(Array_Hijo_Cliente, "Select_H_Cliente", 1);
-                Change_Select_H_Cliente();
+               
             }
         },
         error: function () {
@@ -125,8 +125,8 @@ function transacionAjax_C_Contrato_create(State) {
             "Nit_ID": $("#Select_EmpresaNit").val(),
             "ID": $("#Txt_ID").val(),
             "Descripcion": $("#TxtDescripcion").val(),
-            "TDoc": $("#Td_TD").html(),
-            "Doc": $("#Td_D").html(),
+            "TDoc": T_Doc,
+            "Doc": Doc,
             "Moneda": $("#Select_Moneda").val(),
             "Es_Contract": $("#Select_Estado").val(),
             "SecuenciaCargue": SC,

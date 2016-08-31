@@ -25,7 +25,7 @@ Public Class C_ContratoSQLClass
             "CON_Descripcion," & _
             "CON_TypeDocument_ID," & _
             "CON_Document_ID," & _
-            "CON_Cod_Pais," & _
+            "CON_Cod_Moneda," & _
             "CON_Val_Cont," & _
             "CON_Val_Finan," & _
             "CON_Val_Op_Compra," & _
@@ -83,8 +83,7 @@ Public Class C_ContratoSQLClass
         Dim SQLGeneral As New GeneralSQLClass
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT P_Cod AS ID, CAST(P_Cod AS NVARCHAR(10))+ ' - ' + P_Moneda AS Descripcion FROM PAISES " & _
-                   " WHERE P_Moneda IS NOT NULL ")
+        sql.Append(" SELECT CM_Cod_Moneda_ID AS ID, CAST(CM_Cod_Moneda_ID AS NVARCHAR(10))+ ' - ' + CM_Descripcion AS Descripcion FROM MONEDA_COD ")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)

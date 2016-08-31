@@ -6,25 +6,18 @@ var Array_Hijo_Cliente = [];
 var ArrayEstado = [];
 
 var ID;
+var T_Doc;
+var Doc;
+
 
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los Links
 $(document).ready(function () {
 
-    $("#Select_EmpresaNit").combobox();
-    $("#Select_H_Cliente").combobox();
-    $("#Select_Moneda").combobox();
-    $("#Select_Estado").combobox();
-
     transacionAjax_EmpresaNit('Cliente')
-    $('#Select_EmpresaNit').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
     transacionAjax_Estado('Estado');
-    $('#Select_Estado').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
     transacionAjax_Moneda('Moneda');
-    $('#Select_Moneda').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
 
     $("#Img7").css("display", "none");
     $("#Img6").css("display", "none");
@@ -38,11 +31,15 @@ $(document).ready(function () {
 
     //funcion para las ventanas emergentes
     $("#dialog").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#dialog_eliminar").dialog({
-        autoOpen: false
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true
     });
 
     $("#Dialog_Activos").dialog({
@@ -63,9 +60,7 @@ $(document).ready(function () {
     });
 
     Change_Select_Nit();
-    Change_Select_Estado();
-    Change_Select_Moneda();
-
+    Change_Select_H_Cliente();
 });
 
 //salida del formulario
@@ -78,46 +73,18 @@ function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var TD_ID = this.value;
         transacionAjax_Hijo_Cliente('Hijo_Cliente', TD_ID);
-        $('#Select_H_Cliente').siblings('.ui-combobox').find('.ui-autocomplete-input').val('Seleccione...');
-
-        var Str_Empresa = $("#Select_EmpresaNit option:selected").html();
-        var SplitEmpresa = Str_Empresa.split(" - ");
-        $("#Td_Empresa_ID").html(SplitEmpresa[0]);
-        $("#Td_Empresa_Descrip").html(SplitEmpresa[1]);
     });
 }
 
-//carga las vistas del hijo cliente
+//sacamos documento y tipo de documento requerido para contrato
 function Change_Select_H_Cliente() {
     $("#Select_H_Cliente").change(function () {
         var Str_H_cliente = $("#Select_H_Cliente option:selected").html();
         var SplitCliente = Str_H_cliente.split(" - ");
-        $("#Td_TD").html(SplitCliente[0]);
-        $("#Td_D").html(dinner_format_grid(SplitCliente[1], "0"));
-        $("#Td_NameClient").html(SplitCliente[2]);
+        T_Doc = SplitCliente[0];
+        Doc = SplitCliente[1];
     });
 }
-
-//carga las vistas del estado
-function Change_Select_Estado() {
-    $("#Select_Estado").change(function () {
-        var Str_Estado = $("#Select_Estado option:selected").html();
-        var SplitEstado = Str_Estado.split(" - ");
-        $("#Td_Estado_ID").html(SplitEstado[0]);
-        $("#Td_Estado_Descrip").html(SplitEstado[1]);
-    });
-}
-
-//carga las vistas del estado
-function Change_Select_Moneda() {
-    $("#Select_Moneda").change(function () {
-        var Str_Moneda = $("#Select_Moneda option:selected").html();
-        var SplitMoneda = Str_Moneda.split(" - ");
-        $("#Td_Moneda_ID").html(SplitMoneda[0]);
-        $("#Td_Moneda_Descrip").html(SplitMoneda[1]);
-    });
-}
-
 
 //crear link en la BD
 function BtnCrear() {
@@ -206,12 +173,12 @@ function Clear() {
 
 function Add_Activos(index) {
     $("#Dialog_Activos").dialog("open");
-    $("#Dialog_Activos").dialog("option","title","Crear Activo");
+    $("#Dialog_Activos").dialog("option", "title", "Crear Activo");
     Table_Activos();
 }
 
 function Table_Activos() {
 
     $("#container_TActivos").html("");
- 
+
 }

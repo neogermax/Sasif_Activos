@@ -8,16 +8,16 @@
     <script src="C_Contrato.js" type="text/javascript"></script>
     <script src="C_ContratoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-1.10.2.js" type="text/javascript"></script>
-    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/Dialog/ComboBox_Contrato.css" rel="stylesheet" type="text/css" />
-    <script src="../../Scripts/Chosen/ComboBox.js" type="text/javascript"></script>
+    <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>
+    <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -35,26 +35,20 @@
     <div id="Marco_Contrato">
         <div id="Marco_trabajo_Contrato">
             <div id="Container_controls">
-                <table id="T_Encabezado">
+                <table id="T_Encabezado" style="width: 700px;">
                     <tr>
                         <td id="TD_ID" style="width: 120px;" class="Label_Bold">
                             Nit Empresa
                         </td>
-                        <td id="TD_TID" style="width: 50px;">
-                            <select id="Select_EmpresaNit">
+                        <td id="TD_TID">
+                            <select id="Select_EmpresaNit" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="width: 40px; padding-bottom: 25px;">
+                        <td style="width: 300px; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img1"
                                     src="../../images/error.png" />
-                                <span>Empresa Obligatoria</span></span>
-                        </td>
-                        <td id="Td_Empresa_ID" style="width: 120px;">
-                        </td>
-                        <td id="Td_Empresa_Descrip" style="width: 150px;">
-                        </td>
-                        <td id="Td_Empresa" style="width: 200px;">
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                 </table>
@@ -64,13 +58,15 @@
                             Contrato
                         </td>
                         <td>
-                            <input type="text" id="Txt_ID" maxlength="17" class="Numeric_letter" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="Txt_ID" maxlength="17" class="Numeric_letter" />
+                                <span class="Spam_ANL"></span></span>
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                     src="../../images/error.png" />
-                                <span>Contrato Obligatorio</span></span>
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
@@ -78,36 +74,32 @@
                             Descripción
                         </td>
                         <td style="width: 100px;">
-                            <input type="text" id="TxtDescripcion" maxlength="50" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtDescripcion" maxlength="50" />
+                                <span class="Spam_AST"></span></span>
                         </td>
                         <td style="width: 40px; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                     src="../../images/error.png" />
-                                <span>Descripción Obligatorio</span></span>
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                 </table>
-                <table id="T_Cliente">
+                <table style="width: 700px;">
                     <tr>
                         <td style="width: 120px;" class="Label_Bold">
                             Cliente Principal
                         </td>
-                        <td id="TD_Tdescrip" style="width: 50px;">
-                            <select id="Select_H_Cliente">
+                        <td>
+                            <select id="Select_H_Cliente" class="C_Chosen">
                             </select>
                         </td>
-                        <td style="width: 40px; padding-bottom: 25px;">
+                        <td style="width: 300px; padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
                                     src="../../images/error.png" />
-                                <span>Cliente Obligatorio</span></span>
-                        </td>
-                        <td id="Td_TD" style="width: 40px;">
-                        </td>
-                        <td id="Td_D" style="width: 170px;">
-                        </td>
-                        <td id="Td_NameClient" style="width: 200px;">
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
@@ -115,20 +107,14 @@
                             Estado
                         </td>
                         <td>
-                            <select id="Select_Estado">
+                            <select id="Select_Estado" class="C_Chosen">
                             </select>
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img6"
                                     src="../../images/error.png" />
-                                <span>Estado Obligatorio</span></span>
-                        </td>
-                        <td id="Td_Estado_ID">
-                        </td>
-                        <td id="Td_Estado_Descrip">
-                        </td>
-                        <td id="Td_Estado">
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                     <tr>
@@ -136,20 +122,14 @@
                             Moneda
                         </td>
                         <td>
-                            <select id="Select_Moneda">
+                            <select id="Select_Moneda" class="C_Chosen">
                             </select>
                         </td>
                         <td style="padding-bottom: 25px;">
                             <span class="cssToolTip">
                                 <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img7"
                                     src="../../images/error.png" />
-                                <span>Moneda Obligatorio</span></span>
-                        </td>
-                        <td id="Td_Moneda_ID">
-                        </td>
-                        <td id="Td_Moneda_Descrip">
-                        </td>
-                        <td id="Td_Moneda">
+                                <span class="SpamEG"></span></span>
                         </td>
                     </tr>
                 </table>
@@ -159,7 +139,9 @@
                             Secuencia Cargue
                         </td>
                         <td>
-                            <input type="text" id="TxtSecuenciaCargue" maxlength="7" class="Numeric" />
+                            <span class="cssToolTip_Form">
+                                <input type="text" id="TxtSecuenciaCargue" maxlength="7" class="Numeric" />
+                                <span class="Spam_AN"></span></span>
                         </td>
                         <td style="width: 40px; padding-bottom: 25px;">
                         </td>

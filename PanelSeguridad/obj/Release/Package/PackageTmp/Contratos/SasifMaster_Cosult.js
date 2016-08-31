@@ -6,6 +6,8 @@ var ArrayAyudas = [];
 
 //evento load de los master page
 $(document).ready(function () {
+    transacionAjax_Men("Men");
+    transacionAjax_Ayu("Ayu");
     transacionAjax_Titulo("encabezado", "2");
 });
 
