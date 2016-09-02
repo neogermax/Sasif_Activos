@@ -456,12 +456,20 @@ PanelSeguridad
  funcion que carga el objeto DDL Links
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AreaAjax.Consulta_Repetido(System.String)">
+</member><member name="M:PanelSeguridad.AreaAjax.CargarCliente">
 	<summary>
- funcion que valida si el id esta en la BD
+ funcion que carga el objeto DDL consulta
  </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaAjax.CargarAreaDep">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaAjax.CargarSeguridad">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCotAjax.Consulta_MonedaCot">
 	<summary>
@@ -713,27 +721,27 @@ PanelSeguridad
 	<remarks></remarks>
 </member><member name="F:PanelSeguridad.Sasif.head">
 	<summary>
-Control head.
+head control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif.form1">
 	<summary>
-Control form1.
+form1 control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif.main">
 	<summary>
-Control main.
+main control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="M:PanelSeguridad.CiudadesAjax.Consulta_Ciudades">
 	<summary>
@@ -2212,12 +2220,33 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Charge_DropListAreaDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AreaSQLClass.listArea(System.String,System.String)">
 	<summary>
  funcion que trae el listado de Area para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Consulta_Repetido(PanelSeguridad.AreaClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AyudasAjax.Consulta_Ayudas">

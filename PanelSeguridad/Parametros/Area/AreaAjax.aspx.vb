@@ -14,6 +14,15 @@ Public Class AreaAjax
                 Case "cargar_droplist_busqueda"
                     CargarDroplist()
 
+                Case "Cliente"
+                    CargarCliente()
+
+                Case "Area_Dep"
+                    CargarAreaDep()
+
+                Case "Seguridad"
+                    CargarSeguridad()
+
                 Case "consulta"
                     Consulta_Area()
 
@@ -55,7 +64,7 @@ Public Class AreaAjax
 
             objArea.Descripcion = ""
             objArea.FechaActualizacion = ""
-            objArea.Usuario = ""
+            objArea.UsuarioCreacion = ""
 
             ObjListArea.Add(objArea)
         End If
@@ -77,16 +86,22 @@ Public Class AreaAjax
         Dim result As String
         Dim vl_s_IDxiste As String
 
+        objArea.Nit_ID = Request.Form("Nit_ID")
         objArea.Area_ID = Request.Form("ID")
-
+        
         'validamos si la llave existe
-        vl_s_IDxiste = Consulta_Repetido(objArea.Area_ID)
+        vl_s_IDxiste = SQL_Area.Consulta_Repetido(objArea)
 
         If vl_s_IDxiste = 0 Then
 
             objArea.Descripcion = Request.Form("descripcion")
+            objArea.AreaDependencia = Request.Form("AreaDependencia")
+            objArea.Politica_ID = Request.Form("Politica")
+
+            objArea.UsuarioCreacion = Request.Form("user")
+            objArea.FechaCreacion = Date.Now
+            objArea.UsuarioActualizacion = Request.Form("user")
             objArea.FechaActualizacion = Date.Now
-            objArea.Usuario = Request.Form("user")
 
             ObjListArea.Add(objArea)
 
@@ -112,10 +127,16 @@ Public Class AreaAjax
 
         Dim result As String
 
+        objArea.Nit_ID = Request.Form("Nit_ID")
         objArea.Area_ID = Request.Form("ID")
         objArea.Descripcion = Request.Form("descripcion")
+
+        objArea.Descripcion = Request.Form("descripcion")
+        objArea.AreaDependencia = Request.Form("AreaDependencia")
+        objArea.Politica_ID = Request.Form("Politica")
+
+        objArea.UsuarioActualizacion = Request.Form("user")
         objArea.FechaActualizacion = Date.Now
-        objArea.Usuario = Request.Form("user")
 
         ObjListArea.Add(objArea)
 
@@ -137,6 +158,7 @@ Public Class AreaAjax
 
         Dim result As String
 
+        objArea.Nit_ID = Request.Form("Nit_ID")
         objArea.Area_ID = Request.Form("ID")
         ObjListArea.Add(objArea)
 
@@ -163,25 +185,54 @@ Public Class AreaAjax
 
     End Sub
 
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCliente()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListCliente(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarAreaDep()
+
+        Dim SQL As New AreaSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Index As String = Request.Form("Index")
+
+        ObjListDroplist = SQL.Charge_DropListAreaDepend(vl_S_Index)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarSeguridad()
+
+        Dim SQL As New AreaSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
 #End Region
 
 #Region "FUNCIONES"
-
-    ''' <summary>
-    ''' funcion que valida si el id esta en la BD
-    ''' </summary>
-    ''' <param name="vp_S_ID"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Protected Function Consulta_Repetido(ByVal vp_S_ID As String)
-
-        Dim SQL_General As New GeneralSQLClass
-        Dim result As String
-
-        result = SQL_General.ReadExist("AREA", vp_S_ID, "A_Area_ID", "", "2")
-        Return result
-
-    End Function
 
 #End Region
 

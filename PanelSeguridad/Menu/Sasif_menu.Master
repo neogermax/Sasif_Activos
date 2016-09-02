@@ -10,10 +10,17 @@
     <script src="../SasifMaster.js" type="text/javascript"></script>
     <script src="menu.js" type="text/javascript"></script>
     <link href="../css/css_menu.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function deshabilitaRetroceso() {
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button" //chrome
+            window.onhashchange = function () { window.location.hash = "no-back-button"; }
+        }
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body onload="deshabilitaRetroceso()">
     <form id="form1" runat="server">
     <div class="page">
         <div class="header">
@@ -26,7 +33,7 @@
                         <td id="Hours" colspan="3" style="width: 70%; text-align: center;">
                         </td>
                         <td rowspan="4" style="width: 15%; text-align: center;">
-                            &nbsp;<img  alt="" src="" />
+                            &nbsp;<img alt="" src="" />
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +59,7 @@
                             MENU
                         </td>
                         <td id="Exit">
-                            <input id="BtnExitApp" type="button"  value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
+                            <input id="BtnExitApp" type="button" value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
                         </td>
                     </tr>
                 </table>
@@ -62,7 +69,7 @@
             <table id="M_Container">
                 <tr>
                     <td id="panel_menu">
-                        <div id="container_menu" >
+                        <div id="container_menu">
                         </div>
                     </td>
                     <td id="panel_pag">

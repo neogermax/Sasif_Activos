@@ -8,7 +8,7 @@ function transacionAjax_CargaBusqueda(State) {
         data: { "action": State,
             "tabla": 'AREA'
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
                 ArrayCombo = [];
@@ -16,6 +16,87 @@ function transacionAjax_CargaBusqueda(State) {
             else {
                 ArrayCombo = JSON.parse(result);
                 charge_CatalogList(ArrayCombo, "DDLColumns", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EmpresaNit(State) {
+    $.ajax({
+        url: "AreaAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'CLIENTE'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayEmpresaNit = [];
+            }
+            else {
+                ArrayEmpresaNit = JSON.parse(result);
+                charge_CatalogList(ArrayEmpresaNit, "Select_EmpresaNit", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_AreaDepend(State, Index) {
+    
+    $.ajax({
+        url: "AreaAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Index": Index,
+            "tabla": 'AREA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayAreaDep = [];
+            }
+            else {
+                ArrayAreaDep = JSON.parse(result);
+                charge_CatalogList(ArrayAreaDep, "Select_AreaDepent", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Seguridad(State) {
+    $.ajax({
+        url: "AreaAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'SEGURIDAD'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArraySeguridad = [];
+            }
+            else {
+                ArraySeguridad = JSON.parse(result);
+                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
             }
         },
         error: function () {
@@ -67,11 +148,22 @@ function transacionAjax_Area(State, filtro, opcion) {
 function transacionAjax_Area_create(State) {
 
     var ID;
-    var param;
+    var Nit_ID;
+    var AreaDepen = 0;
+    var Politica = 0;
+
+    if ($("#Select_AreaDepent").val() != "-1")
+        AreaDepen = $("#Select_AreaDepent").val();
+
+    if ($("#Select_Politica").val() != "-1")
+        Politica = $("#Select_Politica").val();
 
     if (State == "modificar") {
+        Nit_ID = editNit_ID;
         ID = editID;
-    } else {
+    }
+    else {
+        Nit_ID = $("#Select_EmpresaNit").val();
         ID = $("#Txt_ID").val();
     }
 
@@ -80,11 +172,14 @@ function transacionAjax_Area_create(State) {
         type: "POST",
         //crear json
         data: { "action": State,
+            "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
+            "AreaDependencia": AreaDepen,
+            "Politica": Politica,
             "user": User
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 
@@ -144,10 +239,11 @@ function transacionAjax_Area_delete(State) {
         type: "POST",
         //crear json
         data: { "action": State,
+            "Nit_ID": editNit_ID,
             "ID": editID,
             "user": User
         },
-       //Transaccion Ajax en proceso
+        //Transaccion Ajax en proceso
         success: function (result) {
             switch (result) {
 

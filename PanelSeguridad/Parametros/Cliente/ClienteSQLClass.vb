@@ -418,7 +418,7 @@ Public Class ClienteSQLClass
         Dim SQLGeneral As New GeneralSQLClass
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT CLI_Nit_ID AS ID, CAST(CLI_Document_ID AS NVARCHAR(20)) + '_' + CAST(CLI_Digito_Verificacion AS NVARCHAR(3)) + ' - ' +  CLI_Nombre AS descripcion FROM CLIENTE WHERE CLI_OP_Empresa ='S' ")
+        sql.Append(" SELECT  CAST(CLI_Document_ID AS NVARCHAR(20)) + CAST(CLI_Digito_Verificacion AS NVARCHAR(3)) AS ID, CAST(CLI_Document_ID AS NVARCHAR(20)) + '_' + CAST(CLI_Digito_Verificacion AS NVARCHAR(3)) + ' - ' +  CLI_Nombre AS descripcion FROM CLIENTE WHERE CLI_OP_Empresa ='S' ")
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
