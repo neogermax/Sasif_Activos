@@ -183,6 +183,10 @@
     <Content Include="Parametros\Ayudas\Ayudas.js" />
     <Content Include="Parametros\Ayudas\AyudasAjax.aspx" />
     <Content Include="Parametros\Ayudas\AyudasTrasaccionsAjax.js" />
+    <Content Include="Parametros\Cargo\Cargo.aspx" />
+    <Content Include="Parametros\Cargo\Cargo.js" />
+    <Content Include="Parametros\Cargo\CargoAjax.aspx" />
+    <Content Include="Parametros\Cargo\CargoTrasaccionsAjax.js" />
     <Content Include="Parametros\Ciudades\Ciudades.aspx" />
     <Content Include="Parametros\Ciudades\Ciudades.js" />
     <Content Include="Parametros\Ciudades\CiudadesAjax.aspx" />
@@ -532,6 +536,22 @@
     </Compile>
     <Compile Include="Parametros\Ayudas\AyudasClass.vb" />
     <Compile Include="Parametros\Ayudas\AyudasSQLClass.vb" />
+    <Compile Include="Parametros\Cargo\Cargo.aspx.designer.vb">
+      <DependentUpon>Cargo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cargo\Cargo.aspx.vb">
+      <DependentUpon>Cargo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoAjax.aspx.designer.vb">
+      <DependentUpon>CargoAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoAjax.aspx.vb">
+      <DependentUpon>CargoAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Parametros\Cargo\CargoClass.vb" />
+    <Compile Include="Parametros\Cargo\CargoSQLClass.vb" />
     <Compile Include="Parametros\Ciudades\Ciudades.aspx.designer.vb">
       <DependentUpon>Ciudades.aspx</DependentUpon>
     </Compile>
@@ -967,7 +987,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Parametros\Cargo\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -2,11 +2,11 @@
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'AREA'
+            "tabla": 'Cargo'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -28,7 +28,7 @@ function transacionAjax_CargaBusqueda(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -52,24 +52,24 @@ function transacionAjax_EmpresaNit(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_AreaDepend(State, Index) {
+function transacionAjax_CargoDepend(State, Index) {
     
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
             "Index": Index,
-            "tabla": 'AREA'
+            "tabla": 'Cargo'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayAreaDep = [];
+                ArrayCargoDep = [];
             }
             else {
-                ArrayAreaDep = JSON.parse(result);
-                charge_CatalogList(ArrayAreaDep, "Select_AreaDepent", 1);
+                ArrayCargoDep = JSON.parse(result);
+                charge_CatalogList(ArrayCargoDep, "Select_CargoDepent", 1);
             }
         },
         error: function () {
@@ -83,7 +83,7 @@ function transacionAjax_AreaDepend(State, Index) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Seguridad(State) {
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -107,7 +107,7 @@ function transacionAjax_Seguridad(State) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Area(State, filtro, opcion) {
+function transacionAjax_Cargo(State, filtro, opcion) {
     var contenido;
 
     if ($("#TxtRead").val() == "") {
@@ -119,7 +119,7 @@ function transacionAjax_Area(State, filtro, opcion) {
 
 
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -130,11 +130,11 @@ function transacionAjax_Area(State, filtro, opcion) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayArea = [];
+                ArrayCargo = [];
             }
             else {
-                ArrayArea = JSON.parse(result);
-                Table_Area();
+                ArrayCargo = JSON.parse(result);
+                Table_Cargo();
             }
         },
         error: function () {
@@ -145,15 +145,15 @@ function transacionAjax_Area(State, filtro, opcion) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Area_create(State) {
+function transacionAjax_Cargo_create(State) {
 
     var ID;
     var Nit_ID;
-    var AreaDepen = 0;
+    var CargoDepen = 0;
     var Politica = 0;
 
-    if ($("#Select_AreaDepent").val() != "-1")
-        AreaDepen = $("#Select_AreaDepent").val();
+    if ($("#Select_CargoDepent").val() != "-1")
+        CargoDepen = $("#Select_CargoDepent").val();
 
     if ($("#Select_Politica").val() != "-1")
         Politica = $("#Select_Politica").val();
@@ -168,14 +168,14 @@ function transacionAjax_Area_create(State) {
     }
 
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
-            "AreaDependencia": AreaDepen,
+            "CargoDependencia": CargoDepen,
             "Politica": Politica,
             "user": User
         },
@@ -185,7 +185,7 @@ function transacionAjax_Area_create(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del area!");
+                    $("#Mensaje_alert").text("No se realizo el ingreso del Cargo!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -204,7 +204,7 @@ function transacionAjax_Area_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El area fue modificado exitosamente! ");
+                        $("#Mensaje_alert").text("El Cargo fue modificado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
@@ -213,7 +213,7 @@ function transacionAjax_Area_create(State) {
                     }
                     else {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El area fue creado exitosamente! ");
+                        $("#Mensaje_alert").text("El Cargo fue creado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
@@ -232,10 +232,10 @@ function transacionAjax_Area_create(State) {
 
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Area_delete(State) {
+function transacionAjax_Cargo_delete(State) {
 
     $.ajax({
-        url: "AreaAjax.aspx",
+        url: "CargoAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -249,7 +249,7 @@ function transacionAjax_Area_delete(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el area!");
+                    $("#Mensaje_alert").text("No se elimino el Cargo!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -259,7 +259,7 @@ function transacionAjax_Area_delete(State) {
 
                 case "Exist_O":
                     $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el area, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
+                    $("#Mensaje_alert").text("No se elimino el Cargo, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "none");
@@ -270,7 +270,7 @@ function transacionAjax_Area_delete(State) {
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
                     $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El area fue eliminado exitosamente! ");
+                    $("#Mensaje_alert").text("El Cargo fue eliminado exitosamente! ");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");

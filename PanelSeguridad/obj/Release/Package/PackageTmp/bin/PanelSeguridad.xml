@@ -6,7 +6,113 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Adm_UsuarioAjax.Consulta_User">
+<member name="M:PanelSeguridad.CargoSQLClass.Read_AllCargo(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla Cargo parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.InsertCargo(PanelSeguridad.CargoClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo Cargo (INSERT)
+ </summary>
+	<param name="vp_Obj_Cargo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.UpdateCargo(PanelSeguridad.CargoClass)">
+	<summary>
+ funcion que crea el query para la modificacion del Cargo (UPDATE)
+ </summary>
+	<param name="vp_Obj_Cargo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.EraseCargo(PanelSeguridad.CargoClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del Cargo (DELETE)
+ </summary>
+	<param name="vp_Obj_Cargo"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.Charge_DropListCargoDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.listCargo(System.String,System.String)">
+	<summary>
+ funcion que trae el listado de Cargo para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.Consulta_Repetido(PanelSeguridad.CargoClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.Consulta_Cargo">
+	<summary>
+ traemos todos los datos para tabla Cargo (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.InsertCargo">
+	<summary>
+ funcion que inserta en la tabla Cargo (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.UpdateCargo">
+	<summary>
+ funcion que actualiza en la tabla Cargo (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.EraseCargo">
+	<summary>
+ funcion que elimina en la tabla Cargo (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.CargarCargoDep">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoAjax.CargarSeguridad">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_UsuarioAjax.Consulta_User">
 	<summary>
  traemos todos los datos para tabla Usuarios (READ)
  </summary>
@@ -456,12 +562,20 @@ PanelSeguridad
  funcion que carga el objeto DDL Links
  </summary>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AreaAjax.Consulta_Repetido(System.String)">
+</member><member name="M:PanelSeguridad.AreaAjax.CargarCliente">
 	<summary>
- funcion que valida si el id esta en la BD
+ funcion que carga el objeto DDL consulta
  </summary>
-	<param name="vp_S_ID"></param>
-	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaAjax.CargarAreaDep">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaAjax.CargarSeguridad">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MonedaCotAjax.Consulta_MonedaCot">
 	<summary>
@@ -713,27 +827,27 @@ PanelSeguridad
 	<remarks></remarks>
 </member><member name="F:PanelSeguridad.Sasif.head">
 	<summary>
-Control head.
+head control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif.form1">
 	<summary>
-Control form1.
+form1 control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="F:PanelSeguridad.Sasif.main">
 	<summary>
-Control main.
+main control.
 </summary>
 	<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member><member name="M:PanelSeguridad.CiudadesAjax.Consulta_Ciudades">
 	<summary>
@@ -2212,12 +2326,33 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Charge_DropListAreaDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AreaSQLClass.listArea(System.String,System.String)">
 	<summary>
  funcion que trae el listado de Area para armar la tabla
  </summary>
 	<param name="vp_S_StrQuery"></param>
 	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Consulta_Repetido(PanelSeguridad.AreaClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AyudasAjax.Consulta_Ayudas">

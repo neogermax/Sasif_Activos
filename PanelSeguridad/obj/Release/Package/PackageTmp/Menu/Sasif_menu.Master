@@ -26,7 +26,7 @@
                         <td id="Hours" colspan="3" style="width: 70%; text-align: center;">
                         </td>
                         <td rowspan="4" style="width: 15%; text-align: center;">
-                            &nbsp;<img  alt="" src="" />
+                            &nbsp;<img alt="" src="" />
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
                             MENU
                         </td>
                         <td id="Exit">
-                            <input id="BtnExitApp" type="button"  value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
+                            <input id="BtnExitApp" type="button" value="SALIDA" onclick="window.location = '../../login/Login.aspx'" />
                         </td>
                     </tr>
                 </table>
@@ -62,7 +62,7 @@
             <table id="M_Container">
                 <tr>
                     <td id="panel_menu">
-                        <div id="container_menu" >
+                        <div id="container_menu">
                         </div>
                     </td>
                     <td id="panel_pag">

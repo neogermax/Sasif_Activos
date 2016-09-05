@@ -1,7 +1,7 @@
 ﻿/*--------------- region de variables globales --------------------*/
-var ArrayArea = [];
+var ArrayCargo = [];
 var ArrayCombo = [];
-var ArrayAreaDep = [];
+var ArrayCargoDep = [];
 var ArraySeguridad = [];
 
 var estado;
@@ -43,13 +43,13 @@ $(document).ready(function () {
 });
 
 
-//carga el combo de Area dependiente
+//carga el combo de Cargo dependiente
 function Change_Select_Nit() {
          
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-        $('#Select_AreaDepent').empty();
-        transacionAjax_AreaDepend('Area_Dep', index_ID);
+        $('#Select_CargoDepent').empty();
+        transacionAjax_CargoDepend('Cargo_Dep', index_ID);
     });
 
   
@@ -80,7 +80,7 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TArea").html("");
+            $("#container_TCargo").html("");
             estado = opcion;
             Clear();
             break;
@@ -88,7 +88,7 @@ function HabilitarPanel(opcion) {
         case "modificar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TArea").html("");
+            $("#container_TCargo").html("");
             estado = opcion;
             Clear();
             break;
@@ -96,7 +96,7 @@ function HabilitarPanel(opcion) {
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
             $("#TablaConsulta").css("display", "inline-table");
-            $("#container_TArea").html("");
+            $("#container_TCargo").html("");
             estado = opcion;
             Clear();
             break;
@@ -114,12 +114,12 @@ function BtnConsulta() {
     if (ValidateSelect == 1) {
         filtro = "N";
         opcion = "ALL";
-        transacionAjax_Area("consulta", filtro, opcion);
+        transacionAjax_Cargo("consulta", filtro, opcion);
     }
     else {
         filtro = "S";
         opcion = $("#DDLColumns").val();
-        transacionAjax_Area("consulta", filtro, opcion);
+        transacionAjax_Cargo("consulta", filtro, opcion);
     }
 
 }
@@ -132,17 +132,17 @@ function BtnCrear() {
 
     if (validate == 0) {
         if ($("#Btnguardar").val() == "Guardar") {
-            transacionAjax_Area_create("crear");
+            transacionAjax_Cargo_create("crear");
         }
         else {
-            transacionAjax_Area_create("modificar");
+            transacionAjax_Cargo_create("modificar");
         }
     }
 }
 
 //elimina de la BD
 function BtnElimina() {
-    transacionAjax_Area_delete("elimina");
+    transacionAjax_Cargo_delete("elimina");
 }
 
 
@@ -202,7 +202,7 @@ function ValidarDroplist() {
 }
 
 // crea la tabla en el cliente
-function Table_Area() {
+function Table_Cargo() {
 
     switch (estado) {
 
@@ -223,38 +223,38 @@ function Table_Area() {
 
 //grid con el boton eliminar
 function Tabla_eliminar() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
-        if (ArrayArea[itemArray].Area_ID != 0) {
+    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+    for (itemArray in ArrayCargo) {
+        if (ArrayCargo[itemArray].Cargo_ID != 0) {
             var dependencia;
 
-            if (ArrayArea[itemArray].AreaDependencia == 0)
+            if (ArrayCargo[itemArray].CargoDependencia == 0)
                 dependencia = "";
             else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
 
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></input></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
         }
     }
-    html_Area += "</tbody></table>";
-    $("#container_TArea").html("");
-    $("#container_TArea").html(html_Area);
+    html_Cargo += "</tbody></table>";
+    $("#container_TCargo").html("");
+    $("#container_TCargo").html(html_Cargo);
 
     $(".Eliminar").click(function () {
     });
 
-    $("#TArea").dataTable({
+    $("#TCargo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Nit, index_Area) {
+function Eliminar(index_Nit, index_Cargo) {
 
-    for (itemArray in ArrayArea) {
-        if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
-            editID = ArrayArea[itemArray].Area_ID;
+    for (itemArray in ArrayCargo) {
+        if (index_Nit == ArrayCargo[itemArray].Nit_ID && index_Cargo == ArrayCargo[itemArray].Cargo_ID) {
+            editID = ArrayCargo[itemArray].Cargo_ID;
             $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
             $("#dialog_eliminar").dialog("open");
         }
@@ -264,63 +264,63 @@ function Eliminar(index_Nit, index_Area) {
 
 //grid con el boton editar
 function Tabla_modificar() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
-        if (ArrayArea[itemArray].Area_ID != 0) {
+    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+    for (itemArray in ArrayCargo) {
+        if (ArrayCargo[itemArray].Cargo_ID != 0) {
             var dependencia;
 
-            if (ArrayArea[itemArray].AreaDependencia == 0)
+            if (ArrayCargo[itemArray].CargoDependencia == 0)
                 dependencia = "";
             else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
 
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayArea[itemArray].Nit_ID + "','" + ArrayArea[itemArray].Area_ID + "')\"></input></td><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
         }
     }
-    html_Area += "</tbody></table>";
-    $("#container_TArea").html("");
-    $("#container_TArea").html(html_Area);
+    html_Cargo += "</tbody></table>";
+    $("#container_TCargo").html("");
+    $("#container_TCargo").html(html_Cargo);
 
     $(".Editar").click(function () {
     });
 
-    $("#TArea").dataTable({
+    $("#TCargo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
 
 // muestra el registro a editar
-function Editar(index_Nit, index_Area) {
+function Editar(index_Nit, index_Cargo) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayArea) {
-        if (index_Nit == ArrayArea[itemArray].Nit_ID && index_Area == ArrayArea[itemArray].Area_ID) {
+    for (itemArray in ArrayCargo) {
+        if (index_Nit == ArrayCargo[itemArray].Nit_ID && index_Cargo == ArrayCargo[itemArray].Cargo_ID) {
 
-            editNit_ID = ArrayArea[itemArray].Nit_ID;
-            editID = ArrayArea[itemArray].Area_ID;
+            editNit_ID = ArrayCargo[itemArray].Nit_ID;
+            editID = ArrayCargo[itemArray].Cargo_ID;
             
-            $("#Select_EmpresaNit").val(ArrayArea[itemArray].Nit_ID);
-            $("#Txt_ID").val(ArrayArea[itemArray].Area_ID);
+            $("#Select_EmpresaNit").val(ArrayCargo[itemArray].Nit_ID);
+            $("#Txt_ID").val(ArrayCargo[itemArray].Cargo_ID);
 
             setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
 
             $("#Select_EmpresaNit").attr("disabled", "disabled");
             $("#Txt_ID").attr("disabled", "disabled");
 
-            $("#TxtDescription").val(ArrayArea[itemArray].Descripcion);
+            $("#TxtDescription").val(ArrayCargo[itemArray].Descripcion);
 
-            if (ArrayArea[itemArray].AreaDependencia == 0)
+            if (ArrayCargo[itemArray].CargoDependencia == 0)
                 setTimeout("ChargeDependencia('-1');", 300);
             else
-                setTimeout("ChargeDependencia('" + ArrayArea[itemArray].AreaDependencia + "');", 300);
+                setTimeout("ChargeDependencia('" + ArrayCargo[itemArray].CargoDependencia + "');", 300);
 
-            if (ArrayArea[itemArray].Politica_ID == 0)
+            if (ArrayCargo[itemArray].Politica_ID == 0)
                 $("#Select_Politica").val("-1");
             else
-                $("#Select_Politica").val(ArrayArea[itemArray].Politica_ID);
+                $("#Select_Politica").val(ArrayCargo[itemArray].Politica_ID);
           
             $("#Btnguardar").attr("value", "Actualizar");
 
@@ -332,31 +332,31 @@ function Editar(index_Nit, index_Area) {
 
 //funcion de carga de la dependecia para edicion
 function ChargeDependencia(index) {
-    $('#Select_AreaDepent').val(index);
+    $('#Select_CargoDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //grid sin botones para ver resultado
 function Tabla_consulta() {
-    var html_Area = "<table id='TArea' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Area Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayArea) {
+    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+    for (itemArray in ArrayCargo) {
 
-        if (ArrayArea[itemArray].Area_ID != 0) {
+        if (ArrayCargo[itemArray].Cargo_ID != 0) {
             var dependencia;
 
-            if (ArrayArea[itemArray].AreaDependencia == 0)
+            if (ArrayCargo[itemArray].CargoDependencia == 0)
                 dependencia = "";
             else
-                dependencia = ArrayArea[itemArray].DescripAreaDepen;
+                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
 
-            html_Area += "<tr id= 'TArea_" + ArrayArea[itemArray].Area_ID + "'><td>" + ArrayArea[itemArray].Nit_ID + " - " + ArrayArea[itemArray].DescripEmpresa + "</td><td>" + ArrayArea[itemArray].Area_ID + "</td><td>" + ArrayArea[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayArea[itemArray].DescripPolitica + "</td><td>" + ArrayArea[itemArray].UsuarioCreacion + "</td><td>" + ArrayArea[itemArray].FechaCreacion + "</td><td>" + ArrayArea[itemArray].UsuarioActualizacion + "</td><td>" + ArrayArea[itemArray].FechaActualizacion + "</td></tr>";
+            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
         }
     }
-    html_Area += "</tbody></table>";
-    $("#container_TArea").html("");
-    $("#container_TArea").html(html_Area);
+    html_Cargo += "</tbody></table>";
+    $("#container_TCargo").html("");
+    $("#container_TCargo").html(html_Cargo);
 
-    $("#TArea").dataTable({
+    $("#TCargo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
@@ -372,7 +372,7 @@ function Clear() {
     $("#Select_EmpresaNit").val("-1");
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
-    $("#Select_AreaDepent").val("-1");
+    $("#Select_CargoDepent").val("-1");
     $("#Select_Politica").val("-1");
 
 

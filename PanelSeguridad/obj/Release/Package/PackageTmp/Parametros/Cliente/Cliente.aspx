@@ -74,7 +74,7 @@
                 <div id="TablaDatos_D">
                     <table id="Tabla_1" style="width: 700px; text-align: left;">
                         <tr>
-                            <td id="TD_ID" style="width: 120px;" class="Label_Bold">
+                            <td style="width: 120px;" class="Label_Bold">
                                 Multi - Empresa
                             </td>
                             <td>

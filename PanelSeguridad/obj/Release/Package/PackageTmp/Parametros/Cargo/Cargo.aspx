@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
-    CodeBehind="Area.aspx.vb" Inherits="PanelSeguridad.Area" %>
+    CodeBehind="Cargo.aspx.vb" Inherits="PanelSeguridad.Cargo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
-    <script src="Area.js" type="text/javascript"></script>
-    <script src="AreaTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="Cargo.js" type="text/javascript"></script>
+    <script src="CargoTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TArea">
+                            <div id="container_TCargo">
                             </div>
                         </td>
                     </tr>
@@ -121,10 +121,10 @@
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">
-                                Area de Dependencia
+                                Cargo de Dependencia
                             </td>
                             <td>
-                                <select id="Select_AreaDepent" class="C_Chosen">
+                                <select id="Select_CargoDepent" class="C_Chosen">
                                 </select>
                             </td>
                             <td style="padding-bottom: 25px; width: 320px;">

@@ -1,21 +1,21 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Data.OleDb
 
-Public Class AreaSQLClass
+Public Class CargoSQLClass
 
 #Region "CRUD"
 
     ''' <summary>
-    ''' creala consulta para la tabla Area parametrizada (READ)
+    ''' creala consulta para la tabla Cargo parametrizada (READ)
     ''' </summary>
     ''' <param name="vp_S_Filtro"></param>
     ''' <param name="vp_S_Opcion"></param>
     ''' <param name="vp_S_Contenido"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Read_AllArea(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
+    Public Function Read_AllCargo(ByVal vp_S_Filtro As String, ByVal vp_S_Opcion As String, ByVal vp_S_Contenido As String)
 
-        Dim ObjListArea As New List(Of AreaClass)
+        Dim ObjListCargo As New List(Of CargoClass)
         Dim StrQuery As String = ""
         Dim conex As New Conector
         Dim Conexion As String = conex.typeConexion("2")
@@ -30,7 +30,7 @@ Public Class AreaSQLClass
 
         sql = New StringBuilder()
 
-        sql.Append("EXEC CONSULT_T_AREA_CARGO 'AREA'")
+        sql.Append("EXEC CONSULT_T_AREA_CARGO 'Cargo'")
         StrQuery = sql.ToString
         conex.StrInsert_and_Update_All(StrQuery, "2")
 
@@ -38,7 +38,7 @@ Public Class AreaSQLClass
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
             sql.Append(" SELECT Nit_ID, " & _
-                             " AREA_CARGO_ID, " & _
+                             " Area_Cargo_ID, " & _
                              " Descripcion, " & _
                              " Area_Cargo_Dependencia, " & _
                              " Politica_ID, " & _
@@ -54,7 +54,7 @@ Public Class AreaSQLClass
 
             If vp_S_Contenido = "ALL" Then
                 sql.Append(" SELECT Nit_ID, " & _
-                             " AREA_CARGO_ID, " & _
+                             " Area_Cargo_ID, " & _
                              " Descripcion, " & _
                              " Area_Cargo_Dependencia, " & _
                              " Politica_ID, " & _
@@ -68,7 +68,7 @@ Public Class AreaSQLClass
                        " FROM T_AREA_CARGO ")
             Else
                 sql.Append(" SELECT Nit_ID, " & _
-                             " AREA_CARGO_ID, " & _
+                             " Area_Cargo_ID, " & _
                              " Descripcion, " & _
                              " Area_Cargo_Dependencia, " & _
                              " Politica_ID, " & _
@@ -86,19 +86,19 @@ Public Class AreaSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListArea = listArea(StrQuery, Conexion)
+        ObjListCargo = listCargo(StrQuery, Conexion)
 
-        Return ObjListArea
+        Return ObjListCargo
 
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la insercion de nuevo Area (INSERT)
+    ''' funcion que crea el query para la insercion de nuevo Cargo (INSERT)
     ''' </summary>
-    ''' <param name="vp_Obj_Area"></param>
+    ''' <param name="vp_Obj_Cargo"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function InsertArea(ByVal vp_Obj_Area As AreaClass)
+    Public Function InsertCargo(ByVal vp_Obj_Cargo As CargoClass)
 
         Dim conex As New Conector
         Dim Result As String
@@ -107,27 +107,27 @@ Public Class AreaSQLClass
         Dim StrQueryID As String = ""
         Dim StrQuery As String = ""
 
-        sql.AppendLine("INSERT AREA (" & _
-            "A_Nit_ID," & _
-            "A_Area_ID," & _
-            "A_Descripcion," & _
-            "A_AreaDependencia," & _
-            "A_Politica_ID," & _
-            "A_Usuario_Creacion," & _
-            "A_FechaCreacion," & _
-            "A_Usuario_Actualizacion," & _
-            "A_FechaActualizacion" & _
+        sql.AppendLine("INSERT Cargo (" & _
+            "C_Nit_ID," & _
+            "C_Cargo_ID," & _
+            "C_Descripcion," & _
+            "C_CargoDependencia," & _
+            "C_Politica_ID," & _
+            "C_Usuario_Creacion," & _
+            "C_FechaCreacion," & _
+            "C_Usuario_Actualizacion," & _
+            "C_FechaActualizacion" & _
             ")")
         sql.AppendLine("VALUES (")
-        sql.AppendLine("'" & vp_Obj_Area.Nit_ID & "',")
-        sql.AppendLine("'" & vp_Obj_Area.Area_ID & "',")
-        sql.AppendLine("'" & vp_Obj_Area.Descripcion & "',")
-        sql.AppendLine("'" & vp_Obj_Area.AreaDependencia & "',")
-        sql.AppendLine("'" & vp_Obj_Area.Politica_ID & "',")
-        sql.AppendLine("'" & vp_Obj_Area.UsuarioCreacion & "',")
-        sql.AppendLine("'" & vp_Obj_Area.FechaCreacion & "',")
-        sql.AppendLine("'" & vp_Obj_Area.UsuarioActualizacion & "',")
-        sql.AppendLine("'" & vp_Obj_Area.FechaActualizacion & "' ) ")
+        sql.AppendLine("'" & vp_Obj_Cargo.Nit_ID & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.Cargo_ID & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.Descripcion & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.CargoDependencia & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.Politica_ID & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.UsuarioCreacion & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.FechaCreacion & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.UsuarioActualizacion & "',")
+        sql.AppendLine("'" & vp_Obj_Cargo.FechaActualizacion & "' ) ")
 
         StrQuery = sql.ToString
 
@@ -138,25 +138,25 @@ Public Class AreaSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la modificacion del Area (UPDATE)
+    ''' funcion que crea el query para la modificacion del Cargo (UPDATE)
     ''' </summary>
-    ''' <param name="vp_Obj_Area"></param>
+    ''' <param name="vp_Obj_Cargo"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function UpdateArea(ByVal vp_Obj_Area As AreaClass)
+    Public Function UpdateCargo(ByVal vp_Obj_Cargo As CargoClass)
 
         Dim conex As New Conector
         Dim Result As String
         ' definiendo los objetos
         Dim sql As New StringBuilder
         Dim StrQuery As String = ""
-        sql.AppendLine("UPDATE AREA SET " & _
-                       " A_Descripcion ='" & vp_Obj_Area.Descripcion & "', " & _
-                       " A_AreaDependencia ='" & vp_Obj_Area.AreaDependencia & "', " & _
-                       " A_Politica_ID ='" & vp_Obj_Area.Politica_ID & "', " & _
-                       " A_Usuario_Actualizacion ='" & vp_Obj_Area.UsuarioActualizacion & "', " & _
-                       " A_FechaActualizacion ='" & vp_Obj_Area.FechaActualizacion & "' " & _
-                       " WHERE  A_Nit_ID = '" & vp_Obj_Area.Nit_ID & "' AND A_Area_ID = '" & vp_Obj_Area.Area_ID & "'")
+        sql.AppendLine("UPDATE Cargo SET " & _
+                       " C_Descripcion ='" & vp_Obj_Cargo.Descripcion & "', " & _
+                       " C_CargoDependencia ='" & vp_Obj_Cargo.CargoDependencia & "', " & _
+                       " C_Politica_ID ='" & vp_Obj_Cargo.Politica_ID & "', " & _
+                       " C_Usuario_Actualizacion ='" & vp_Obj_Cargo.UsuarioActualizacion & "', " & _
+                       " C_FechaActualizacion ='" & vp_Obj_Cargo.FechaActualizacion & "' " & _
+                       " WHERE  C_Nit_ID = '" & vp_Obj_Cargo.Nit_ID & "' AND C_Cargo_ID = '" & vp_Obj_Cargo.Cargo_ID & "'")
         StrQuery = sql.ToString
 
         Result = conex.StrInsert_and_Update_All(StrQuery, "2")
@@ -166,12 +166,12 @@ Public Class AreaSQLClass
     End Function
 
     ''' <summary>
-    ''' funcion que crea el query para la eliminacion del Area (DELETE)
+    ''' funcion que crea el query para la eliminacion del Cargo (DELETE)
     ''' </summary>
-    ''' <param name="vp_Obj_Area"></param>
+    ''' <param name="vp_Obj_Cargo"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function EraseArea(ByVal vp_Obj_Area As AreaClass)
+    Public Function EraseCargo(ByVal vp_Obj_Cargo As CargoClass)
 
         Dim conex As New Conector
         Dim Result As String = ""
@@ -180,7 +180,7 @@ Public Class AreaSQLClass
         Dim StrQuery As String
         Dim SQL_general As New GeneralSQLClass
 
-        sql.AppendLine("DELETE AREA WHERE A_Nit_ID = '" & vp_Obj_Area.Nit_ID & "' AND A_Area_ID = '" & vp_Obj_Area.Area_ID & "'")
+        sql.AppendLine("DELETE Cargo WHERE C_Nit_ID = '" & vp_Obj_Cargo.Nit_ID & "' AND C_Cargo_ID = '" & vp_Obj_Cargo.Cargo_ID & "'")
         StrQuery = sql.ToString
         Result = conex.StrInsert_and_Update_All(StrQuery, "2")
 
@@ -225,7 +225,7 @@ Public Class AreaSQLClass
     ''' <param name="vp_S_NitEmpresa"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Charge_DropListAreaDepend(ByVal vp_S_NitEmpresa As String)
+    Public Function Charge_DropListCargoDepend(ByVal vp_S_NitEmpresa As String)
 
         Dim ObjListDroplist As New List(Of Droplist_Class)
         Dim StrQuery As String = ""
@@ -235,8 +235,8 @@ Public Class AreaSQLClass
         Dim SQLGeneral As New GeneralSQLClass
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT A_Area_ID AS ID,CAST(A_Area_ID AS NVARCHAR(5)) + ' - ' + A_Descripcion AS DESCRIPCION FROM AREA " & _
-                   " WHERE  A_Nit_ID = '" & vp_S_NitEmpresa & "'")
+        sql.Append(" SELECT C_Cargo_ID AS ID,CAST(C_Cargo_ID AS NVARCHAR(5)) + ' - ' + C_Descripcion AS DESCRIPCION FROM CARGO " & _
+                   " WHERE  C_Nit_ID = '" & vp_S_NitEmpresa & "'")
 
         StrQuery = sql.ToString
 
@@ -276,13 +276,13 @@ Public Class AreaSQLClass
 #Region "CARGAR LISTAS"
 
     ''' <summary>
-    ''' funcion que trae el listado de Area para armar la tabla
+    ''' funcion que trae el listado de Cargo para armar la tabla
     ''' </summary>
     ''' <param name="vp_S_StrQuery"></param>
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listArea(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listCargo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -292,7 +292,7 @@ Public Class AreaSQLClass
 
         objcmd = objConexBD.CreateCommand
 
-        Dim ObjListArea As New List(Of AreaClass)
+        Dim ObjListCargo As New List(Of CargoClass)
 
         'abrimos conexion
         objConexBD.Open()
@@ -304,25 +304,25 @@ Public Class AreaSQLClass
         'recorremos la consulta por la cantidad de datos en la BD
         While ReadConsulta.Read
 
-            Dim objArea As New AreaClass
+            Dim objCargo As New CargoClass
             'cargamos datos sobre el objeto de login
-            objArea.Nit_ID = ReadConsulta.GetValue(0)
-            objArea.Area_ID = ReadConsulta.GetValue(1)
-            objArea.Descripcion = ReadConsulta.GetValue(2)
-            objArea.AreaDependencia = ReadConsulta.GetValue(3)
-            objArea.Politica_ID = ReadConsulta.GetValue(4)
+            objCargo.Nit_ID = ReadConsulta.GetValue(0)
+            objCargo.Cargo_ID = ReadConsulta.GetValue(1)
+            objCargo.Descripcion = ReadConsulta.GetValue(2)
+            objCargo.CargoDependencia = ReadConsulta.GetValue(3)
+            objCargo.Politica_ID = ReadConsulta.GetValue(4)
 
-            objArea.UsuarioCreacion = ReadConsulta.GetValue(5)
-            objArea.FechaCreacion = ReadConsulta.GetValue(6)
-            objArea.UsuarioActualizacion = ReadConsulta.GetValue(7)
-            objArea.FechaActualizacion = ReadConsulta.GetValue(8)
-            
-            If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objArea.DescripAreaDepen = ReadConsulta.GetValue(9) Else objArea.DescripAreaDepen = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objArea.DescripPolitica = ReadConsulta.GetValue(10) Else objArea.DescripPolitica = ""
-            objArea.DescripEmpresa = ReadConsulta.GetValue(11)
+            objCargo.UsuarioCreacion = ReadConsulta.GetValue(5)
+            objCargo.FechaCreacion = ReadConsulta.GetValue(6)
+            objCargo.UsuarioActualizacion = ReadConsulta.GetValue(7)
+            objCargo.FechaActualizacion = ReadConsulta.GetValue(8)
+
+            If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCargo.DescripCargoDepen = ReadConsulta.GetValue(9) Else objCargo.DescripCargoDepen = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCargo.DescripPolitica = ReadConsulta.GetValue(10) Else objCargo.DescripPolitica = ""
+            objCargo.DescripEmpresa = ReadConsulta.GetValue(11)
 
             'agregamos a la lista
-            ObjListArea.Add(objArea)
+            ObjListCargo.Add(objCargo)
 
         End While
 
@@ -330,7 +330,7 @@ Public Class AreaSQLClass
         ReadConsulta.Close()
         objConexBD.Close()
         'retornamos la consulta
-        Return ObjListArea
+        Return ObjListCargo
 
     End Function
 
@@ -344,7 +344,7 @@ Public Class AreaSQLClass
     ''' <param name="vp_O_Obj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Consulta_Repetido(ByVal vp_O_Obj As AreaClass)
+    Public Function Consulta_Repetido(ByVal vp_O_Obj As CargoClass)
 
         Dim StrQuery As String = ""
         Dim Result As String = ""
@@ -352,9 +352,9 @@ Public Class AreaSQLClass
 
         Dim sql As New StringBuilder
 
-        sql.AppendLine(" SELECT COUNT(1) FROM AREA " & _
-                       " WHERE A_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
-                       " AND A_Area_ID = '" & vp_O_Obj.Area_ID & "'")
+        sql.AppendLine(" SELECT COUNT(1) FROM Cargo " & _
+                       " WHERE C_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
+                       " AND C_Cargo_ID = '" & vp_O_Obj.Cargo_ID & "'")
 
         StrQuery = sql.ToString
 
