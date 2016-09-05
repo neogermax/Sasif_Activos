@@ -421,6 +421,8 @@ function transacionAjax_Cliente_create(State) {
                         NitAlter = $("#Select_EmpresaNit").val();
                         ArrayEmpresaNit = [];
                         transacionAjax_EmpresaNit('Cliente');
+                        $("#Admin_Anexos").css("display", "inline-table");
+   
                         Disabled_Client();
                     }
                     break;

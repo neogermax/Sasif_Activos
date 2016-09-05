@@ -18,7 +18,7 @@ var editType_Document_ID;
 var editDocument_ID;
 var NitAlter = "";
 var ValidatorCampos;
-
+var OpcComplementos = 0;
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los Links
@@ -31,6 +31,7 @@ $(document).ready(function () {
     transacionAjax_TCuenta('TCuenta');
 
     Verifica();
+    ExitComplementos();
 
     $("#ESelect").css("display", "none");
     $("#ImgMul").css("display", "none");
@@ -39,6 +40,8 @@ $(document).ready(function () {
     $("#ImgCiudad").css("display", "none");
     $("#ImgPais_D").css("display", "none");
     $("#Relacion").css("display", "none");
+    $("#T_option").css("display", "none");
+
 
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -60,13 +63,17 @@ $(document).ready(function () {
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
+
     $("#TablaDatos_D").css("display", "none");
+    $("#Admin_Anexos").css("display", "none");
+    $("#Container_Complementos").css("display", "none");
+
     $("#Relacion").css("display", "none");
     $("#Controls").css("display", "none");
-    $("#Complementos").css("display", "none");
     $("#TablaConsulta").css("display", "none");
     $("#Anexos").css("display", "none");
     $("#TR_Nit").css("display", "none");
+    $("#Admin_Anexos").css("display", "none");
 
 
     //funcion para las ventanas emergentes
@@ -313,10 +320,10 @@ function HabilitarPanel(opcion) {
         case "crear":
             ResetError();
             $("#TablaDatos_D").css("display", "inline-table");
-            // $("#Relacion").css("display", "inline-table");
+            $("#Admin_Anexos").css("display", "none");
+
             $("#Controls").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
-            $("#Complementos").css("display", "none");
             $("#Anexos").css("display", "none");
 
             $("#Select_EmpresaNit").removeAttr("disabled");
@@ -331,10 +338,10 @@ function HabilitarPanel(opcion) {
             break;
 
         case "buscar":
+            $("#Admin_Anexos").css("display", "none");
             $("#TablaDatos_D").css("display", "none");
             $("#Relacion").css("display", "none");
             $("#Controls").css("display", "none");
-            $("#Complementos").css("display", "none");
             $("#Anexos").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
@@ -348,7 +355,6 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#Relacion").css("display", "none");
             $("#Controls").css("display", "none");
-            $("#Complementos").css("display", "none");
             $("#Anexos").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
@@ -362,7 +368,6 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#Relacion").css("display", "none");
             $("#Controls").css("display", "none");
-            $("#Complementos").css("display", "none");
             $("#Anexos").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
@@ -918,6 +923,7 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             $("#Txt_Nit").attr("disabled", "disabled");
             $("#Txt_Ident").attr("disabled", "disabled");
             $("#Complementos").css("display", "inline-table");
+            $("#Admin_Anexos").css("display", "inline-table");
 
             setTimeout("ChargeCiudad(StrCiudad);", 300);
 
@@ -1156,4 +1162,29 @@ function Enabled_Client() {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+}
+
+
+//habilita barra de complementos
+function Complemento() {
+
+
+    if (OpcComplementos == 0) {
+        $("#Container_Complementos").css("display", "inline-table");
+        $("#T_option").css("display", "inline-table");
+        OpcComplementos = 1;
+    }
+    else {
+        $('#Container_Complementos').fadeOut("slow");
+        OpcComplementos = 0;
+    }
+}
+
+//cierra  barra de complementos
+function ExitComplementos() {
+    $("#form1").click(function () {
+        $("#T_option").css("display", "none");
+        $('#Container_Complementos').fadeOut("slow");
+        OpcComplementos = 0;
+    });
 }
