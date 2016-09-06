@@ -45,14 +45,11 @@ $(document).ready(function () {
 
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
-         
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
         $('#Select_AreaDepent').empty();
         transacionAjax_AreaDepend('Area_Dep', index_ID);
     });
-
-  
 }
 
 //salida del formulario

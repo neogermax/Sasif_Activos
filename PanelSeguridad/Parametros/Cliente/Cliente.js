@@ -10,14 +10,17 @@ var ArrayEntfinanciera = [];
 var ArrayTcuenta = [];
 var ArrayCli_Relacion = [];
 var ArrayRegimen = [];
-
+var ArrayArea = [];
+var ArrayCargo = [];
+var ArraySeguridad = [];
+var ArrayJefe = [];
 
 var estado;
 var editNit_ID;
 var editType_Document_ID;
 var editDocument_ID;
 var NitAlter = "";
-var ValidatorCampos;
+var ValidatorCampos = 1;
 var OpcComplementos = 0;
 /*--------------- region de variables globales --------------------*/
 
@@ -29,6 +32,7 @@ $(document).ready(function () {
     transacionAjax_Pais('Pais');
     transacionAjax_Documento('Documento');
     transacionAjax_TCuenta('TCuenta');
+    transacionAjax_Seguridad('Seguridad');
 
     Verifica();
     ExitComplementos();
@@ -41,7 +45,6 @@ $(document).ready(function () {
     $("#ImgPais_D").css("display", "none");
     $("#Relacion").css("display", "none");
     $("#T_option").css("display", "none");
-
 
     $("#Img1").css("display", "none");
     $("#Img2").css("display", "none");
@@ -58,16 +61,20 @@ $(document).ready(function () {
     $("#Img14").css("display", "none");
     $("#Img15").css("display", "none");
     $("#Img16").css("display", "none");
+    $("#Img22").css("display", "none");
+    $("#Img23").css("display", "none");
 
     $("#DE").css("display", "none");
     $("#SE").css("display", "none");
     $("#WE").css("display", "none");
 
-
     $("#TablaDatos_D").css("display", "none");
     $("#Admin_Anexos").css("display", "none");
+    $("#Foto_Persona").css("display", "none");
     $("#Container_Complementos").css("display", "none");
-
+    $("#C_Empleado").css("display", "none");
+    $("#C_Banco").css("display", "none");
+    
     $("#Relacion").css("display", "none");
     $("#Controls").css("display", "none");
     $("#TablaConsulta").css("display", "none");
@@ -137,7 +144,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("#Dialog_C_R_U_D").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -186,7 +192,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("#Dialog_Format_Adress").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -211,7 +216,6 @@ $(document).ready(function () {
         }
     });
 
-
     $(function () {
         $("#Acordeon_Dat").accordion({
             heightStyle: "content"
@@ -223,6 +227,7 @@ $(document).ready(function () {
     Change_Select_TPersona();
     ValideAnexos();
     Change_Select_TDoc();
+    Change_Select_Nit();
 
 });
 
@@ -276,6 +281,23 @@ function Change_Select_TPersona() {
     });
 }
 
+//carga el combo de Area dependiente
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+        $('#Select_Area').empty();
+        transacionAjax_Area('Area', index_ID);
+
+        $('#Select_Cargo').empty();
+        transacionAjax_Cargo('Cargo', index_ID);
+
+        $('#Select_Jefe').empty();
+        transacionAjax_Jefe('Jefe', index_ID);
+
+    });
+}
+
+
 
 //revisa el tipo de documento
 function Change_Select_TDoc() {
@@ -321,8 +343,9 @@ function HabilitarPanel(opcion) {
             ResetError();
             $("#TablaDatos_D").css("display", "inline-table");
             $("#Admin_Anexos").css("display", "none");
-
-            $("#Controls").css("display", "inline-table");
+            $("#Foto_Persona").css("display", "inline-table");
+    
+             $("#Controls").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -340,7 +363,8 @@ function HabilitarPanel(opcion) {
         case "buscar":
             $("#Admin_Anexos").css("display", "none");
             $("#TablaDatos_D").css("display", "none");
-            $("#Relacion").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+    
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -353,7 +377,9 @@ function HabilitarPanel(opcion) {
         case "modificar":
             ResetError();
             $("#TablaDatos_D").css("display", "none");
-            $("#Relacion").css("display", "none");
+            $("#Admin_Anexos").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+    
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -366,7 +392,9 @@ function HabilitarPanel(opcion) {
 
         case "eliminar":
             $("#TablaDatos_D").css("display", "none");
-            $("#Relacion").css("display", "none");
+            $("#Admin_Anexos").css("display", "none");
+            $("#Foto_Persona").css("display", "none");
+    
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -421,260 +449,6 @@ function BtnElimina() {
 }
 
 
-//validamos campos para la creacion del link
-function validarCamposCrear() {
-
-    var validar = 0;
-
-    switch (ValidatorCampos) {
-        case 1:
-            validar = valida_1();
-            break;
-
-        case 2:
-            validar = valida_2();
-            break;
-
-        case 3:
-            validar = valida_3();
-            break;
-
-        default:
-            validar = valida_1();
-            break;
-
-    }
-
-    return validar;
-}
-
-//validacion general
-function valida_1() {
-
-    var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Select_Pais").val();
-    var Campo_3 = $("#Select_Ciudad").val();
-    var Campo_4 = $("#Select_Documento").val();
-    var Campo_5 = $("#Txt_Ident").val();
-    var Campo_6 = $("#TxtNombre").val();
-    var Campo_7 = $("#Select_Ciudad_Doc").val();
-    var Campo_8 = $("#Select_TPersona").val();
-    var Campo_9 = $("#Select_Regimen").val();
-
-    var validar = 0;
-
-    if (Campo_9 == "-1" || Campo_8 == "-1" || Campo_7 == "-1" || Campo_6 == "" || Campo_5 == "" || Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1")
-            $("#ImgMul").css("display", "inline-table");
-        else
-            $("#ImgMul").css("display", "none");
-
-        if (Campo_2 == "-1")
-            $("#ImgPais").css("display", "inline-table");
-        else
-            $("#ImgPais").css("display", "none");
-
-        if (Campo_3 == "-1")
-            $("#Img1").css("display", "inline-table");
-        else
-            $("#Img1").css("display", "none");
-
-        if (Campo_4 == "-1")
-            $("#Img2").css("display", "inline-table");
-        else
-            $("#Img2").css("display", "none");
-
-        if (Campo_5 == "")
-            $("#Img3").css("display", "inline-table");
-        else
-            $("#Img3").css("display", "none");
-
-        if (Campo_6 == "")
-            $("#Img5").css("display", "inline-table");
-        else
-            $("#Img5").css("display", "none");
-
-        if (Campo_7 == "-1")
-            $("#ImgC_Doc").css("display", "inline-table");
-        else
-            $("#ImgC_Doc").css("display", "none");
-
-        if (Campo_8 == "-1")
-            $("#Img9").css("display", "inline-table");
-        else
-            $("#Img9").css("display", "none");
-
-        if (Campo_9 == "-1")
-            $("#Img10").css("display", "inline-table");
-        else
-            $("#Img10").css("display", "none");
-    }
-    else {
-        $("#ImgC_Doc").css("display", "none");
-        $("#ImgMul").css("display", "none");
-        $("#ImgPais").css("display", "none");
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img5").css("display", "none");
-        $("#Img9").css("display", "none");
-        $("#Img10").css("display", "none");
-    }
-
-    return validar;
-
-}
-
-
-//validacion general
-function valida_2() {
-
-    var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Select_Pais").val();
-    var Campo_3 = $("#Select_Ciudad").val();
-    var Campo_4 = $("#Select_Documento").val();
-    var Campo_5 = $("#Txt_Ident").val();
-    var Campo_6 = $("#TxtNombreNit").val();
-    var Campo_8 = $("#Select_TPersona").val();
-    var Campo_9 = $("#Select_Regimen").val();
-
-    var validar = 0;
-
-    if (Campo_9 == "-1" || Campo_8 == "-1" || Campo_6 == "" || Campo_5 == "" || Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1")
-            $("#ImgMul").css("display", "inline-table");
-        else
-            $("#ImgMul").css("display", "none");
-
-        if (Campo_2 == "-1")
-            $("#ImgPais").css("display", "inline-table");
-        else
-            $("#ImgPais").css("display", "none");
-
-        if (Campo_3 == "-1")
-            $("#Img1").css("display", "inline-table");
-        else
-            $("#Img1").css("display", "none");
-
-        if (Campo_4 == "-1")
-            $("#Img2").css("display", "inline-table");
-        else
-            $("#Img2").css("display", "none");
-
-        if (Campo_5 == "")
-            $("#Img3").css("display", "inline-table");
-        else
-            $("#Img3").css("display", "none");
-
-        if (Campo_6 == "")
-            $("#Img11").css("display", "inline-table");
-        else
-            $("#Img11").css("display", "none");
-
-        if (Campo_8 == "-1")
-            $("#Img9").css("display", "inline-table");
-        else
-            $("#Img9").css("display", "none");
-
-        if (Campo_9 == "-1")
-            $("#Img10").css("display", "inline-table");
-        else
-            $("#Img10").css("display", "none");
-    }
-    else {
-        $("#ImgC_Doc").css("display", "none");
-        $("#ImgMul").css("display", "none");
-        $("#ImgPais").css("display", "none");
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img11").css("display", "none");
-        $("#Img9").css("display", "none");
-        $("#Img10").css("display", "none");
-    }
-
-    return validar;
-}
-
-//validacion general
-function valida_3() {
-
-    var Campo_1 = $("#Select_EmpresaNit").val();
-    var Campo_2 = $("#Select_Pais").val();
-    var Campo_3 = $("#Select_Ciudad").val();
-    var Campo_4 = $("#Select_Documento").val();
-    var Campo_5 = $("#Txt_Ident").val();
-    var Campo_6 = $("#TxtNombreNit").val();
-    var Campo_8 = $("#Select_TPersona").val();
-    var Campo_9 = $("#Select_Regimen").val();
-    var Campo_7 = $("#Txt_CodBank").val();
-
-    var validar = 0;
-
-    if (Campo_7 == "" || Campo_9 == "-1" || Campo_8 == "-1" || Campo_6 == "" || Campo_5 == "" || Campo_4 == "-1" || Campo_3 == "-1" || Campo_2 == "-1" || Campo_1 == "-1") {
-        validar = 1;
-        if (Campo_1 == "-1")
-            $("#ImgMul").css("display", "inline-table");
-        else
-            $("#ImgMul").css("display", "none");
-
-        if (Campo_2 == "-1")
-            $("#ImgPais").css("display", "inline-table");
-        else
-            $("#ImgPais").css("display", "none");
-
-        if (Campo_3 == "-1")
-            $("#Img1").css("display", "inline-table");
-        else
-            $("#Img1").css("display", "none");
-
-        if (Campo_4 == "-1")
-            $("#Img2").css("display", "inline-table");
-        else
-            $("#Img2").css("display", "none");
-
-        if (Campo_5 == "")
-            $("#Img3").css("display", "inline-table");
-        else
-            $("#Img3").css("display", "none");
-
-        if (Campo_6 == "")
-            $("#Img11").css("display", "inline-table");
-        else
-            $("#Img11").css("display", "none");
-
-        if (Campo_7 == "")
-            $("#Img12").css("display", "inline-table");
-        else
-            $("#Img12").css("display", "none");
-
-        if (Campo_8 == "-1")
-            $("#Img9").css("display", "inline-table");
-        else
-            $("#Img9").css("display", "none");
-
-        if (Campo_9 == "-1")
-            $("#Img10").css("display", "inline-table");
-        else
-            $("#Img10").css("display", "none");
-    }
-    else {
-        $("#ImgC_Doc").css("display", "none");
-        $("#ImgMul").css("display", "none");
-        $("#ImgPais").css("display", "none");
-        $("#Img1").css("display", "none");
-        $("#Img2").css("display", "none");
-        $("#Img3").css("display", "none");
-        $("#Img11").css("display", "none");
-        $("#Img9").css("display", "none");
-        $("#Img10").css("display", "none");
-        $("#Img12").css("display", "none");
-    }
-
-    return validar;
-}
 
 //escondemos los iconos obligatorios
 function ResetError() {
@@ -807,6 +581,10 @@ function Tabla_modificar() {
 var StrCiudad;
 var StrDocCiudad;
 var StrRegimen;
+var StrArea;
+var StrCargo;
+var StrDocJefe;
+var StrPolitica;
 
 // muestra el registro a editar
 function Editar(index_Nit, index_TDocumento, index_Documento) {
@@ -816,9 +594,9 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
     D_Documento = index_Documento;
 
     $("#TablaDatos_D").css("display", "inline-table");
-    //$("#Relacion").css("display", "inline-table");
     $("#Controls").css("display", "inline-table");
-
+    $("#Foto_Persona").css("display", "inline-table");
+    
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayCliente) {
@@ -833,15 +611,25 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             $("#Select_EmpresaNit").val(ArrayCliente[itemArray].Nit_ID);
             $("#Select_Documento").val(ArrayCliente[itemArray].TypeDocument_ID);
             $("#Select_Pais").val(ArrayCliente[itemArray].Pais_ID);
+            $("#Select_TPersona").val(ArrayCliente[itemArray].TipoPersona);
+            $("#Select_Acceso").val(ArrayCliente[itemArray].AccesoSistema);
+
             StrCiudad = ArrayCliente[itemArray].Ciudad_ID;
             StrDocCiudad = ArrayCliente[itemArray].DocCiudad;
             StrRegimen = ArrayCliente[itemArray].Regimen;
+            StrArea = ArrayCliente[itemArray].Area_ID;
+            StrCargo = ArrayCliente[itemArray].Cargo_ID;
+            StrPolitica = ArrayCliente[itemArray].Cargo_ID;
+            StrDocJefe = ArrayCliente[itemArray].Document_ID_Jefe;
 
-            $("#Select_TPersona").val(ArrayCliente[itemArray].TipoPersona);
+            if (StrPolitica == 0)
+                $("#Select_Politica").val("-1");
+            else
+                $("#Select_Politica").val(StrPolitica);
 
             setTimeout("$('#Select_Pais').trigger('change');", 200);
             setTimeout("$('#Select_TPersona').trigger('change');", 200);
-
+            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
 
             $("#Txt_Ident").val(ArrayCliente[itemArray].Document_ID);
             $("#TxtVerif").val(ArrayCliente[itemArray].Digito_Verificacion);
@@ -891,11 +679,6 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             else
                 $("#Check_MultiEmpresa").prop("checked", false);
 
-            if (ArrayCliente[itemArray].OP_Empleado == "S")
-                $("#Check_Empleado").prop("checked", true);
-            else
-                $("#Check_Empleado").prop("checked", false);
-
             if (ArrayCliente[itemArray].OP_Asesor == "S")
                 $("#Check_Asesor").prop("checked", true);
             else
@@ -909,11 +692,21 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             if (ArrayCliente[itemArray].Other_2 == "S") {
                 $("#Check_EntBancaria").prop("checked", true);
                 $("#Anexos").css("display", "inline-table");
+                $("#C_Banco").css("display", "inline-table");
             }
             else {
                 $("#Check_EntBancaria").prop("checked", false);
-                $("#Anexos").css("display", "none");
             }
+
+            if (ArrayCliente[itemArray].OP_Empleado == "S") {
+                $("#Check_Empleado").prop("checked", true);
+                $("#Anexos").css("display", "inline-table");
+                $("#C_Empleado").css("display", "inline-table");
+                setTimeout("EditEmpleado();", 600);
+
+            }
+            else
+                $("#Check_Empleado").prop("checked", false);
 
             $("#Btnguardar").attr("value", "Actualizar");
 
@@ -939,7 +732,18 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
     }
 }
 
-//funcion de carga de lacuidad para edicion
+//para cargar edicion de los combos de empleados
+function EditEmpleado() {
+
+    ChargeArea(StrArea);
+    ChargeCargo(StrCargo);
+
+    if (StrDocJefe != 0)
+        ChargeJefe(StrDocJefe);
+
+}
+
+//funcion de carga de la cuidad para edicion
 function ChargeCiudad(index) {
     $('#Select_Ciudad').val(index);
     $('.C_Chosen').trigger('chosen:updated');
@@ -948,6 +752,24 @@ function ChargeCiudad(index) {
 //funcion de carga de la ciudad del documento para edicion
 function ChargeDocCiudad(index) {
     $('#Select_Ciudad_Doc').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//funcion de carga del area para edicion
+function ChargeArea(index) {
+    $('#Select_Area').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//funcion de carga del cargo para edicion
+function ChargeCargo(index) {
+    $('#Select_Cargo').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//funcion de carga del jefe imediato para edicion
+function ChargeJefe(index) {
+    $('#Select_Jefe').val(index);
     $('.C_Chosen').trigger('chosen:updated');
 }
 
@@ -1075,45 +897,6 @@ function Verifica() {
         $("#TxtVerif").val(DigitoVerificado);
 
     });
-}
-
-//revisa si tiene informacion adicional
-function ValideAnexos() {
-
-    $('#Check_Cliente').change(function () {
-    });
-
-    $('#Check_Avaluador').change(function () {
-    });
-
-    $('#Check_Transito').change(function () {
-    });
-
-    $('#Check_Hacienda').change(function () {
-    });
-
-    $('#Check_MultiEmpresa').change(function () {
-    });
-
-    $('#Check_Empleado').change(function () {
-    });
-
-    $('#Check_Asesor').change(function () {
-    });
-
-    $('#Check_Proveedor').click(function () {
-    });
-
-    $('#Check_EntBancaria').click(function () {
-        if ($(this).is(':checked')) {
-            $("#Anexos").css("display", "inline-table");
-            ValidatorCampos = 3;
-        }
-        else {
-            $("#Anexos").css("display", "none");
-        }
-    });
-
 }
 
 

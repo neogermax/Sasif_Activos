@@ -41,7 +41,7 @@ Public Class ClienteSQLClass
                               " CLI_Other_1, " & _
                               " CLI_Other_2, " & _
                               " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario, " & _
+                              " CLI_Usuario_Creacion, " & _
                               " C.C_Descripcion, " & _
                               " TD.TD_Descripcion, " & _
                               " CLI_Pais_ID, " & _
@@ -54,13 +54,27 @@ Public Class ClienteSQLClass
                               " CLI_TipoPersona, " & _
                               " CLI_Regimen, " & _
                               " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen " & _
+                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
+                              " CLI_AccesoSistema, " & _
+                              " CLI_Area_ID, " & _
+                              " CLI_Cargo_ID, " & _
+                              " CLI_TypeDocument_ID_Jefe, " & _
+                              " CLI_Document_ID_Jefe, " & _
+                              " CLI_Politica_ID, " & _
+                              " CLI_FechaCreacion, " & _
+                              " CLI_Usuario_Actualizacion, " & _
+                              " A.A_Descripcion, " & _
+                              " CA.C_Descripcion, " & _
+                              " PO.PS_Descripcion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' ")
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID ")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -80,7 +94,7 @@ Public Class ClienteSQLClass
                               " CLI_Other_1, " & _
                               " CLI_Other_2, " & _
                               " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario, " & _
+                              " CLI_Usuario_Creacion, " & _
                               " C.C_Descripcion, " & _
                               " TD.TD_Descripcion, " & _
                               " CLI_Pais_ID, " & _
@@ -93,13 +107,27 @@ Public Class ClienteSQLClass
                               " CLI_TipoPersona, " & _
                               " CLI_Regimen, " & _
                               " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen " & _
+                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
+                              " CLI_AccesoSistema, " & _
+                              " CLI_Area_ID, " & _
+                              " CLI_Cargo_ID, " & _
+                              " CLI_TypeDocument_ID_Jefe, " & _
+                              " CLI_Document_ID_Jefe, " & _
+                              " CLI_Politica_ID, " & _
+                              " CLI_FechaCreacion, " & _
+                              " CLI_Usuario_Actualizacion, " & _
+                              " A.A_Descripcion, " & _
+                              " CA.C_Descripcion, " & _
+                              " PO.PS_Descripcion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' ")
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID ")
             Else
                 sql.Append(" SELECT CLI_Nit_ID, " & _
                               " CLI_TypeDocument_ID, " & _
@@ -117,7 +145,7 @@ Public Class ClienteSQLClass
                               " CLI_Other_1, " & _
                               " CLI_Other_2, " & _
                               " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario, " & _
+                              " CLI_Usuario_Creacion, " & _
                               " C.C_Descripcion, " & _
                               " TD.TD_Descripcion, " & _
                               " CLI_Pais_ID, " & _
@@ -130,13 +158,27 @@ Public Class ClienteSQLClass
                               " CLI_TipoPersona, " & _
                               " CLI_Regimen, " & _
                               " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen " & _
+                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
+                              " CLI_AccesoSistema, " & _
+                              " CLI_Area_ID, " & _
+                              " CLI_Cargo_ID, " & _
+                              " CLI_TypeDocument_ID_Jefe, " & _
+                              " CLI_Document_ID_Jefe, " & _
+                              " CLI_Politica_ID, " & _
+                              " CLI_FechaCreacion, " & _
+                              " CLI_Usuario_Actualizacion, " & _
+                              " A.A_Descripcion, " & _
+                              " CA.C_Descripcion, " & _
+                              " PO.PS_Descripcion " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
                         " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -188,8 +230,16 @@ Public Class ClienteSQLClass
             " CLI_Other_2, " & _
             " CLI_TipoPersona, " & _
             " CLI_Regimen, " & _
-            " CLI_FechaActualizacion, " & _
-            " CLI_Usuario " & _
+            " CLI_AccesoSistema, " & _
+            " CLI_Area_ID, " & _
+            " CLI_Cargo_ID, " & _
+            " CLI_TypeDocument_ID_Jefe, " & _
+            " CLI_Document_ID_Jefe, " & _
+            " CLI_Politica_ID, " & _
+            " CLI_Usuario_Creacion, " & _
+            " CLI_FechaCreacion, " & _
+            " CLI_Usuario_Actualizacion, " & _
+            " CLI_FechaActualizacion " & _
              ")")
         sql.AppendLine("VALUES (")
         sql.AppendLine("'" & vp_O_Obj.Nit_ID & "',")
@@ -215,8 +265,16 @@ Public Class ClienteSQLClass
         sql.AppendLine("'" & vp_O_Obj.Other_2 & "',")
         sql.AppendLine("'" & vp_O_Obj.TipoPersona & "',")
         sql.AppendLine("'" & vp_O_Obj.Regimen & "',")
-        sql.AppendLine("'" & vp_O_Obj.FechaActualizacion & "',")
-        sql.AppendLine("'" & vp_O_Obj.Usuario & "' ) ")
+        sql.AppendLine("'" & vp_O_Obj.AccesoSistema & "',")
+        sql.AppendLine("'" & vp_O_Obj.Area_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.Cargo_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.TypeDocument_ID_Jefe & "',")
+        sql.AppendLine("'" & vp_O_Obj.Document_ID_Jefe & "',")
+        sql.AppendLine("'" & vp_O_Obj.Politica_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.UsuarioCreacion & "',")
+        sql.AppendLine("'" & vp_O_Obj.FechaCreacion & "',")
+        sql.AppendLine("'" & vp_O_Obj.UsuarioActualizacion & "',")
+        sql.AppendLine("'" & vp_O_Obj.FechaActualizacion & "' ) ")
 
         StrQuery = sql.ToString
 
@@ -259,8 +317,14 @@ Public Class ClienteSQLClass
                           " CLI_Other_2 ='" & vp_O_Obj.Other_2 & "', " & _
                           " CLI_TipoPersona ='" & vp_O_Obj.TipoPersona & "', " & _
                           " CLI_Regimen ='" & vp_O_Obj.Regimen & "', " & _
-                          " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "', " & _
-                          " CLI_Usuario ='" & vp_O_Obj.Usuario & "'" & _
+                          " CLI_AccesoSistema ='" & vp_O_Obj.AccesoSistema & "', " & _
+                          " CLI_Area_ID ='" & vp_O_Obj.Area_ID & "', " & _
+                          " CLI_Cargo_ID ='" & vp_O_Obj.Cargo_ID & "', " & _
+                          " CLI_TypeDocument_ID_Jefe ='" & vp_O_Obj.TypeDocument_ID_Jefe & "', " & _
+                          " CLI_Document_ID_Jefe ='" & vp_O_Obj.Document_ID_Jefe & "', " & _
+                          " CLI_Politica_ID ='" & vp_O_Obj.Politica_ID & "', " & _
+                          " CLI_Usuario_Actualizacion ='" & vp_O_Obj.UsuarioActualizacion & "', " & _
+                          " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "'" & _
                        " WHERE CLI_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
                        " AND CLI_TypeDocument_ID = '" & vp_O_Obj.TypeDocument_ID & "'" & _
                        " AND CLI_Document_ID = '" & vp_O_Obj.Document_ID & "'")
@@ -401,6 +465,32 @@ Public Class ClienteSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_NitEmpresa"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListJefe(ByVal vp_S_NitEmpresa As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT CLI_Document_ID AS ID,CAST(CLI_TypeDocument_ID AS NVARCHAR(3)) + ' - ' +  CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' +  CLI_Nombre + ' ' + CLI_Nombre_2 + ' ' + CLI_Apellido_1 + ' ' +  CLI_Apellido_2 AS Descripcion FROM CLIENTE " & _
+                   " WHERE CLI_OP_Empleado = 'S' AND CLI_Nit_ID = '" & vp_S_NitEmpresa & "'")
+
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
 
     ''' <summary>
     ''' crea la consulta para cargar el combo
@@ -515,7 +605,7 @@ Public Class ClienteSQLClass
                     " CLI_Other_1, " & _
                     " CLI_Other_2, " & _
                     " CLI_FechaActualizacion, " & _
-                    " CLI_Usuario, " & _
+                    " CLI_Usuario_Creacion, " & _
                     " C.C_Descripcion, " & _
                     " TD.TD_Descripcion, " & _
                     " CLI_Pais_ID, " & _
@@ -620,7 +710,7 @@ Public Class ClienteSQLClass
             If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Other_2 = ReadConsulta.GetValue(14) Else objCliente.Other_2 = "-1"
 
             objCliente.FechaActualizacion = ReadConsulta.GetValue(15)
-            objCliente.Usuario = ReadConsulta.GetValue(16)
+            objCliente.UsuarioCreacion = ReadConsulta.GetValue(16)
             objCliente.DescripCiudad = ReadConsulta.GetValue(17)
             objCliente.DescripTypeDocument = ReadConsulta.GetValue(18)
 
@@ -637,6 +727,20 @@ Public Class ClienteSQLClass
             If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objCliente.Regimen = ReadConsulta.GetValue(27) Else objCliente.Regimen = ""
             If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objCliente.DescripTipoPersona = ReadConsulta.GetValue(28) Else objCliente.DescripTipoPersona = ""
             If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objCliente.DescripRegimen = ReadConsulta.GetValue(29) Else objCliente.DescripRegimen = ""
+
+            If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objCliente.AccesoSistema = ReadConsulta.GetValue(30) Else objCliente.AccesoSistema = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objCliente.Area_ID = ReadConsulta.GetValue(31) Else objCliente.Area_ID = 0
+            If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objCliente.Cargo_ID = ReadConsulta.GetValue(32) Else objCliente.Cargo_ID = 0
+            If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objCliente.TypeDocument_ID_Jefe = ReadConsulta.GetValue(33) Else objCliente.TypeDocument_ID_Jefe = 0
+            If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objCliente.Document_ID_Jefe = ReadConsulta.GetValue(34) Else objCliente.Document_ID_Jefe = 0
+            If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objCliente.Politica_ID = ReadConsulta.GetValue(35) Else objCliente.Politica_ID = 0
+
+            objCliente.FechaCreacion = ReadConsulta.GetValue(36)
+            objCliente.UsuarioActualizacion = ReadConsulta.GetValue(37)
+
+            If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objCliente.DescripArea = ReadConsulta.GetValue(38) Else objCliente.DescripArea = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objCliente.DescripCargo = ReadConsulta.GetValue(39) Else objCliente.DescripCargo = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objCliente.DescripSeguridad = ReadConsulta.GetValue(40) Else objCliente.DescripSeguridad = ""
 
             'agregamos a la lista
             ObjListCliente.Add(objCliente)

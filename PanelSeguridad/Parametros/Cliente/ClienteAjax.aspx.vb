@@ -20,8 +20,17 @@ Public Class ClienteAjax
                 Case "TCuenta"
                     CargarTCuenta()
 
-                Case "cargar_droplist_busqueda"
-                    CargarDroplist()
+                Case "Area"
+                    CargarArea()
+
+                Case "Cargo"
+                    CargarCargo()
+
+                Case "Jefe"
+                    CargarJefe()
+
+                Case "Seguridad"
+                    CargarSeguridad()
 
                 Case "Pais"
                     CargarPaises()
@@ -31,6 +40,9 @@ Public Class ClienteAjax
 
                 Case "Documento"
                     CargarDocumento()
+
+                Case "cargar_droplist_busqueda"
+                    CargarDroplist()
 
                 Case "crear"
                     Insert()
@@ -89,7 +101,7 @@ Public Class ClienteAjax
 
             objCliente.Nit_ID = ""
             objCliente.FechaActualizacion = ""
-            objCliente.Usuario = ""
+            objCliente.UsuarioCreacion = ""
 
             ObjListCliente.Add(objCliente)
         End If
@@ -144,8 +156,17 @@ Public Class ClienteAjax
             objCliente.TipoPersona = Request.Form("TipoPersona")
             objCliente.Regimen = Request.Form("Regimen")
 
+            objCliente.AccesoSistema = Request.Form("Acceso")
+            objCliente.Area_ID = Request.Form("Area")
+            objCliente.Cargo_ID = Request.Form("Cargo")
+            objCliente.TypeDocument_ID_Jefe = Request.Form("TDocJefe")
+            objCliente.Document_ID_Jefe = Request.Form("DocJefe")
+            objCliente.Politica_ID = Request.Form("Politica")
+
+            objCliente.UsuarioCreacion = Request.Form("user")
+            objCliente.FechaCreacion = Date.Now
+            objCliente.UsuarioActualizacion = Request.Form("user")
             objCliente.FechaActualizacion = Date.Now
-            objCliente.Usuario = Request.Form("user")
 
             ObjListCliente.Add(objCliente)
 
@@ -199,8 +220,15 @@ Public Class ClienteAjax
         objCliente.TipoPersona = Request.Form("TipoPersona")
         objCliente.Regimen = Request.Form("Regimen")
 
+        objCliente.AccesoSistema = Request.Form("Acceso")
+        objCliente.Area_ID = Request.Form("Area")
+        objCliente.Cargo_ID = Request.Form("Cargo")
+        objCliente.TypeDocument_ID_Jefe = Request.Form("TDocJefe")
+        objCliente.Document_ID_Jefe = Request.Form("DocJefe")
+        objCliente.Politica_ID = Request.Form("Politica")
+
+        objCliente.UsuarioActualizacion = Request.Form("user")
         objCliente.FechaActualizacion = Date.Now
-        objCliente.Usuario = Request.Form("user")
 
         ObjListCliente.Add(objCliente)
 
@@ -522,6 +550,66 @@ Public Class ClienteAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarArea()
+
+        Dim SQL As New AreaSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Index As String = Request.Form("Index")
+
+        ObjListDroplist = SQL.Charge_DropListAreaDepend(vl_S_Index)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarCargo()
+
+        Dim SQL As New CargoSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Index As String = Request.Form("Index")
+
+        ObjListDroplist = SQL.Charge_DropListCargoDepend(vl_S_Index)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarJefe()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Index As String = Request.Form("Index")
+
+        ObjListDroplist = SQL.Charge_DropListJefe(vl_S_Index)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarSeguridad()
+
+        Dim SQL As New CargoSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Tabla As String = Request.Form("tabla")
+
+        ObjListDroplist = SQL.Charge_DropListSeguridad(vl_S_Tabla)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

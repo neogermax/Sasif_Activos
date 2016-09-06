@@ -394,38 +394,3 @@ textarea
     border-radius: 3px;
     font-family: Verdana, Geneva, sans-serif;
 }
-
-
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*                                                               TOOL TIP                                                                                     */
-/*------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Clase que tendra el tooltip */
-.Complemento
-{
-    position: relative; /* Esta clase tiene que tener posicion relativa */
-    color: #D8D104; /* Color del texto */
-}
-
-/* El tooltip */
-.Complemento spam
-{
-    background: rgba(20,20,20,0.9) url('../../images/alert.png') center left 5px no-repeat;
-    border: 2px solid #D8D104;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px #333;
-    color: #D8D104;
-    display: none; /* El tooltip por defecto estara oculto */
-    font-size: 0.8em;
-    padding: 10px 10px 10px 50px;
-    max-width: 6000px;
-    position: absolute; /* El tooltip se posiciona de forma absoluta para no modificar el aspezto del resto de la pagina */
-    top: 15px; /* Posicion apartir de la parte superior del primer elemento padre con posicion relativa */
-    left: 40px; /* Posicion apartir de la parte izquierda del primer elemento padre con posicion relativa */
-    z-index: 10000; /* Poner un z-index alto para que aparezca por encima del resto de elementos */
-}
-
-/* El tooltip cuando se muestra */
-.Complemento:hover spam
-{
-    display: inline; /* Para mostrarlo simplemente usamos display block por ejemplo */
-}

@@ -389,3 +389,13 @@
     position: absolute;
     z-index: 50;
 }
+
+#Foto_Persona
+{
+    width: 100px;
+    height: 120px;
+    position: absolute;
+    z-index: 50;
+    margin-left: 755px;
+    margin-top: 10px;
+}

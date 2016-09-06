@@ -154,6 +154,7 @@
     <Content Include="images\error_2.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\people_online.png" />
+    <Content Include="images\relations.png" />
     <Content Include="images\search.png" />
     <Content Include="images\user.png" />
     <Content Include="McCain\Image\activo.png" />
@@ -200,6 +201,7 @@
     <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
     <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
+    <Content Include="Parametros\Cliente\Cliente_Validacion.js" />
     <Content Include="Parametros\Fasecolda\Fasecolda.aspx" />
     <Content Include="Parametros\Fasecolda\Fasecolda.js" />
     <Content Include="Parametros\Fasecolda\FasecoldaAjax.aspx" />
