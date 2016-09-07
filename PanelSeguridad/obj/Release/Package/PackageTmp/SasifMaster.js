@@ -61,6 +61,14 @@ function RevisarAyudas() {
     $(".Spam_C").html(ArrayAyudas[18].Ayudas_ID + ": " + ArrayAyudas[18].Descripcion);
     $(".Spam_AT4").html(ArrayAyudas[19].Ayudas_ID + ": " + ArrayAyudas[19].Descripcion);
     $(".Spam_ACliente").html(ArrayAyudas[20].Ayudas_ID + ": " + ArrayAyudas[20].Descripcion);
+    $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
+    $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
+    
+    $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
+    $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
+    $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
+    $(".Spam_CT5").html(ArrayAyudas[21].Descripcion);
+
 }
 
 
@@ -242,6 +250,6 @@ function Convert_Decimal(index) {
     var Output = 0;
     if (index != "") {
         Output = index.replace(".", ",");
-      }
+    }
     return Output;
 }

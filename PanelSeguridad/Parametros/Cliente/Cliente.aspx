@@ -45,7 +45,7 @@
         </div>
         <div id="Marco_trabajo_Form">
             <div id="Admin_Anexos">
-                <span id="T_option" class="T_options Label_Bold">Información Cliente</span> <span
+                <span id="T_option" class="T_options Label_Bold">Información Persona</span> <span
                     class="cssToolTip_Form"><a href="javascript:Complemento();">
                         <img alt="error" title="" style="height: 40px; width: 40px; position: absolute; padding-left: 10px;
                             padding-top: 15px; z-index: 30;" id="Imglogo" src="../../images/logo.png" />

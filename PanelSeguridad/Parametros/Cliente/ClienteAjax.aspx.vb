@@ -71,6 +71,9 @@ Public Class ClienteAjax
                 Case "R_ead_Document"
                     R_ead_Document()
 
+                Case "Foto"
+                    Verifica_Foto()
+
             End Select
         End If
 
@@ -427,6 +430,36 @@ Public Class ClienteAjax
         Dim vl_S_Doc As String = Request.Form("Doc")
 
         ObjList = SQL.Read_All(vl_S_Nit, vl_S_TypeDoc, vl_S_Doc)
+
+        If ObjList Is Nothing Then
+
+            Dim obj As New DocumentosClass
+            ObjList = New List(Of DocumentosClass)
+
+            obj.Nit_ID = ""
+            obj.FechaActualizacion = ""
+
+            ObjList.Add(obj)
+        End If
+
+        Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' traemos todos los datos para tabla Entidades Financieras DEL CLIENTE SELECCIONADO (READ)
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Verifica_Foto()
+
+        Dim SQL As New DocumentosSQLClass
+        Dim ObjList As New List(Of DocumentosClass)
+
+        Dim vl_S_Nit As String = Request.Form("Nit")
+        Dim vl_S_TypeDoc As String = Request.Form("TypeDoc")
+        Dim vl_S_Doc As String = Request.Form("Doc")
+
+        ObjList = SQL.ExistFoto(vl_S_Nit, vl_S_TypeDoc, vl_S_Doc)
 
         If ObjList Is Nothing Then
 

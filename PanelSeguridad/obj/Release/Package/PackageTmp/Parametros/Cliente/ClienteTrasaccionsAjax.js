@@ -212,6 +212,120 @@ function transacionAjax_Documento(State) {
         }
     });
 }
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Area(State, Index) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Index": Index,
+            "tabla": 'AREA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayArea = [];
+            }
+            else {
+                ArrayArea = JSON.parse(result);
+                charge_CatalogList(ArrayArea, "Select_Area", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Cargo(State, Index) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Index": Index,
+            "tabla": 'Cargo'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayCargo = [];
+            }
+            else {
+                ArrayCargo = JSON.parse(result);
+                charge_CatalogList(ArrayCargo, "Select_Cargo", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Jefe(State, Index) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Index": Index,
+            "tabla": 'Cargo'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayJefe = [];
+            }
+            else {
+                ArrayJefe = JSON.parse(result);
+                charge_CatalogList(ArrayJefe, "Select_Jefe", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_Seguridad(State) {
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'SEGURIDAD'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArraySeguridad = [];
+            }
+            else {
+                ArraySeguridad = JSON.parse(result);
+                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
+
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Cliente(State, filtro, opcion) {
@@ -259,6 +373,12 @@ function transacionAjax_Cliente_create(State) {
     var ID_D;
     var capture_Nit;
     var CodBank = 0;
+    var Area = 0;
+    var Cargo = 0;
+    var Politica = 0;
+    var TDocJefe = 0;
+    var DocJefe = 0;
+
     var Name;
     var CiudadDocument;
     var CL;
@@ -270,6 +390,22 @@ function transacionAjax_Cliente_create(State) {
     var AS;
     var PR;
     var EB;
+
+    if ($("#Select_Area").val() != "-1")
+        Area = $("#Select_Area").val();
+
+    if ($("#Select_Cargo").val() != "-1")
+        Cargo = $("#Select_Cargo").val();
+
+    if ($("#Select_Jefe").val() != "-1") {
+        var StrJefe = $("#Select_Jefe option:selected").html();
+        var SplitJefe = StrJefe.split(" - ");
+        TDocJefe = SplitJefe[0];
+        DocJefe = SplitJefe[1];
+    }
+
+    if ($("#Select_Politica").val() != "-1")
+        Politica = $("#Select_Politica").val();
 
     if ($("#Txt_CodBank").val() != "")
         CodBank = $("#Txt_CodBank").val();
@@ -360,6 +496,7 @@ function transacionAjax_Cliente_create(State) {
             "Ape_2": $("#Txt_Ape_2").val(),
             "Pais_ID": $("#Select_Pais").val(),
             "Ciudad_ID": $("#Select_Ciudad").val(),
+            "CiuDoc": CiudadDocument,           
             "TipoPersona": $("#Select_TPersona").val(),
             "Regimen": $("#Select_Regimen").val(),
             "OP_Cliente": CL,
@@ -372,7 +509,12 @@ function transacionAjax_Cliente_create(State) {
             "Other_1": PR,
             "Other_2": EB,
             "CodBank": CodBank,
-            "CiuDoc": CiudadDocument,
+            "Acceso": $("#Select_Acceso").val(),
+            "Area": Area,
+            "Cargo": Cargo,
+            "TDocJefe": TDocJefe,
+            "DocJefe": DocJefe,
+            "Politica": Politica,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -422,7 +564,7 @@ function transacionAjax_Cliente_create(State) {
                         ArrayEmpresaNit = [];
                         transacionAjax_EmpresaNit('Cliente');
                         $("#Admin_Anexos").css("display", "inline-table");
-   
+
                         Disabled_Client();
                     }
                     break;
@@ -700,6 +842,38 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
         }
     });
 }
+
+/*------------------------------ CONSULTA ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Foto(State, Nit, TypeDoc, Doc) {
+
+    ArrayFoto = [];
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayFoto = [];
+            }
+            else {
+                ArrayFoto = JSON.parse(result);
+                ViewFoto();
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*------------------------------ crear direcciones---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax

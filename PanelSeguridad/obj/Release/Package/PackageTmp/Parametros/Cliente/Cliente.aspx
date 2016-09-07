@@ -7,6 +7,7 @@
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
     <script src="Cliente.js" type="text/javascript"></script>
     <script src="ClienteTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="Cliente_Validacion.js" type="text/javascript"></script>
     <script src="Cliente_Direccion.js" type="text/javascript"></script>
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
     <script src="Cliente_Documento.js" type="text/javascript"></script>
@@ -44,8 +45,8 @@
         </div>
         <div id="Marco_trabajo_Form">
             <div id="Admin_Anexos">
-                <span id="T_option" class="T_options Label_Bold">Complementos</span> <span class="cssToolTip_Form">
-                    <a href="javascript:Complemento();">
+                <span id="T_option" class="T_options Label_Bold">Información Persona</span> <span
+                    class="cssToolTip_Form"><a href="javascript:Complemento();">
                         <img alt="error" title="" style="height: 40px; width: 40px; position: absolute; padding-left: 10px;
                             padding-top: 15px; z-index: 30;" id="Imglogo" src="../../images/logo.png" />
                     </a><span class="Spam_ACliente"></span></span>
@@ -56,7 +57,7 @@
                                 <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="45px"
                                     width="45px" style="margin-top: 2.5px;" /></a>
                         </div>
-                        <div class="Spam_AT1 C_Text Label_Bold">
+                        <div class="Spam_CT1 C_Text Label_Bold">
                         </div>
                     </div>
                     <div class="Option_Cliente" onclick="javascript:Bancos('Default');">
@@ -64,18 +65,32 @@
                             <a href="javascript:Bancos('Default');">
                                 <img alt="Bank" id="Bancos" src="../../images/bank.png" height="50px" width="50px" /></a>
                         </div>
-                        <div class="Spam_AT2 C_Text Label_Bold">
+                        <div class="Spam_CT2 C_Text Label_Bold">
                         </div>
                     </div>
                     <div class="Option_Cliente" onclick="javascript:Documentos('Default');">
                         <div class="C_Image">
                             <a href="javascript:Documentos('Default');">
-                                <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="45px" width="45px" /></a>
+                                <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="45px" width="45px"
+                                    style="margin-top: 2.5px;" /></a>
                         </div>
-                        <div class="Spam_AT4 C_Text Label_Bold">
+                        <div class="Spam_CT4 C_Text Label_Bold">
+                        </div>
+                    </div>
+                    <div class="Option_Cliente" onclick="javascript:DocumentosAutorizados('Default');">
+                        <div class="C_Image">
+                            <a href="javascript:DocumentosAutorizados('Default');">
+                                <img alt="Bank" id="Img21" src="../../images/DocAuto.png" height="45px" width="45px"
+                                    style="margin-top: 2.5px;" /></a>
+                        </div>
+                        <div class="Spam_CT5 C_Text Label_Bold">
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="Foto_Persona">
+                <img alt="foto" title="" style="height: 120px; width: 100px; position: absolute;"
+                    id="Imgfoto" src="../../images/avatar.png" />
             </div>
             <div id="Container_controls">
                 <table id="TablaConsulta">
@@ -321,47 +336,112 @@
                             </td>
                         </tr>
                     </table>
-                    <table id="Tabla_8" style="width: 240px; text-align: left;">
+                    <table id="Tabla_8" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">
                                 Tipo de Relación
                             </td>
-                            <td align="center">
-                                <input id="Btn_Relacion" type="button" value="Asignar" onclick="BtnRelacion();" />
+                            <td style="width: 195px;">
+                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
+                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                            </td>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Acceso al Sistema
+                            </td>
+                            <td>
+                                <select id="Select_Acceso" class="C_Chosen">
+                                    <option value="N">No</option>
+                                    <option value="S">Si</option>
+                                </select>
+                            </td>
+                            <td style="width: 120px;">
                             </td>
                         </tr>
                     </table>
                 </div>
                 <table id="Anexos">
                     <tr>
-                        <td align="center" class="Title_Bold" colspan="8">
-                            INFORMACIÓN ADICIONAL
-                        </td>
-                    </tr>
-                    <tr id="EF">
-                        <td class="Label_Bold " style="width: 100px;">
-                            Codigo Banco
-                        </td>
                         <td>
-                            <span class="cssToolTip_Form">
-                                <input type="text" id="Txt_CodBank" style="width: 80px;" maxlength="3" class="Numeric" />
-                                <span class="Spam_AN"></span></span>
-                        </td>
-                        <td style="padding-bottom: 25px; width: 700px;">
-                            <span class="cssToolTip">
-                                <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
-                                    src="../../images/error.png" />
-                                <span class="SpamEG"></span></span>
-                        </td>
-                    </tr>
-                </table>
-                <table id="Relacion">
-                    <tr>
-                    </tr>
-                    <tr>
-                        <td align="center" class="Title_Bold" colspan="8">
-                            <p>
-                            </p>
+                            <table id="Tabla_TC" style="width: 100%">
+                                <tr>
+                                    <td align="center" class="Title_Bold" colspan="8">
+                                        INFORMACIÓN ADICIONAL
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="C_Banco" style="width: 100%">
+                                <tr>
+                                    <td class="Label_Bold " style="width: 100px;">
+                                        Codigo Banco
+                                    </td>
+                                    <td>
+                                        <span class="cssToolTip_Form">
+                                            <input type="text" id="Txt_CodBank" style="width: 80px;" maxlength="3" class="Numeric" />
+                                            <span class="Spam_AN"></span></span>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 700px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img12"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="C_Empleado" style="width: 100%">
+                                <tr>
+                                    <td class="Label_Bold " style="width: 100px;">
+                                        Área
+                                    </td>
+                                    <td>
+                                        <select id="Select_Area" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 200px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img22"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="Label_Bold " style="width: 100px;">
+                                        Cargo
+                                    </td>
+                                    <td>
+                                        <select id="Select_Cargo" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 200px;">
+                                        <span class="cssToolTip">
+                                            <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img23"
+                                                src="../../images/error.png" />
+                                            <span class="SpamEG"></span></span>
+                                    </td>
+                                </tr>
+                                <tr class="Empleado">
+                                    <td class="Label_Bold " style="width: 100px;">
+                                        jefe Inmediato
+                                    </td>
+                                    <td>
+                                        <select id="Select_Jefe" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 200px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;" class="Label_Bold">
+                                        Politica de Seguridad
+                                    </td>
+                                    <td>
+                                        <select id="Select_Politica" class="C_Chosen">
+                                        </select>
+                                    </td>
+                                    <td style="padding-bottom: 25px; width: 200px;">
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -414,7 +494,7 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Relation" title="Relaciones del Cliente">
+    <div id="Dialog_Relation" title="Relaciones de la Persona">
         <table style="width: 100%; text-align: center; margin-top: 20px;">
             <tr>
                 <td class="Label_Bold">

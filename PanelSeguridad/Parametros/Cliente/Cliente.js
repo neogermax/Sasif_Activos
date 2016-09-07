@@ -74,7 +74,7 @@ $(document).ready(function () {
     $("#Container_Complementos").css("display", "none");
     $("#C_Empleado").css("display", "none");
     $("#C_Banco").css("display", "none");
-    
+
     $("#Relacion").css("display", "none");
     $("#Controls").css("display", "none");
     $("#TablaConsulta").css("display", "none");
@@ -344,8 +344,8 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "inline-table");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "inline-table");
-    
-             $("#Controls").css("display", "inline-table");
+
+            $("#Controls").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -355,6 +355,8 @@ function HabilitarPanel(opcion) {
             $("#Txt_Nit").removeAttr("disabled");
             $("#Txt_Ident").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+
+            $("#Imgfoto").attr("src", "../../images/avatar.png");
             Enabled_Client();
             Clear();
             estado = opcion;
@@ -364,7 +366,7 @@ function HabilitarPanel(opcion) {
             $("#Admin_Anexos").css("display", "none");
             $("#TablaDatos_D").css("display", "none");
             $("#Foto_Persona").css("display", "none");
-    
+
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -379,7 +381,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "none");
-    
+
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -394,7 +396,7 @@ function HabilitarPanel(opcion) {
             $("#TablaDatos_D").css("display", "none");
             $("#Admin_Anexos").css("display", "none");
             $("#Foto_Persona").css("display", "none");
-    
+
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
 
@@ -593,10 +595,12 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
     D_TDocumento = index_TDocumento;
     D_Documento = index_Documento;
 
+    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento);
+
     $("#TablaDatos_D").css("display", "inline-table");
     $("#Controls").css("display", "inline-table");
     $("#Foto_Persona").css("display", "inline-table");
-    
+
     $("#TablaConsulta").css("display", "none");
 
     for (itemArray in ArrayCliente) {
@@ -627,9 +631,9 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             else
                 $("#Select_Politica").val(StrPolitica);
 
+            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
             setTimeout("$('#Select_Pais').trigger('change');", 200);
             setTimeout("$('#Select_TPersona').trigger('change');", 200);
-            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
 
             $("#Txt_Ident").val(ArrayCliente[itemArray].Document_ID);
             $("#TxtVerif").val(ArrayCliente[itemArray].Digito_Verificacion);
@@ -702,7 +706,7 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
                 $("#Check_Empleado").prop("checked", true);
                 $("#Anexos").css("display", "inline-table");
                 $("#C_Empleado").css("display", "inline-table");
-                setTimeout("EditEmpleado();", 600);
+                setTimeout("EditEmpleado();", 300);
 
             }
             else
@@ -735,12 +739,11 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
 //para cargar edicion de los combos de empleados
 function EditEmpleado() {
 
-    ChargeArea(StrArea);
-    ChargeCargo(StrCargo);
-
+    setTimeout("ChargeArea(StrArea);", 300);
+    setTimeout("ChargeCargo(StrCargo);", 300);
+    
     if (StrDocJefe != 0)
-        ChargeJefe(StrDocJefe);
-
+        setTimeout("ChargeJefe(StrDocJefe);", 300);
 }
 
 //funcion de carga de la cuidad para edicion

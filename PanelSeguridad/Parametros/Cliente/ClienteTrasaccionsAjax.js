@@ -843,6 +843,38 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
     });
 }
 
+/*------------------------------ CONSULTA ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax
+function transacionAjax_Foto(State, Nit, TypeDoc, Doc) {
+
+    ArrayFoto = [];
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Nit": Nit,
+            "TypeDoc": TypeDoc,
+            "Doc": Doc
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayFoto = [];
+            }
+            else {
+                ArrayFoto = JSON.parse(result);
+                ViewFoto();
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
 /*------------------------------ crear direcciones---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
 function transacionAjax_Document_create(State, Nit, TypeDoc, Doc) {

@@ -147,6 +147,7 @@
     <Content Include="css\Chosen\style.css" />
     <Content Include="images\add.png" />
     <Content Include="images\adress_book.png" />
+    <Content Include="images\avatar.png" />
     <Content Include="images\bank.png" />
     <Content Include="images\Descarga.png" />
     <Content Include="images\DocAuto.png" />

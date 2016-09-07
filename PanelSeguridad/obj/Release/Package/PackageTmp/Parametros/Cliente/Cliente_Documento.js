@@ -1,6 +1,8 @@
 ﻿var ArrayDocument = [];
 var ListDocument = [];
 
+var ArrayFoto = [];
+
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                                        GRID PRINCIPAL DE DOCUMENTOS                                */
 /*---------------------------------------------------------------------------------------------------------------*/
@@ -412,9 +414,20 @@ function BtnSave_Document_Client() {
 
 //arma la ruta del documento y lo muestra
 function SearchDocument(Ruta, Nombre, Ext) {
-
-    alert(Ruta);
     var Link_Download = Ruta + Nombre + "." + Ext;
-    alert(Link_Download);
+}
+
+//
+function ViewFoto() {
+    var StrSrc;
+
+    if (ArrayFoto.length != 0) {
+        StrSrc = ArrayFoto[0].RutaDocumento + ArrayFoto[0].DescripDocument + '.' + ArrayFoto[0].DescripFormato;
+    }
+    else {
+        StrSrc = "../../images/avatar.png";
+    }
+
+    $("#Imgfoto").attr("src", StrSrc);
 
 }
