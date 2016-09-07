@@ -20,8 +20,8 @@
     <file relUrl="css/theme_blue_Sky/images/ui-icons_3d80b3_256x240.png" publishTime="12/17/2012 21:06:26" />
     <file relUrl="Parametros/TipoActivo/TipoActivoTrasaccionsAjax.js" publishTime="07/21/2016 12:06:00" />
     <file relUrl="css/icons/folder-horizontal.png" publishTime="11/21/2009 11:22:10" />
-    <file relUrl="Parametros/Cliente/Cliente.aspx" publishTime="09/07/2016 09:44:27" />
-    <file relUrl="bin/PanelSeguridad.dll" publishTime="09/07/2016 07:34:54" />
+    <file relUrl="Parametros/Cliente/Cliente.aspx" publishTime="09/07/2016 12:55:29" />
+    <file relUrl="bin/PanelSeguridad.dll" publishTime="09/07/2016 12:57:34" />
     <file relUrl="Parametros/SasifMaster_Cosult.js" publishTime="08/08/2016 15:10:02" />
     <file relUrl="Parametros/SubTipoActivo/SubTipoActivoTrasaccionsAjax.js" publishTime="07/21/2016 12:06:48" />
     <file relUrl="css/css_menu.css" publishTime="05/24/2016 12:40:32" />
@@ -108,7 +108,7 @@
     <file relUrl="SasifMaster_Cosult.js" publishTime="08/08/2016 15:06:34" />
     <file relUrl="Parametros/Area/Area.js" publishTime="09/05/2016 16:36:47" />
     <file relUrl="SasifMaster.js" publishTime="09/06/2016 11:20:13" />
-    <file relUrl="Web.config" publishTime="08/30/2016 08:48:40" />
+    <file relUrl="Web.config" publishTime="09/07/2016 12:56:59" />
     <file relUrl="Parametros/TipoActivo/TipoActivo.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="Parametros/Inf_Impuesto/Inf_Impuesto.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="images/carga.gif" publishTime="08/21/2014 15:13:32" />
@@ -166,7 +166,7 @@
     <file relUrl="images/adress_book.png" publishTime="07/07/2016 09:33:00" />
     <file relUrl="Parametros/Festivos/Festivos.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="Parametros/Productos/Productos.js" publishTime="08/26/2016 10:04:20" />
-    <file relUrl="css/css_form.css" publishTime="09/06/2016 16:40:37" />
+    <file relUrl="css/css_form.css" publishTime="09/07/2016 11:06:20" />
     <file relUrl="Administrador/Adm_opcrol/Adm_OpcRolTrasaccionsAjax.js" publishTime="03/28/2016 09:59:22" />
     <file relUrl="Administrador/Adm_ResetUser/Adm_ResetUser.js" publishTime="08/25/2016 15:57:07" />
     <file relUrl="Parametros/SubTipoProduct_Leasing/SubTipoProduct_LeasingAjax.aspx" publishTime="07/18/2016 11:49:58" />
@@ -232,7 +232,7 @@
     <file relUrl="Administrador/Adm_roles/Adm_Roles.aspx" publishTime="08/18/2016 13:11:08" />
     <file relUrl="Parametros/TipoProduct_Leasing/TipoProduct_Leasing.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="images/search.png" publishTime="07/18/2016 10:25:44" />
-    <file relUrl="Parametros/Cliente/Cliente.js" publishTime="09/07/2016 09:41:23" />
+    <file relUrl="Parametros/Cliente/Cliente.js" publishTime="09/07/2016 10:14:47" />
     <file relUrl="Parametros/Mensajes/Mensajes.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="css/Dialog/images/ui-bg_inset-hard_100_f5f8f9_1x100.png" publishTime="03/28/2016 20:38:28" />
     <file relUrl="Administrador/Adm_opcrol/Adm_OpcRolAjax.aspx" publishTime="03/09/2016 08:01:40" />
@@ -266,17 +266,18 @@
     <file relUrl="Parametros/Inf_Impuesto/Inf_ImpuestoAjax.aspx" publishTime="06/24/2016 11:18:40" />
     <file relUrl="css/css_master.css" publishTime="06/20/2016 16:39:50" />
     <file relUrl="images/alert.png" publishTime="03/08/2016 09:05:34" />
-    <file relUrl="bin/PanelSeguridad.pdb" publishTime="09/07/2016 07:34:54" />
+    <file relUrl="bin/PanelSeguridad.pdb" publishTime="09/07/2016 12:57:34" />
     <file relUrl="css/custom/charge.css" publishTime="05/13/2016 10:21:08" />
     <file relUrl="css/theme_blue_Sky/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png" publishTime="12/17/2012 21:06:26" />
     <file relUrl="Parametros/Relation_Tipo_Subtipo_Activo/Relation_Tipo_Subtipo_Activo.js" publishTime="08/26/2016 08:48:40" />
     <file relUrl="Parametros/Ayudas/Ayudas.aspx" publishTime="08/26/2016 17:10:41" />
     <file relUrl="Parametros/Impuesto_Gasto/Impuesto_GastoTrasaccionsAjax.js" publishTime="06/23/2016 16:58:52" />
     <file relUrl="McCain/Image/activo.png" publishTime="06/19/2016 09:42:28" />
-    <file relUrl="bin/PanelSeguridad.xml" publishTime="09/07/2016 07:34:54" />
-    <file relUrl="Parametros/Cliente/ClienteTrasaccionsAjax.js" publishTime="09/07/2016 07:48:22" />
+    <file relUrl="bin/PanelSeguridad.xml" publishTime="09/07/2016 12:57:34" />
+    <file relUrl="Parametros/Cliente/ClienteTrasaccionsAjax.js" publishTime="09/07/2016 12:54:19" />
     <file relUrl="Scripts/Dialog/datepicker.js" publishTime="08/16/2016 16:38:20" />
     <file relUrl="images/salir.gif" publishTime="03/04/2014 11:13:26" />
+    <file relUrl="Parametros/Cliente/Cliente_DocAutorizado.js" publishTime="09/07/2016 12:54:19" />
     <file relUrl="Administrador/Adm_opcrol/Adm_OpcRol.js" publishTime="08/18/2016 12:54:04" />
     <file relUrl="Scripts/Chosen/chosen.jquery.js" publishTime="08/04/2016 08:20:37" />
     <file relUrl="login/CambioPasswordAjax.aspx" publishTime="02/26/2016 23:18:46" />
