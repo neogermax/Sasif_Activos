@@ -11,6 +11,7 @@
     <script src="Cliente_Direccion.js" type="text/javascript"></script>
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
     <script src="Cliente_Documento.js" type="text/javascript"></script>
+    <script src="Cliente_DocAutorizado.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -1339,6 +1340,43 @@
         </div>
         <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
             <input id="Button2" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
+        </div>
+    </div>
+    <div id="Dialog_Doc_Autorizados">
+        <div id="Div1" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+            <table style="width: 100%">
+                <tr>
+                    <td class="Label_Bold">
+                        Nit Empresa
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_Nit_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                    <td class="Label_Bold">
+                        Tipo identificación
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_TypeIden_Doc_A" maxlength="20" readonly="readonly" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                    <td class="Label_Bold">
+                        Identificación
+                    </td>
+                    <td>
+                        <span class="cssToolTip_Form">
+                            <input type="text" id="Txt_Ident_Doc_A" maxlength="20" readonly="readonly" style="width: 100px;" />
+                            <span class="Spam_ACI"></span></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="Div5">
+        </div>
+        <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
+            <input id="Button3" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
         </div>
     </div>
 </asp:Content>

@@ -200,6 +200,7 @@
     <Content Include="Parametros\Cliente\ClienteAjax.aspx" />
     <Content Include="Parametros\Cliente\ClienteTrasaccionsAjax.js" />
     <Content Include="Parametros\Cliente\Cliente_Direccion.js" />
+    <Content Include="Parametros\Cliente\Cliente_DocAutorizado.js" />
     <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
     <Content Include="Parametros\Cliente\Cliente_Validacion.js" />

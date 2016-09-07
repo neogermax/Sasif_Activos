@@ -37,13 +37,13 @@ D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\G
 D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.dll
 D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.xml
 D:\SASIF_GERMAN\IMPUESTOS\AdmonActivos\AdmonActivos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
-Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.dll
-Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.pdb
-Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.xml
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\ResolveAssemblyReference.cache
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\GenerateResource.read.1.tlog
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\GenerateResource.write.1.tlog
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.dll
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.pdb
+Y:\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.xml
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.dll
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.xml
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.pdb

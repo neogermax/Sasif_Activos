@@ -62,6 +62,7 @@
 
 #Marco_trabajo_Form
 {
+    position: relative;
     margin-top: 10px;
     padding: 20px 20px;
     background-color: silver;

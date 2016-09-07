@@ -32,8 +32,12 @@ Public Class Relaciones_FinancierasSQLClass
                    "       RF_Usuario_Creacion, " & _
                    "       RF_FechaCreacion, " & _
                    "       RF_Usuario_Actualizacion, " & _
-                   "       RF_FechaActualizacion  " & _
-                   " FROM RELACIONES_FINANCIERAS " & _
+                   "       RF_FechaActualizacion,  " & _
+                   "       C.CLI_Nombre,  " & _
+                   "       TC.TC_Descripcion  " & _
+                   " FROM RELACIONES_FINANCIERAS RF" & _
+                   " INNER JOIN CLIENTE C ON C.CLI_Document_ID = RF.RF_Document_ID_EF " & _
+                   " INNER JOIN TIPOCUENTA TC ON TC.TC_ID = RF.RF_TipoCuenta " & _
                    " WHERE RF_Nit_ID = '" & vp_S_Nit & "' " & _
                    " AND RF_TypeDocument_ID = '" & vp_S_TypeDoc & "' " & _
                    " AND RF_Document_ID = '" & vp_S_Doc & "' ")
@@ -170,7 +174,9 @@ Public Class Relaciones_FinancierasSQLClass
 
             obj.UsuarioActualizacion = ReadConsulta.GetValue(9)
             obj.FechaActualizacion = ReadConsulta.GetValue(10)
-            
+
+            obj.DescripEntidad = ReadConsulta.GetValue(11)
+            obj.DecripCuenta = ReadConsulta.GetValue(12)
             'agregamos a la lista
             ObjList.Add(obj)
 
