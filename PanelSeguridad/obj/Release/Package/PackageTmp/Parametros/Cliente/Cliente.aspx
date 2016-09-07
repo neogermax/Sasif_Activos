@@ -51,7 +51,7 @@
                             padding-top: 15px; z-index: 30;" id="Imglogo" src="../../images/logo.png" />
                     </a><span class="Spam_ACliente"></span></span>
                 <div id="Container_Complementos">
-                    <div class="Option_Cliente" onclick="javascript:Direcciones('Default');">
+                    <div class="Option_Cliente" onclick="javascript:BlockAnexos('Direcciones');">
                         <div class="C_Image">
                             <a href="javascript:Direcciones('Default');">
                                 <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="45px"
@@ -60,7 +60,7 @@
                         <div class="Spam_CT1 C_Text Label_Bold">
                         </div>
                     </div>
-                    <div class="Option_Cliente" onclick="javascript:Bancos('Default');">
+                    <div class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
                             <a href="javascript:Bancos('Default');">
                                 <img alt="Bank" id="Bancos" src="../../images/bank.png" height="50px" width="50px" /></a>
@@ -68,7 +68,7 @@
                         <div class="Spam_CT2 C_Text Label_Bold">
                         </div>
                     </div>
-                    <div class="Option_Cliente" onclick="javascript:Documentos('Default');">
+                    <div class="Option_Cliente" onclick="javascript:BlockAnexos('Documento');">
                         <div class="C_Image">
                             <a href="javascript:Documentos('Default');">
                                 <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="45px" width="45px"
@@ -77,7 +77,7 @@
                         <div class="Spam_CT4 C_Text Label_Bold">
                         </div>
                     </div>
-                    <div class="Option_Cliente" onclick="javascript:DocumentosAutorizados('Default');">
+                    <div class="Option_Cliente" onclick="javascript:BlockAnexos('DocumentoAutrizado');">
                         <div class="C_Image">
                             <a href="javascript:DocumentosAutorizados('Default');">
                                 <img alt="Bank" id="Img21" src="../../images/DocAuto.png" height="45px" width="45px"

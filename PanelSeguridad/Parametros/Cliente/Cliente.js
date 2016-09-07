@@ -741,7 +741,7 @@ function EditEmpleado() {
 
     setTimeout("ChargeArea(StrArea);", 300);
     setTimeout("ChargeCargo(StrCargo);", 300);
-    
+
     if (StrDocJefe != 0)
         setTimeout("ChargeJefe(StrDocJefe);", 300);
 }
@@ -972,4 +972,28 @@ function ExitComplementos() {
         $('#Container_Complementos').fadeOut("slow");
         OpcComplementos = 0;
     });
+}
+
+//redirecciona al modulo selecionado
+function BlockAnexos(Modulo) {
+
+    switch (Modulo) {
+        case "Banco":
+            Bancos('Default');
+            break;
+
+        case "Direcciones":
+            Direcciones('Default');
+            break;
+
+        case "Documento":
+            Documentos('Default');
+            break;
+
+        case "DocumentoAutrizado":
+            DocumentosAutorizados('Default');
+            break;
+
+    }
+
 }
