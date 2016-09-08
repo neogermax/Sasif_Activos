@@ -8,10 +8,16 @@ var ListBancos = [];
 //el llamado para insertar modificar o eliminar la direcciones
 function Bancos(Option_Bank) {
     $("#Dialog_EntidadFinanciera").dialog("open");
-    $("#Dialog_EntidadFinanciera").dialog("option", "title", "Entidades Financieras de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_EntidadFinanciera").dialog("option", "title", "Entidades Financieras de: " + Nombre_Persona);
+
+    if (OpcWordComplementos == 'V')
+        $("#BtnSave_Bank").css("display", "none");
+    else
+        $("#BtnSave_Bank").css("display", "inline-table");
+
 
     switch (Option_Bank) {
-        case "Read":
+        case "V":
             $("#Txt_Nit_B").val(D_Nit);
             $("#Txt_TypeIden_B").val(D_String_TDocumento);
             $("#Txt_Ident_B").val(D_Documento);
@@ -23,7 +29,7 @@ function Bancos(Option_Bank) {
 
             break;
 
-        case "Default":
+        case "U":
 
             var Nit_Work;
 
@@ -50,11 +56,11 @@ function Tabla_General_Bank(Opc_Link) {
     var contador = 0;
 
     switch (Opc_Link) {
-        case "Read":
+        case "V":
             html = "<table id='TBank' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones</th><th>Entidad Financiera</th><th>Tipo de cuenta</th><th>N° Cuenta</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
 
-        case "Default":
+        case "U":
             html = "<table id='TBank' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones <span class='cssToolTip_ver'><img alt='Bank' class='AddBank' onclick=\"AddBank()\" id='Crear' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Nueva Entidad Financiera</span></span></th><th>Entidad Financiera</th><th>Tipo de cuenta</th><th>N° Cuenta</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
     }
@@ -63,14 +69,14 @@ function Tabla_General_Bank(Opc_Link) {
         if (ArrayBancos[itemArray].TypeDoc_ID != "") {
 
             switch (Opc_Link) {
-                case "Read":
+                case "V":
                     if (estado == "eliminar")
                         html += "<tr><td><select id='Select_" + ArrayBancos[itemArray].Document_ID_EF + "' class='Opciones' onchange=\"Select_Option_Bank(this,'" + ArrayBancos[itemArray].Document_ID_EF + "','" + ArrayBancos[itemArray].TipoCuenta + "','" + ArrayBancos[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td>" + ArrayBancos[itemArray].DescripEntidad + "</td><td>" + ArrayBancos[itemArray].TipoCuenta + " - " + ArrayBancos[itemArray].DecripCuenta + "</td><td>" + ArrayBancos[itemArray].Cuenta + "</td><td>" + ArrayBancos[itemArray].UsuarioCreacion + "</td><td>" + ArrayBancos[itemArray].FechaCreacion + "</td><td>" + ArrayBancos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayBancos[itemArray].FechaActualizacion + "</td></tr>";
                     else
                         html += "<tr><td><select id='Select_" + ArrayBancos[itemArray].Document_ID_EF + "' class='Opciones' onchange=\"Select_Option_Bank(this,'" + ArrayBancos[itemArray].Document_ID_EF + "','" + ArrayBancos[itemArray].TipoCuenta + "','" + ArrayBancos[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayBancos[itemArray].DescripEntidad + "</td><td>" + ArrayBancos[itemArray].TipoCuenta + " - " + ArrayBancos[itemArray].DecripCuenta + "</td><td>" + ArrayBancos[itemArray].Cuenta + "</td><td>" + ArrayBancos[itemArray].UsuarioCreacion + "</td><td>" + ArrayBancos[itemArray].FechaCreacion + "</td><td>" + ArrayBancos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayBancos[itemArray].FechaActualizacion + "</td></tr>";
                     break;
 
-                case "Default":
+                case "U":
                     html += "<tr><td><select id='Select_" + ArrayBancos[itemArray].Document_ID_EF + "' class='Opciones' onchange=\"Select_Option_Bank(this,'" + ArrayBancos[itemArray].Document_ID_EF + "','" + ArrayBancos[itemArray].TipoCuenta + "','" + ArrayBancos[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td>" + ArrayBancos[itemArray].DescripEntidad + "</td><td>" + ArrayBancos[itemArray].TipoCuenta + " - " + ArrayBancos[itemArray].DecripCuenta + "</td><td>" + ArrayBancos[itemArray].Cuenta + "</td><td>" + ArrayBancos[itemArray].UsuarioCreacion + "</td><td>" + ArrayBancos[itemArray].FechaCreacion + "</td><td>" + ArrayBancos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayBancos[itemArray].FechaActualizacion + "</td></tr>";
                     break;
             }
@@ -162,7 +168,7 @@ function AddBank() {
     ClearBank();
     Enabled_Bank();
     $("#Dialog_C_R_U_D_Bank").dialog("open");
-    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Nueva Entidad Financiera de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Nueva Entidad Financiera de: " + Nombre_Persona);
     $("#BtnAddBank").attr("value", "Agregar");
 }
 
@@ -192,7 +198,7 @@ function Add_Array_Bank() {
 function DeleteBank(Nit_Bank, TC_bank, Cuenta_Bank) {
 
     $("#Dialog_C_R_U_D_Bank").dialog("open");
-    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Retirar Entidad Financiera de: " + +$("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Retirar Entidad Financiera de: " + +Nombre_Persona);
     $("#BtnAddBank").attr("value", "Eliminar");
 
     Search_Bank(Nit_Bank, TC_bank, Cuenta_Bank);
@@ -245,7 +251,7 @@ function RestoreDelete_Array_Bank() {
 function ReadBank(Nit_Bank, TC_bank, Cuenta_Bank) {
 
     $("#Dialog_C_R_U_D_Bank").dialog("open");
-    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Entidad Financiera de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Bank").dialog("option", "title", "Entidad Financiera de: " + Nombre_Persona);
     $("#BtnAddBank").attr("value", "Salir");
 
     Search_Bank(Nit_Bank, TC_bank, Cuenta_Bank);

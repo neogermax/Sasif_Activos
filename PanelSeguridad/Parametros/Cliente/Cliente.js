@@ -22,6 +22,8 @@ var editDocument_ID;
 var NitAlter = "";
 var ValidatorCampos = 1;
 var OpcComplementos = 0;
+var OpcWordComplementos;
+
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los Links
@@ -94,18 +96,6 @@ $(document).ready(function () {
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
         modal: true
-    });
-
-    $("#Dialog_Visualiza").dialog({
-        autoOpen: false,
-        dialogClass: "Dialog_Sasif",
-        modal: true,
-        width: 600,
-        height: 630,
-        overlay: {
-            opacity: 0.5,
-            background: "black"
-        }
     });
 
     $("#Dialog_Direcciones").dialog({
@@ -360,6 +350,8 @@ function HabilitarPanel(opcion) {
             $("#Controls").css("display", "inline-table");
             $("#TablaConsulta").css("display", "none");
             $("#Anexos").css("display", "none");
+            $("#C_Banco").css("display", "none");
+            $("#C_Empleado").css("display", "none");
 
             $("#Select_EmpresaNit").removeAttr("disabled");
             $("#Select_Documento").removeAttr("disabled");
@@ -396,6 +388,8 @@ function HabilitarPanel(opcion) {
 
             $("#Controls").css("display", "none");
             $("#Anexos").css("display", "none");
+            $("#C_Banco").css("display", "none");
+            $("#C_Empleado").css("display", "none");
 
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCliente").html("");
@@ -556,7 +550,7 @@ function Tabla_modificar() {
             var StrCiudad = ArrayCliente[itemArray].DescripCiudad
             var ArraySplit = StrCiudad.split("_");
 
-            html_Cliente += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "')\"></input></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+            html_Cliente += "<tr><td><input type ='radio' class= 'Ver' name='ver' onclick=\"Ver('" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "')\"></input></td><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "','U')\"></input></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
         }
     }
     html_Cliente += "</tbody></table>";
@@ -584,8 +578,9 @@ var StrDocJefe;
 var StrPolitica;
 
 // muestra el registro a editar
-function Editar(index_Nit, index_TDocumento, index_Documento) {
+function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
 
+    OpcWordComplementos = Type;
     D_Nit = index_Nit;
     D_TDocumento = index_TDocumento;
     D_Documento = index_Documento;
@@ -652,7 +647,6 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             $("#Txt_Ape_2").val(ArrayCliente[itemArray].Apellido_2);
             $("#Txt_CodBank").val(ArrayCliente[itemArray].Cod_Bank);
 
-
             if (ArrayCliente[itemArray].OP_Cliente == "S")
                 $("#Check_Cliente").prop("checked", true);
             else
@@ -695,6 +689,7 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
             }
             else {
                 $("#Check_EntBancaria").prop("checked", false);
+                $("#C_Banco").css("display", "none");
             }
 
             if (ArrayCliente[itemArray].OP_Empleado == "S") {
@@ -704,8 +699,10 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
                 setTimeout("EditEmpleado();", 300);
 
             }
-            else
+            else {
                 $("#Check_Empleado").prop("checked", false);
+                $("#C_Empleado").css("display", "none");
+            }
 
             $("#Btnguardar").attr("value", "Actualizar");
 
@@ -729,6 +726,15 @@ function Editar(index_Nit, index_TDocumento, index_Documento) {
 
         }
     }
+
+    if (Type == "V") {
+        $("#Btnguardar").css("display", "none");
+        Disabled_Client();
+    }
+    else {
+        $("#Btnguardar").css("display", "inline-table");
+    }
+
 }
 
 //para cargar edicion de los combos de empleados
@@ -852,39 +858,8 @@ function Ver(index_Nit, index_TDocumento, index_Documento) {
     D_TDocumento = index_TDocumento;
     D_Documento = index_Documento;
 
-    for (itemArray in ArrayCliente) {
-        if (index_Nit == ArrayCliente[itemArray].Nit_ID && index_TDocumento == ArrayCliente[itemArray].TypeDocument_ID && index_Documento == ArrayCliente[itemArray].Document_ID) {
+    Editar(index_Nit, index_TDocumento, index_Documento, "V");
 
-            var StrCiudad = ArrayCliente[itemArray].DescripCiudad
-            var ArraySplit = StrCiudad.split("_");
-
-            D_String_Contacto = ArrayCliente[itemArray].Nombre;
-            D_String_TDocumento = ArrayCliente[itemArray].DescripTypeDocument;
-
-            $("#V_Nombre").html(ArrayCliente[itemArray].Nombre);
-            $("#V_TDocumento").html(ArrayCliente[itemArray].DescripTypeDocument);
-            $("#V_Documento").html(ArrayCliente[itemArray].Document_ID);
-            $("#V_Nit").html(ArrayCliente[itemArray].Nit_ID);
-            $("#V_Digito").html(ArrayCliente[itemArray].Digito_Verificacion);
-            $("#V_Municipio").html(ArrayCliente[itemArray].DescripCiudad);
-
-            $("#V_TPersona").html(ArrayCliente[itemArray].DescripTipoPersona);
-            $("#V_Regimen").html(ArrayCliente[itemArray].DescripRegimen);
-
-            $("#V_Op_Cliente").html(ArrayCliente[itemArray].OP_Cliente);
-            $("#V_Op_Avaluador").html(ArrayCliente[itemArray].OP_Avaluador);
-            $("#V_Op_Transito").html(ArrayCliente[itemArray].OP_Transito);
-            $("#V_Op_Hacienda").html(ArrayCliente[itemArray].OP_Hacienda);
-            $("#V_Op_Empresa").html(ArrayCliente[itemArray].OP_Empresa);
-            $("#V_Op_Empleado").html(ArrayCliente[itemArray].OP_Empleado);
-            $("#V_Op_Asesor").html(ArrayCliente[itemArray].OP_Asesor);
-            $("#V_Op_Otro_1").html(ArrayCliente[itemArray].Other_1);
-            $("#V_Banco").html(ArrayCliente[itemArray].Other_2);
-
-            $("#Dialog_Visualiza").dialog("option", "title", "Cliente: " + ArrayCliente[itemArray].Nombre);
-        }
-    }
-    $("#Dialog_Visualiza").dialog("open");
 }
 
 //verifica el numero de verificacion DIAN
@@ -918,6 +893,22 @@ function Disabled_Client() {
     $("#Select_TPersona").attr("disabled", "disabled");
     $("#Select_Regimen").attr("disabled", "disabled");
 
+    $("#Txt_CodBank").attr("disabled", "disabled");
+    $("#Select_Area").attr("disabled", "disabled");
+    $("#Select_Cargo").attr("disabled", "disabled");
+    $("#Select_Jefe").attr("disabled", "disabled");
+    $("#Select_Politica").attr("disabled", "disabled");
+
+    $("#Check_Cliente").attr("disabled", "disabled");
+    $("#Check_Avaluador").attr("disabled", "disabled");
+    $("#Check_Transito").attr("disabled", "disabled");
+    $("#Check_Hacienda").attr("disabled", "disabled");
+    $("#Check_MultiEmpresa").attr("disabled", "disabled");
+    $("#Check_Empleado").attr("disabled", "disabled");
+    $("#Check_Asesor").attr("disabled", "disabled");
+    $("#Check_Proveedor").attr("disabled", "disabled");
+    $("#Check_EntBancaria").attr("disabled", "disabled");
+
     $('.C_Chosen').trigger('chosen:updated');
 
 }
@@ -940,6 +931,22 @@ function Enabled_Client() {
 
     $("#Select_TPersona").removeAttr("disabled");
     $("#Select_Regimen").removeAttr("disabled");
+
+    $("#Txt_CodBank").removeAttr("disabled");
+    $("#Select_Area").removeAttr("disabled");
+    $("#Select_Cargo").removeAttr("disabled");
+    $("#Select_Jefe").removeAttr("disabled");
+    $("#Select_Politica").removeAttr("disabled");
+
+    $("#Check_Cliente").removeAttr("disabled");
+    $("#Check_Avaluador").removeAttr("disabled");
+    $("#Check_Transito").removeAttr("disabled");
+    $("#Check_Hacienda").removeAttr("disabled");
+    $("#Check_MultiEmpresa").removeAttr("disabled");
+    $("#Check_Empleado").removeAttr("disabled");
+    $("#Check_Asesor").removeAttr("disabled");
+    $("#Check_Proveedor").removeAttr("disabled");
+    $("#Check_EntBancaria").removeAttr("disabled");
 
     $('.C_Chosen').trigger('chosen:updated');
 
@@ -973,20 +980,24 @@ function ExitComplementos() {
 function BlockAnexos(Modulo) {
 
     switch (Modulo) {
+
         case "Banco":
-            Bancos('Default');
+            String_Nombre();
+            Bancos(OpcWordComplementos);
             break;
 
         case "Direcciones":
-            Direcciones('Default');
+            String_Nombre();
+            Direcciones(OpcWordComplementos);
             break;
 
         case "Documento":
-            Documentos('Default');
+            String_Nombre();
+            Documentos(OpcWordComplementos);
             break;
 
         case "DocumentoAutrizado":
-            DocumentosAutorizados('Default');
+            DocumentosAutorizados(OpcWordComplementos);
             break;
 
     }

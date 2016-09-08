@@ -21,6 +21,8 @@ var CamposPN = 0;
 var CamposPJ = 0;
 var CamposBanco = 0;
 var CamposEmpleado = 0;
+var Nombre_Persona;
+
 
 //revisa si tiene informacion adicional
 function ValideAnexos() {
@@ -346,4 +348,16 @@ function valida_Empleados() {
     }
 
     return validar;
+}
+
+//captura el nombre de la persona
+function String_Nombre() {
+
+
+    if ($("#TxtNombre").val() == "") {
+        Nombre_Persona = $("#TxtNombreNit").val();
+    }
+    else {
+        Nombre_Persona = $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val();
+    }
 }

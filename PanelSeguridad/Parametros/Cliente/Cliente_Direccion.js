@@ -17,10 +17,16 @@ var D_String_Contacto;
 //el llamado para insertar modificar o eliminar la direcciones
 function Direcciones(Option_Adress) {
     $("#Dialog_Direcciones").dialog("open");
-    $("#Dialog_Direcciones").dialog("option", "title", "Direcciones de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_Direcciones").dialog("option", "title", "Direcciones de: " + Nombre_Persona);
+
+    if (OpcWordComplementos == 'V')
+        $("#BtnSave_Adress").css("display", "none");
+    else
+        $("#BtnSave_Adress").css("display", "inline-table");
+
 
     switch (Option_Adress) {
-        case "Read":
+        case "V":
             $("#Txt_Nit_V").val(D_Nit);
             $("#Txt_TypeIden_V").val(D_String_TDocumento);
             $("#Txt_Ident_V").val(D_Documento);
@@ -32,7 +38,7 @@ function Direcciones(Option_Adress) {
 
             break;
 
-        case "Default":
+        case "U":
 
             var Nit_Work;
 
@@ -48,12 +54,12 @@ function Direcciones(Option_Adress) {
             $("#Txt_TypeIden_V_2").val($("#Select_Documento option:selected").text());
             $("#Txt_Ident_V_2").val($("#Txt_Ident").val() + "-" + $("#TxtVerif").val());
 
-            D_String_Contacto = $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val();
+            D_String_Contacto = Nombre_Persona;
 
             transacionAjax_allAdress('R_ead_Adress', $("#Select_EmpresaNit").val(), $("#Select_Documento").val(), $("#Txt_Ident").val(), Option_Adress);
             break;
     }
-    
+
 }
 
 
@@ -63,11 +69,11 @@ function Tabla_General(Opc_Link) {
     var contador = 0;
 
     switch (Opc_Link) {
-        case "Read":
+        case "V":
             html = "<table id='TDireccion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones</th><th>Consecutivo</th><th>Pais</th><th>Ciudad</th><th>Nombre del contacto</th><th>Pagina Web</th><th>Dirección</th><th>Telefono 1</th><th>Telefono 2</th><th>Telefono 3</th><th>Telefono 4</th><th>Correo 1</th><th>Correo 2</th></tr></thead><tbody>";
             break;
 
-        case "Default":
+        case "U":
             html = "<table id='TDireccion' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones <span class='cssToolTip_ver'><img alt='Direc' class='AddDirec' onclick=\"AddDirecion()\" id='Crear' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Nueva Dirección</span></span></th><th>Consecutivo</th><th>Pais</th><th>Ciudad</th><th>Nombre del contacto</th><th>Pagina Web</th><th>Dirección</th><th>Telefono 1</th><th>Telefono 2</th><th>Telefono 3</th><th>Telefono 4</th><th>Correo 1</th><th>Correo 2</th></tr></thead><tbody>";
             break;
     }
@@ -76,14 +82,14 @@ function Tabla_General(Opc_Link) {
         if (ArrayDirecciones[itemArray].TypeDoc_ID != "") {
 
             switch (Opc_Link) {
-                case "Read":
+                case "V":
                     if (estado == "eliminar")
                         html += "<tr><td><select id='Select_" + ArrayDirecciones[itemArray].Consecutivo + "' class='Opciones' onchange=\"Select_Option(this,'" + ArrayDirecciones[itemArray].Consecutivo + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td>" + ArrayDirecciones[itemArray].Consecutivo + "</td><td>" + ArrayDirecciones[itemArray].DescripPais + "</td><td>" + ArrayDirecciones[itemArray].DescripCiudad + "</td> <td>" + ArrayDirecciones[itemArray].Contacto + "</td><td>" + ArrayDirecciones[itemArray].PaginaWeb + "</td><td>" + ArrayDirecciones[itemArray].Direccion + "</td><td>" + ArrayDirecciones[itemArray].Telefono_1 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_2 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_3 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_4 + "</td><td>" + ArrayDirecciones[itemArray].Correo_1 + "</td><td>" + ArrayDirecciones[itemArray].Correo_2 + "</td></tr>";
                     else
                         html += "<tr><td><select id='Select_" + ArrayDirecciones[itemArray].Consecutivo + "' class='Opciones' onchange=\"Select_Option(this,'" + ArrayDirecciones[itemArray].Consecutivo + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayDirecciones[itemArray].Consecutivo + "</td><td>" + ArrayDirecciones[itemArray].DescripPais + "</td><td>" + ArrayDirecciones[itemArray].DescripCiudad + "</td> <td>" + ArrayDirecciones[itemArray].Contacto + "</td><td>" + ArrayDirecciones[itemArray].PaginaWeb + "</td><td>" + ArrayDirecciones[itemArray].Direccion + "</td><td>" + ArrayDirecciones[itemArray].Telefono_1 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_2 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_3 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_4 + "</td><td>" + ArrayDirecciones[itemArray].Correo_1 + "</td><td>" + ArrayDirecciones[itemArray].Correo_2 + "</td></tr>";
                     break;
 
-                case "Default":
+                case "U":
                     html += "<tr><td><select id='Select_" + ArrayDirecciones[itemArray].Consecutivo + "' class='Opciones' onchange=\"Select_Option(this,'" + ArrayDirecciones[itemArray].Consecutivo + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Modificar</option><option value='R'>Retirar</option></select></td><td>" + ArrayDirecciones[itemArray].Consecutivo + "</td><td>" + ArrayDirecciones[itemArray].DescripPais + "</td><td>" + ArrayDirecciones[itemArray].DescripCiudad + "</td> <td>" + ArrayDirecciones[itemArray].Contacto + "</td><td>" + ArrayDirecciones[itemArray].PaginaWeb + "</td><td>" + ArrayDirecciones[itemArray].Direccion + "</td><td>" + ArrayDirecciones[itemArray].Telefono_1 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_2 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_3 + "</td><td>" + ArrayDirecciones[itemArray].Telefono_4 + "</td><td>" + ArrayDirecciones[itemArray].Correo_1 + "</td><td>" + ArrayDirecciones[itemArray].Correo_2 + "</td></tr>";
                     break;
             }
@@ -117,7 +123,7 @@ function AddDirecion() {
     Enabled_Direccion();
     var Direccion_Consecutivo = ArrayDirecciones.length + 1;
     $("#Dialog_C_R_U_D").dialog("open");
-    $("#Dialog_C_R_U_D").dialog("option", "title", "Nueva dirección de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D").dialog("option", "title", "Nueva dirección de: " + Nombre_Persona);
     $("#TxtConsecutivo").val(Direccion_Consecutivo);
     $("#TxtContact").val(D_String_Contacto);
 
@@ -211,7 +217,7 @@ function Select_Option(Select_control, Index_Adress) {
 function UpdateDirecion(Direccion_Consecutivo) {
     clearDireccion();
     $("#Dialog_C_R_U_D").dialog("open");
-    $("#Dialog_C_R_U_D").dialog("option", "title", "Actualizar dirección de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D").dialog("option", "title", "Actualizar dirección de: " + Nombre_Persona);
     $("#TxtConsecutivo").val(Direccion_Consecutivo);
     $("#BtnAdd").attr("value", "Actualizar");
 
@@ -246,7 +252,7 @@ function Update_Array_Adress() {
 function DeleteDirecion(Direccion_Consecutivo) {
 
     $("#Dialog_C_R_U_D").dialog("open");
-    $("#Dialog_C_R_U_D").dialog("option", "title", "Retirar Dirección de: " + +$("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D").dialog("option", "title", "Retirar Dirección de: " + +Nombre_Persona);
     $("#TxtConsecutivo").val(Direccion_Consecutivo);
     $("#BtnAdd").attr("value", "Eliminar");
 
@@ -301,7 +307,7 @@ function RestoreDelete_Array_Adress() {
 function ReadDirecion(Direccion_Consecutivo) {
 
     $("#Dialog_C_R_U_D").dialog("open");
-    $("#Dialog_C_R_U_D").dialog("option", "title", "Dirección de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D").dialog("option", "title", "Dirección de: " + Nombre_Persona);
     $("#TxtConsecutivo").val(Direccion_Consecutivo);
     $("#BtnAdd").attr("value", "Salir");
 

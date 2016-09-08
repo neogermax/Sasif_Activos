@@ -46,17 +46,16 @@
         </div>
         <div id="Marco_trabajo_Form">
             <div id="Admin_Anexos">
-                <span id="T_option" class="T_options Label_Bold">Información Persona</span> <span
-                    class="cssToolTip_Form"><a href="javascript:Complemento();">
-                        <img alt="error" title="" style="height: 40px; width: 40px; position: absolute; padding-left: 10px;
-                            padding-top: 15px; z-index: 30;" id="Imglogo" src="../../images/logo.png" />
-                    </a><span class="Spam_ACliente"></span></span>
+                <span id="T_option" class="T_options Label_Bold">Información Persona</span><a href="javascript:Complemento();">
+                    <img alt="error" title="" style="height: 32px; width: 32px; position: absolute; padding-left: 10px;
+                        padding-top: 15px; z-index: 30;" id="Imglogo" src="../../images/logo.png" />
+                </a>
                 <div id="Container_Complementos">
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Direcciones');">
                         <div class="C_Image">
                             <a href="javascript:Direcciones('Default');">
-                                <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="45px"
-                                    width="45px" style="margin-top: 2.5px;" /></a>
+                                <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="35px"
+                                    width="35px" style="margin-top: 7px;" /></a>
                         </div>
                         <div class="Spam_CT1 C_Text Label_Bold">
                         </div>
@@ -64,7 +63,7 @@
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
                             <a href="javascript:Bancos('Default');">
-                                <img alt="Bank" id="Bancos" src="../../images/bank.png" height="50px" width="50px" /></a>
+                                <img alt="Bank" id="Bancos" src="../../images/bank.png" height="40px" width="40px" style="margin-top: 3px;"  /></a>
                         </div>
                         <div class="Spam_CT2 C_Text Label_Bold">
                         </div>
@@ -72,19 +71,10 @@
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Documento');">
                         <div class="C_Image">
                             <a href="javascript:Documentos('Default');">
-                                <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="45px" width="45px"
-                                    style="margin-top: 2.5px;" /></a>
+                                <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
+                                    style="margin-top: 7px;" /></a>
                         </div>
                         <div class="Spam_CT4 C_Text Label_Bold">
-                        </div>
-                    </div>
-                    <div class="Option_Cliente" onclick="javascript:BlockAnexos('DocumentoAutrizado');">
-                        <div class="C_Image">
-                            <a href="javascript:DocumentosAutorizados('Default');">
-                                <img alt="Bank" id="Img21" src="../../images/DocAuto.png" height="45px" width="45px"
-                                    style="margin-top: 2.5px;" /></a>
-                        </div>
-                        <div class="Spam_CT5 C_Text Label_Bold">
                         </div>
                     </div>
                 </div>
@@ -601,145 +591,6 @@
             </tr>
         </table>
     </div>
-    <div id="Dialog_Visualiza">
-        <table id="D_Impuestos" style="width: 100%; padding-left: 20px;">
-            <tr>
-                <td class="Label_Bold" style="width: 130px;">
-                    Nit
-                </td>
-                <td id="V_Nit" style="width: 160px;">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    Tipo de Documento
-                </td>
-                <td id="V_TDocumento">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    N° Documento
-                </td>
-                <td id="V_Documento">
-                </td>
-                <td class="Label_Bold" style="width: 60px;">
-                    Digito
-                </td>
-                <td id="V_Digito">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    Empresa
-                </td>
-                <td id="V_Nombre" colspan="3">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    Ciudad
-                </td>
-                <td id="V_Municipio">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    Tipo de Persona
-                </td>
-                <td id="V_TPersona">
-                </td>
-            </tr>
-            <tr>
-                <td class="Label_Bold">
-                    Regimen
-                </td>
-                <td id="V_Regimen">
-                </td>
-            </tr>
-        </table>
-        <div id="Acordeon_Dat">
-            <h3>
-                Relación
-            </h3>
-            <div>
-                <table style="width: 100%; padding-left: 60px;">
-                    <tr>
-                        <td class="Label_Bold" style="width: 180px;">
-                            Cliente
-                        </td>
-                        <td id="V_Op_Cliente" style="width: 90px;">
-                        </td>
-                        <td class="Label_Bold" style="width: 100px;">
-                            Avaluador
-                        </td>
-                        <td id="V_Op_Avaluador">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">
-                            Organismo de Transito
-                        </td>
-                        <td id="V_Op_Transito">
-                        </td>
-                        <td class="Label_Bold">
-                            Hacienda
-                        </td>
-                        <td id="V_Op_Hacienda">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">
-                            Multi-Empresa
-                        </td>
-                        <td id="V_Op_Empresa">
-                        </td>
-                        <td class="Label_Bold">
-                            Empleado
-                        </td>
-                        <td id="V_Op_Empleado">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">
-                            Asesor
-                        </td>
-                        <td id="V_Op_Asesor">
-                        </td>
-                        <td class="Label_Bold">
-                            Proveedor
-                        </td>
-                        <td id="V_Op_Otro_1">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Label_Bold">
-                            Ent. Bancaria
-                        </td>
-                        <td id="V_Banco">
-                        </td>
-                        <td class="Label_Bold">
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <table id="Complementos_Read">
-            <tr>
-                <td colspan="4" align="left">
-                    <span class="cssToolTip_ver"><a href="javascript:Direcciones('Read');">
-                        <img alt="Direc" id="Img18" src="../../images/adress_book.png" /></a> <span class="Spam_AT1">
-                        </span></span><span class="cssToolTip_ver"><a href="javascript:Bancos('Read');">
-                            <img alt="Bank" id="Img19" src="../../images/bank.png" height="60px" width="60px" /></a>
-                            <span class="Spam_AT2"></span></span><span class="cssToolTip_ver"><a href="javascript:Documentos('Read');">
-                                <img alt="Bank" id="Img20" src="../../images/documentos.png" height="60px" width="60px" /></a>
-                                <span class="Spam_AT4"></span></span>
-                </td>
-            </tr>
-        </table>
-    </div>
     <div id="Dialog_Direcciones">
         <div id="Controls_direcciones" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
             <table style="width: 100%">
@@ -812,7 +663,7 @@
         <div id="container_Bank">
         </div>
         <div id="Div4" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
-            <input id="Button1" type="button" value="Guardar" onclick="BtnSave_Bank_Client()" />
+            <input id="BtnSave_Bank" type="button" value="Guardar" onclick="BtnSave_Bank_Client()" />
         </div>
     </div>
     <div id="Dialog_C_R_U_D">
@@ -1339,7 +1190,7 @@
         <div id="container_Document">
         </div>
         <div id="Div6" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
-            <input id="Button2" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
+            <input id="BtnSave_Document" type="button" value="Guardar" onclick="BtnSave_Document_Client()" />
         </div>
     </div>
     <div id="Dialog_Doc_Autorizados">
@@ -1376,7 +1227,7 @@
         <div id="container_DocAuto">
         </div>
         <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
-            <input id="Button3" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
+            <input id="BtnSave_Document_A" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
         </div>
     </div>
 </asp:Content>

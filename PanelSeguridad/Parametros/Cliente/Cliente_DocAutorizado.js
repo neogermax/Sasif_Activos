@@ -10,10 +10,16 @@ var ArrayFoto = [];
 //el llamado para insertar modificar o eliminar la direcciones
 function DocumentosAutorizados(Option_Document) {
     $("#Dialog_Doc_Autorizados").dialog("open");
-    $("#Dialog_Doc_Autorizados").dialog("option", "title", "Documentos Autorizados de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_Doc_Autorizados").dialog("option", "title", "Documentos Autorizados de: " + Nombre_Persona);
+
+    if (OpcWordComplementos == 'V')
+        $("#BtnSave_Document_A").css("display", "none");
+    else
+        $("#BtnSave_Document_A").css("display", "inline-table");
+
 
     switch (Option_Document) {
-        case "Read":
+        case "V":
             $("#Txt_Nit_Doc_A").val(D_Nit);
             $("#Txt_TypeIden_Doc_A").val(D_String_TDocumento);
             $("#Txt_Ident_Doc_A").val(D_Documento);
@@ -25,7 +31,7 @@ function DocumentosAutorizados(Option_Document) {
 
             break;
 
-        case "Default":
+        case "U":
 
             var Nit_Work;
 
@@ -53,11 +59,11 @@ function Tabla_General_DocumentAuto(Opc_Link) {
     var contador = 0;
 
     switch (Opc_Link) {
-        case "Read":
+        case "V":
             html = "<table id='TDocAuto' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones</th><th>Ver o Descargar</th><th>Documento</th><th>Formato</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
 
-        case "Default":
+        case "U":
             html = "<table id='TDocAuto' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones <span class='cssToolTip_ver'><img alt='Document' class='AddDocument' onclick=\"AddDocument()\" id='Crear' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Nuevo Documento</span></span></th><th>Ver o Descargar</th><th>Documento</th><th>Formato</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
     }
@@ -66,14 +72,14 @@ function Tabla_General_DocumentAuto(Opc_Link) {
         if (ArrayDocAutorizado[itemArray].TypeDoc_ID != "") {
 
             switch (Opc_Link) {
-                case "Read":
+                case "V":
                     if (estado == "eliminar")
                         html += "<tr><td><select id='Select_" + ArrayDocAutorizado[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocAutorizado[itemArray].DocExist_ID + "','" + ArrayDocAutorizado[itemArray].Formato + "','" + ArrayDocAutorizado[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocAutorizado[itemArray].RutaDocumento + ArrayDocAutorizado[itemArray].DescripDocument + "." + ArrayDocAutorizado[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocAutorizado[itemArray].DescripDocument + "</td><td>" + ArrayDocAutorizado[itemArray].DescripFormato + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaActualizacion + "</td></tr>";
                     else
                         html += "<tr><td><select id='Select_" + ArrayDocAutorizado[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocAutorizado[itemArray].DocExist_ID + "','" + ArrayDocAutorizado[itemArray].Formato + "','" + ArrayDocAutorizado[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocAutorizado[itemArray].RutaDocumento + ArrayDocAutorizado[itemArray].DescripDocument + "." + ArrayDocAutorizado[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocAutorizado[itemArray].DescripDocument + "</td><td>" + ArrayDocAutorizado[itemArray].DescripFormato + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaActualizacion + "</td></tr>";
                     break;
 
-                case "Default":
+                case "U":
                     html += "<tr><td><select id='Select_" + ArrayDocAutorizado[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocAutorizado[itemArray].DocExist_ID + "','" + ArrayDocAutorizado[itemArray].Formato + "','" + ArrayDocAutorizado[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocAutorizado[itemArray].RutaDocumento + ArrayDocAutorizado[itemArray].DescripDocument + "." + ArrayDocAutorizado[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocAutorizado[itemArray].DescripDocument + "</td><td>" + ArrayDocAutorizado[itemArray].DescripFormato + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaCreacion + "</td><td>" + ArrayDocAutorizado[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocAutorizado[itemArray].FechaActualizacion + "</td></tr>";
                     break;
             }

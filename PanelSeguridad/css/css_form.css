@@ -335,8 +335,8 @@
 
 #Container_Complementos
 {
-    height: 250px;
-    width: 250px;
+    height: 170px;
+    width: 200px;
     position: absolute;
     background-color: silver;
     padding-top: 40px;
@@ -379,14 +379,14 @@
 
 .C_Text
 {
-    padding-left: 80px;
+    padding-left: 60px;
     margin-top: 15px;
 }
 
 .T_options
 {
     margin-top: 25px;
-    margin-left: 90px;
+    margin-left: 50px;
     position: absolute;
     z-index: 50;
 }
