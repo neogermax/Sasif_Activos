@@ -253,3 +253,19 @@ function Convert_Decimal(index) {
     }
     return Output;
 }
+
+//escondemos los iconos obligatorios
+function ResetError() {
+    $("#ImgC_Doc").css("display", "none");
+    $("#ImgMul").css("display", "none");
+    $("#ImgPais").css("display", "none");
+    $("#ImgID").css("display", "none");
+    $("#Img1").css("display", "none");
+    $("#Img2").css("display", "none");
+    $("#Img3").css("display", "none");
+    $("#Img5").css("display", "none");
+    $("#Img9").css("display", "none");
+    $("#Img10").css("display", "none");
+    $("#Img11").css("display", "none");
+    $("#Img12").css("display", "none");
+}

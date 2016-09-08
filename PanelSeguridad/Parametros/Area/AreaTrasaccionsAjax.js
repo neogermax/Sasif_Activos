@@ -177,7 +177,7 @@ function transacionAjax_Area_create(State) {
             "descripcion": $("#TxtDescription").val(),
             "AreaDependencia": AreaDepen,
             "Politica": Politica,
-            "user": User
+            "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -218,6 +218,7 @@ function transacionAjax_Area_create(State) {
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
                         $("#WE").css("display", "none");
+                        transacionAjax_AreaDepend('Area_Dep', index_ID);
                         Clear();
                     }
                     break;

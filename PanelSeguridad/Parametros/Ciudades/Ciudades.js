@@ -56,9 +56,8 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
-
             $("#Select_Pais").removeAttr("disabled");
-
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -76,6 +75,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCiudades").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 

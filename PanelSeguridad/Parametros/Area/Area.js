@@ -6,6 +6,7 @@ var ArraySeguridad = [];
 
 var estado;
 var editNit_ID;
+var index_ID;
 var editID;
 /*--------------- region de variables globales --------------------*/
 
@@ -46,7 +47,7 @@ $(document).ready(function () {
 //carga el combo de Area dependiente
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
+        index_ID = $(this).val();
         $('#Select_AreaDepent').empty();
         transacionAjax_AreaDepend('Area_Dep', index_ID);
     });
@@ -69,7 +70,7 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
-        
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -87,6 +88,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TArea").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -371,8 +373,10 @@ function Clear() {
     $("#TxtDescription").val("");
     $("#Select_AreaDepent").val("-1");
     $("#Select_Politica").val("-1");
-
-
+     
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
 }

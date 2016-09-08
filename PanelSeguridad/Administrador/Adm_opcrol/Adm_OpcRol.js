@@ -80,6 +80,7 @@ function HabilitarPanel(opcion) {
             $("#DDL_ID").removeAttr("disabled");
             $("#TxtConsecutivo").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
             break;
