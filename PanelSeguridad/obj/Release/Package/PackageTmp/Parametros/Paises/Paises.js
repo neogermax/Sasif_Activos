@@ -126,7 +126,7 @@ function HabilitarPanel(opcion) {
             $("#Btnguardar").attr("value", "Guardar");
             $("#Btnguardar").css("display", "inline-table");
             Enabled_Pais();
-
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -147,6 +147,7 @@ function HabilitarPanel(opcion) {
             $("#container_TPaises").html("");
             estado = opcion;
             Enabled_Pais();
+            ResetError();
             Clear();
             break;
 

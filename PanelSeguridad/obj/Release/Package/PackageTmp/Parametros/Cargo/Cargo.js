@@ -6,6 +6,7 @@ var ArraySeguridad = [];
 
 var estado;
 var editNit_ID;
+var index_ID; 
 var editID;
 /*--------------- region de variables globales --------------------*/
 
@@ -47,7 +48,7 @@ $(document).ready(function () {
 function Change_Select_Nit() {
          
     $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
+        index_ID = $(this).val();
         $('#Select_CargoDepent').empty();
         transacionAjax_CargoDepend('Cargo_Dep', index_ID);
     });
@@ -72,7 +73,7 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $('.C_Chosen').trigger('chosen:updated');
-        
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -90,6 +91,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TCargo").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 
@@ -375,7 +377,9 @@ function Clear() {
     $("#Select_CargoDepent").val("-1");
     $("#Select_Politica").val("-1");
 
-
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
+
+    $('.C_Chosen').trigger('chosen:updated');
+
 }

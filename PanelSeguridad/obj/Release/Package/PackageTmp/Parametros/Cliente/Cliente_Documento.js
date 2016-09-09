@@ -10,10 +10,16 @@ var ArrayFoto = [];
 //el llamado para insertar modificar o eliminar la direcciones
 function Documentos(Option_Document) {
     $("#Dialog_Documentos").dialog("open");
-    $("#Dialog_Documentos").dialog("option", "title", "Documentos de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_Documentos").dialog("option", "title", "Documentos de: " + Nombre_Persona);
+
+    if (OpcWordComplementos == 'V')
+        $("#BtnSave_Document").css("display", "none");
+    else
+        $("#BtnSave_Document").css("display", "inline-table");
+
 
     switch (Option_Document) {
-        case "Read":
+        case "V":
             $("#Txt_Nit_Doc").val(D_Nit);
             $("#Txt_TypeIden_Doc").val(D_String_TDocumento);
             $("#Txt_Ident_Doc").val(D_Documento);
@@ -25,7 +31,7 @@ function Documentos(Option_Document) {
 
             break;
 
-        case "Default":
+        case "U":
 
             var Nit_Work;
 
@@ -53,11 +59,11 @@ function Tabla_General_Document(Opc_Link) {
     var contador = 0;
 
     switch (Opc_Link) {
-        case "Read":
+        case "V":
             html = "<table id='TDocument' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones</th><th>Ver o Descargar</th><th>Documento</th><th>Formato</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
 
-        case "Default":
+        case "U":
             html = "<table id='TDocument' border='1' cellpadding='1' cellspacing='1'  style='width: 100%; margin-top: 20px;'><thead><tr><th>Opciones <span class='cssToolTip_ver'><img alt='Document' class='AddDocument' onclick=\"AddDocument()\" id='Crear' height='20px' width='20px' src='../../images/add.png' /><span>Agregar Nuevo Documento</span></span></th><th>Ver o Descargar</th><th>Documento</th><th>Formato</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Modificación</th></tr></thead><tbody>";
             break;
     }
@@ -66,14 +72,14 @@ function Tabla_General_Document(Opc_Link) {
         if (ArrayDocument[itemArray].TypeDoc_ID != "") {
 
             switch (Opc_Link) {
-                case "Read":
+                case "V":
                     if (estado == "eliminar")
                         html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     else
                         html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     break;
 
-                case "Default":
+                case "U":
                     html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     break;
             }
@@ -165,7 +171,7 @@ function AddDocument() {
     ClearDocument();
     Enabled_Document();
     $("#Dialog_C_R_U_D_Document").dialog("open");
-    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Nueva Entidad Financiera de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Nueva Entidad Financiera de: " + Nombre_Persona);
     $("#BtnAddDocument").attr("value", "Agregar");
 }
 
@@ -195,7 +201,7 @@ function Add_Array_Document() {
 function DeleteDocument(Nit_Document, TC_Document, Cuenta_Document) {
 
     $("#Dialog_C_R_U_D_Document").dialog("open");
-    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Retirar Entidad Financiera de: " + +$("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Retirar Entidad Financiera de: " + +Nombre_Persona);
     $("#BtnAddDocument").attr("value", "Eliminar");
 
     Search_Document(Nit_Document, TC_Document, Cuenta_Document);
@@ -248,7 +254,7 @@ function RestoreDelete_Array_Document() {
 function ReadDocument(Nit_Document, TC_Document, Cuenta_Document) {
 
     $("#Dialog_C_R_U_D_Document").dialog("open");
-    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Entidad Financiera de: " + $("#TxtNombre").val() + " " + $("#TxtNombre_2").val() + " " + $("#Txt_Ape_1").val() + " " + $("#Txt_Ape_2").val());
+    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Entidad Financiera de: " + Nombre_Persona);
     $("#BtnAddDocument").attr("value", "Salir");
 
     Search_Document(Nit_Document, TC_Document, Cuenta_Document);

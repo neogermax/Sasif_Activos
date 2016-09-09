@@ -39,6 +39,7 @@
     Private _TypeDocument_ID_Jefe As Integer
     Private _Document_ID_Jefe As Long
     Private _Politica_ID As Integer
+    Private _GrpDocumentos As Integer
 
     Private _UsuarioCreacion As String
     Private _FechaCreacion As String
@@ -387,5 +388,13 @@
         End Set
     End Property
 
+    Public Property GrpDocumentos() As Integer
+        Get
+            Return Me._GrpDocumentos
+        End Get
+        Set(ByVal value As Integer)
+            Me._GrpDocumentos = value
+        End Set
+    End Property
 #End Region
 End Class

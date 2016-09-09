@@ -63,7 +63,8 @@
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
                             <a href="javascript:Bancos('Default');">
-                                <img alt="Bank" id="Bancos" src="../../images/bank.png" height="40px" width="40px" style="margin-top: 3px;"  /></a>
+                                <img alt="Bank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
+                                    style="margin-top: 3px;" /></a>
                         </div>
                         <div class="Spam_CT2 C_Text Label_Bold">
                         </div>
@@ -330,23 +331,36 @@
                     <table id="Tabla_8" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 120px;" class="Label_Bold">
+                                Acceso al Sistema
+                            </td>
+                            <td style="width: 70px;">
+                                <select id="Select_Acceso" class="C_Chosen" style="width: 70px;">
+                                    <option value="N">No</option>
+                                    <option value="S">Si</option>
+                                </select>
+                            </td>
+                            <td style="width: 122px;">
+                            </td>
+                              <td style="width: 150px;" class="Label_Bold">
+                                Grupo de Documentos
+                            </td>
+                            <td>
+                                <select id="Select_GrpDocument" class="C_Chosen">
+                                </select>
+                            </td>
+                            <td style="width: 50px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Tabla_9" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
                                 Tipo de Relación
                             </td>
                             <td style="width: 195px;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
                                         src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
-                            </td>
-                            <td style="width: 120px;" class="Label_Bold">
-                                Acceso al Sistema
-                            </td>
-                            <td>
-                                <select id="Select_Acceso" class="C_Chosen">
-                                    <option value="N">No</option>
-                                    <option value="S">Si</option>
-                                </select>
-                            </td>
-                            <td style="width: 120px;">
                             </td>
                         </tr>
                     </table>

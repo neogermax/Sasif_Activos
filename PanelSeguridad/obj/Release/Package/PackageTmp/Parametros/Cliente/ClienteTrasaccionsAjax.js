@@ -297,6 +297,33 @@ function transacionAjax_Jefe(State, Index) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_GrpDocumentos(State, Index) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "Index": Index,
+            "tabla": 'GrpDocumentos'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                ArrayGrpDocumentos = [];
+            }
+            else {
+                ArrayGrpDocumentos = JSON.parse(result);
+                charge_CatalogList(ArrayGrpDocumentos, "Select_GrpDocument", 1);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -378,6 +405,7 @@ function transacionAjax_Cliente_create(State) {
     var Politica = 0;
     var TDocJefe = 0;
     var DocJefe = 0;
+    var GrpDocumento = 0;
 
     var Name;
     var CiudadDocument;
@@ -403,6 +431,9 @@ function transacionAjax_Cliente_create(State) {
         TDocJefe = SplitJefe[0];
         DocJefe = SplitJefe[1];
     }
+
+    if ($('#Select_GrpDocument').val() != "-1")
+        GrpDocumento = $('#Select_GrpDocument').val();
 
     if ($("#Select_Politica").val() != "-1")
         Politica = $("#Select_Politica").val();
@@ -496,7 +527,7 @@ function transacionAjax_Cliente_create(State) {
             "Ape_2": $("#Txt_Ape_2").val(),
             "Pais_ID": $("#Select_Pais").val(),
             "Ciudad_ID": $("#Select_Ciudad").val(),
-            "CiuDoc": CiudadDocument,           
+            "CiuDoc": CiudadDocument,
             "TipoPersona": $("#Select_TPersona").val(),
             "Regimen": $("#Select_Regimen").val(),
             "OP_Cliente": CL,
@@ -515,6 +546,7 @@ function transacionAjax_Cliente_create(State) {
             "TDocJefe": TDocJefe,
             "DocJefe": DocJefe,
             "Politica": Politica,
+            "GrpDocumento": GrpDocumento,
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso

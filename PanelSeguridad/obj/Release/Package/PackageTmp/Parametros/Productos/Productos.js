@@ -89,6 +89,7 @@ function HabilitarPanel(opcion) {
             
             $("#Btnguardar").attr("value", "Guardar");
             Enabled_Controls();
+            ResetError();
             Clear();
             estado = opcion;
             $('.C_Chosen').trigger('chosen:updated');
@@ -110,6 +111,7 @@ function HabilitarPanel(opcion) {
             $("#container_TPorcen_Descuentos").html("");
             estado = opcion;
             Enabled_Controls();
+            ResetError();
             Clear();
             break;
 

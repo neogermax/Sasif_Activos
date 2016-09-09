@@ -65,7 +65,8 @@ Public Class ClienteSQLClass
                               " CLI_Usuario_Actualizacion, " & _
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion " & _
+                              " PO.PS_Descripcion, " & _
+                              " CLI_GrpDocumentos " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -118,7 +119,8 @@ Public Class ClienteSQLClass
                               " CLI_Usuario_Actualizacion, " & _
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion " & _
+                              " PO.PS_Descripcion, " & _
+                              " CLI_GrpDocumentos " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -169,7 +171,8 @@ Public Class ClienteSQLClass
                               " CLI_Usuario_Actualizacion, " & _
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion " & _
+                              " PO.PS_Descripcion, " & _
+                              " CLI_GrpDocumentos " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -236,6 +239,7 @@ Public Class ClienteSQLClass
             " CLI_TypeDocument_ID_Jefe, " & _
             " CLI_Document_ID_Jefe, " & _
             " CLI_Politica_ID, " & _
+            " CLI_GrpDocumentos, " & _
             " CLI_Usuario_Creacion, " & _
             " CLI_FechaCreacion, " & _
             " CLI_Usuario_Actualizacion, " & _
@@ -271,6 +275,7 @@ Public Class ClienteSQLClass
         sql.AppendLine("'" & vp_O_Obj.TypeDocument_ID_Jefe & "',")
         sql.AppendLine("'" & vp_O_Obj.Document_ID_Jefe & "',")
         sql.AppendLine("'" & vp_O_Obj.Politica_ID & "',")
+        sql.AppendLine("'" & vp_O_Obj.GrpDocumentos & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.FechaCreacion & "',")
         sql.AppendLine("'" & vp_O_Obj.UsuarioActualizacion & "',")
@@ -323,6 +328,7 @@ Public Class ClienteSQLClass
                           " CLI_TypeDocument_ID_Jefe ='" & vp_O_Obj.TypeDocument_ID_Jefe & "', " & _
                           " CLI_Document_ID_Jefe ='" & vp_O_Obj.Document_ID_Jefe & "', " & _
                           " CLI_Politica_ID ='" & vp_O_Obj.Politica_ID & "', " & _
+                          " CLI_GrpDocumentos ='" & vp_O_Obj.GrpDocumentos & "', " & _
                           " CLI_Usuario_Actualizacion ='" & vp_O_Obj.UsuarioActualizacion & "', " & _
                           " CLI_FechaActualizacion ='" & vp_O_Obj.FechaActualizacion & "'" & _
                        " WHERE CLI_Nit_ID = '" & vp_O_Obj.Nit_ID & "'" & _
@@ -567,6 +573,31 @@ Public Class ClienteSQLClass
 
     End Function
 
+    ''' <summary>
+    ''' crea la consulta para cargar el combo
+    ''' </summary>
+    ''' <param name="vp_S_NitEmpresa"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Charge_DropListGrpDocumentos(ByVal vp_S_NitEmpresa As String)
+
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim StrQuery As String = ""
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("3")
+
+        Dim SQLGeneral As New GeneralSQLClass
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT GD_Grp_Documento_ID AS ID,CAST(GD_Grp_Documento_ID AS NVARCHAR(5)) + ' - ' + GD_Descripcion AS DESCRIPCION FROM GRUPO_DOCUMENTO " & _
+                   " WHERE GD_Nit_ID ='" & vp_S_NitEmpresa & "'")
+        StrQuery = sql.ToString
+
+        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
+
+        Return ObjListDroplist
+
+    End Function
 
 #End Region
 
@@ -741,6 +772,8 @@ Public Class ClienteSQLClass
             If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objCliente.DescripArea = ReadConsulta.GetValue(38) Else objCliente.DescripArea = ""
             If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objCliente.DescripCargo = ReadConsulta.GetValue(39) Else objCliente.DescripCargo = ""
             If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objCliente.DescripSeguridad = ReadConsulta.GetValue(40) Else objCliente.DescripSeguridad = ""
+
+            If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(41) Else objCliente.GrpDocumentos = 0
 
             'agregamos a la lista
             ObjListCliente.Add(objCliente)

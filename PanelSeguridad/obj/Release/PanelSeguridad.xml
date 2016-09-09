@@ -300,6 +300,13 @@ PanelSeguridad
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteSQLClass.Charge_DropListGrpDocumentos(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteSQLClass.Read_Client(System.String,System.String,System.String)">
 	<summary>
  creala consulta para del Cliente seleccionado (READ)
@@ -681,6 +688,11 @@ PanelSeguridad
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteAjax.CargarJefe">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteAjax.CargarGrpDocumentos">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>

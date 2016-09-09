@@ -97,8 +97,8 @@ function HabilitarPanel(opcion) {
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
             $("#Btnguardar").css("display", "inline-table");
-            
             Enabled_Controls();
+            ResetError();
             Clear();
             estado = opcion;
             $("#Select_Estado").attr("disabled", "disabled");
@@ -124,9 +124,9 @@ function HabilitarPanel(opcion) {
             $("#container_TFasecolda").html("");
             $("#Select_Estado").removeAttr("disabled");
             $('.C_Chosen').trigger('chosen:updated');
-
             estado = opcion;
             Enabled_Controls();
+            ResetError();
             Clear();
             break;
 

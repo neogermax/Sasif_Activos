@@ -14,6 +14,7 @@ var ArrayArea = [];
 var ArrayCargo = [];
 var ArraySeguridad = [];
 var ArrayJefe = [];
+var ArrayGrpDocumentos = [];
 
 var estado;
 var editNit_ID;
@@ -295,6 +296,9 @@ function Change_Select_Nit() {
 
         $('#Select_Jefe').empty();
         transacionAjax_Jefe('Jefe', index_ID);
+
+        $('#Select_GrpDocument').empty();
+        transacionAjax_GrpDocumentos('GrpDocumentos', index_ID);
 
     });
 }
@@ -618,6 +622,7 @@ var StrArea;
 var StrCargo;
 var StrDocJefe;
 var StrPolitica;
+var StrGrpdocumento;
 
 // muestra el registro a editar
 function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
@@ -657,7 +662,8 @@ function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
             StrCargo = ArrayCliente[itemArray].Cargo_ID;
             StrPolitica = ArrayCliente[itemArray].Cargo_ID;
             StrDocJefe = ArrayCliente[itemArray].Document_ID_Jefe;
-
+            StrGrpdocumento = ArrayCliente[itemArray].GrpDocumentos;
+            
             if (StrPolitica == 0)
                 $("#Select_Politica").val("-1");
             else
@@ -764,6 +770,9 @@ function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
             if (StrRegimen != "")
                 setTimeout("ChargeRegimen(StrRegimen);", 300);
 
+            if (StrGrpdocumento != 0)
+                setTimeout("ChargeGrpDocumentos(StrGrpdocumento);", 400);
+
             $('.C_Chosen').trigger('chosen:updated');
 
         }
@@ -787,6 +796,12 @@ function EditEmpleado() {
 
     if (StrDocJefe != 0)
         setTimeout("ChargeJefe(StrDocJefe);", 300);
+}
+
+//funcion de carga de la cuidad para edicion
+function ChargeGrpDocumentos(index) {
+    $('#Select_GrpDocument').val(index);
+    $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga de la cuidad para edicion

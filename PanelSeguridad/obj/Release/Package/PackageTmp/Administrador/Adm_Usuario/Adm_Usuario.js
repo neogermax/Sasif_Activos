@@ -56,6 +56,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "none");
             $("#Txt_ID").removeAttr("disabled");
             $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -73,6 +74,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TUser").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 

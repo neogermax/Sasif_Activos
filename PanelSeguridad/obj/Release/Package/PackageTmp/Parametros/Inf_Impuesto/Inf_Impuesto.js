@@ -185,14 +185,12 @@ function HabilitarPanel(opcion) {
             $("#TablaMuticliente").css("display", "inline-table");
             $("#TablaCliente").css("display", "inline-table");
             $("#controls_X").css("display", "inline-table");
-
             $("#TablaConsulta").css("display", "none");
-
             $("#Btnguardar").attr("value", "Guardar");
+            ResetError();
             Clear();
             estado = opcion;
-
-
+            
             for (item in ArrayPaises) {
                 if (ArrayPaises[item].ID == 169) {
                     var Str_pais = ArrayPaises[item].descripcion;

@@ -149,11 +149,10 @@ function HabilitarPanel(opcion) {
             $("#Select_LTipo").removeAttr("disabled");
             $("#Txt_LInf").removeAttr("disabled");
             $("#Txt_Sup").removeAttr("disabled");
-
             $("#Btnguardar").attr("value", "Guardar");
 
             $('.C_Chosen').trigger('chosen:updated');
-
+            ResetError();
             Clear();
             estado = opcion;
             break;
@@ -171,6 +170,7 @@ function HabilitarPanel(opcion) {
             $("#TablaConsulta").css("display", "inline-table");
             $("#container_TPorcen_Descuentos").html("");
             estado = opcion;
+            ResetError();
             Clear();
             break;
 

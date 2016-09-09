@@ -29,6 +29,9 @@ Public Class ClienteAjax
                 Case "Jefe"
                     CargarJefe()
 
+                Case "GrpDocumentos"
+                    CargarGrpDocumentos()
+
                 Case "Seguridad"
                     CargarSeguridad()
 
@@ -166,6 +169,8 @@ Public Class ClienteAjax
             objCliente.Document_ID_Jefe = Request.Form("DocJefe")
             objCliente.Politica_ID = Request.Form("Politica")
 
+            objCliente.GrpDocumentos = Request.Form("GrpDocumento")
+
             objCliente.UsuarioCreacion = Request.Form("user")
             objCliente.FechaCreacion = Date.Now
             objCliente.UsuarioActualizacion = Request.Form("user")
@@ -229,6 +234,8 @@ Public Class ClienteAjax
         objCliente.TypeDocument_ID_Jefe = Request.Form("TDocJefe")
         objCliente.Document_ID_Jefe = Request.Form("DocJefe")
         objCliente.Politica_ID = Request.Form("Politica")
+
+        objCliente.GrpDocumentos = Request.Form("GrpDocumento")
 
         objCliente.UsuarioActualizacion = Request.Form("user")
         objCliente.FechaActualizacion = Date.Now
@@ -628,6 +635,21 @@ Public Class ClienteAjax
         Dim vl_S_Index As String = Request.Form("Index")
 
         ObjListDroplist = SQL.Charge_DropListJefe(vl_S_Index)
+        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga el objeto DDL consulta
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub CargarGrpDocumentos()
+
+        Dim SQL As New ClienteSQLClass
+        Dim ObjListDroplist As New List(Of Droplist_Class)
+        Dim vl_S_Index As String = Request.Form("Index")
+
+        ObjListDroplist = SQL.Charge_DropListGrpDocumentos(vl_S_Index)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

@@ -218,6 +218,7 @@ function transacionAjax_Cargo_create(State) {
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
                         $("#WE").css("display", "none");
+                        transacionAjax_CargoDepend('Cargo_Dep', index_ID);
                         Clear();
                     }
                     break;
