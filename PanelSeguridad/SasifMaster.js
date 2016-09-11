@@ -269,3 +269,62 @@ function ResetError() {
     $("#Img11").css("display", "none");
     $("#Img12").css("display", "none");
 }
+
+//carga de documentos global
+function UpLoad_Document(NameAjax, NameFile_ID) {
+
+    //validamos si seleccionaron un archivo
+    if ($("#" + NameFile_ID).val() != "") {
+
+        //Añadimos la imagen de carga en el contenedor
+        $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "block");
+
+        //capturamos los datos del input file
+        var file = $("#" + NameFile_ID);
+        var dataFile = $("#" + NameFile_ID)[0].files[0];
+
+        //inicializamos el fordata para transferencia de archivos
+        var data = new FormData();
+        //asinamos el datafile a la variable archivo 
+        data.append('archivo', dataFile);
+        //data.ajaxStart(inicioEnvio);
+        //transacion ajax
+        $.ajax({
+            url: NameAjax + "Ajax.aspx",
+            type: "POST",
+            contentType: false,
+            data: data,
+            processData: false,
+            success: function (result) {
+
+                //creamos variables
+                var filename = result;
+                filename = $.trim(filename)
+                filename = filename.replace(/\s/g, '_');
+                alert(filename);
+                var objectfile = data;
+                var description = "xxxxx";
+
+                $("#" + NameFile_ID).val("");
+
+                $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "none");
+                $("#ctl00_cphPrincipal_Txtdecription").val("");
+
+            },
+            error: function (error) {
+                alert("Ocurrió un error inesperado, por favor intente de nuevo mas tarde: " + error);
+                console.log(error);
+                $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "none");
+            }
+        });
+    }
+    else {
+
+    }
+
+}
+
+
+function load_Document(Ruta) { 
+ 
+}

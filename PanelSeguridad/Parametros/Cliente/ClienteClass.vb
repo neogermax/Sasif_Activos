@@ -1,5 +1,7 @@
 ﻿Public Class ClienteClass
 #Region "Campos"
+
+    Private _Index As Long
     Private _Nit_ID As String
     Private _TypeDocument_ID As Integer
     Private _Document_ID As Long
@@ -52,6 +54,14 @@
 #End Region
 
 #Region "Propiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Nit_ID() As String
         Get
             Return Me._Nit_ID

@@ -1,9 +1,25 @@
 ﻿Imports Newtonsoft.Json
+Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Web.Script.Serialization
+Imports System.IO
+
 
 Public Class ClienteAjax
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim Doc As New DocumentosClass
+        If Request.Files.Count() > 0 Then
+            Dim Document As String = Doc.UpLoad_Document(Request.Files, "F:\DESARROLLO\CLIENTES SASIF\Desarrollos propios\DOCUMENTOS_PRESENTACION\")
+
+            If Document <> "" Then
+                Response.Write(Document)
+            End If
+
+            Exit Sub
+        End If
 
         If Request.Form("action") <> Nothing Then
             'aterrizamos las opciones del proceso

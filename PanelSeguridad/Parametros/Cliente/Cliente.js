@@ -171,6 +171,18 @@ $(document).ready(function () {
         }
     });
 
+    $("#Dialog_C_R_U_D_Document").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 850,
+        height: 550,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
+    });
+
     $("#Dialog_Delete_Adress").dialog({
         autoOpen: false,
         dialogClass: "Dialog_Sasif",
@@ -219,10 +231,16 @@ $(document).ready(function () {
         }
     });
 
-    $(function () {
-        $("#Acordeon_Dat").accordion({
-            heightStyle: "content"
-        });
+    $("#Dialog_Visor").dialog({
+        autoOpen: false,
+        dialogClass: "Dialog_Sasif",
+        modal: true,
+        width: 1000,
+        height: 520,
+        overlay: {
+            opacity: 0.5,
+            background: "black"
+        }
     });
 
     Format_Adress();
@@ -477,37 +495,52 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Cliente() {
 
+    var html_Cliente;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='11' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Ver</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            for (itemArray in ArrayCliente) {
+                if (ArrayCliente[itemArray].Cliente_ID != 0) {
+
+                    var StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    var ArraySplit = StrCiudad.split("_");
+
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            for (itemArray in ArrayCliente) {
+                if (ArrayCliente[itemArray].Document_ID != 0) {
+
+                    var StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    var ArraySplit = StrCiudad.split("_");
+
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
+            for (itemArray in ArrayCliente) {
+                if (ArrayCliente[itemArray].Cliente_ID != 0) {
+
+                    var StrCiudad = ArrayCliente[itemArray].DescripCiudad
+                    var ArraySplit = StrCiudad.split("_");
+
+                    html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Index + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='E'>Eliminar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
+
+                }
+            }
             break;
     }
 
-}
-
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='11' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Ver</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
-    for (itemArray in ArrayCliente) {
-        if (ArrayCliente[itemArray].Cliente_ID != 0) {
-
-            var StrCiudad = ArrayCliente[itemArray].DescripCiudad
-            var ArraySplit = StrCiudad.split("_");
-
-            html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "','');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
-
-        }
-    }
     html_Cliente += "</tbody></table>";
     $("#container_TCliente").html("");
     $("#container_TCliente").html(html_Cliente);
@@ -519,99 +552,36 @@ function Tabla_consulta() {
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
+
 }
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
-    for (itemArray in ArrayCliente) {
-        if (ArrayCliente[itemArray].Document_ID != 0) {
-
-            var StrCiudad = ArrayCliente[itemArray].DescripCiudad
-            var ArraySplit = StrCiudad.split("_");
-
-            html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "','U');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='M'>Editar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
-        }
-    }
-    html_Cliente += "</tbody></table>";
-    $("#container_TCliente").html("");
-    $("#container_TCliente").html(html_Cliente);
-
-    $(".Editar").click(function () {
-    });
-
-    $(".Ver").click(function () {
-    });
-
-    $("#TCliente").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Cliente = "<table id='TCliente' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th colspan='10' class='Grid_Head' >Datos Generales</th><th colspan='11' class='Grid_Head' >Relacion</th></tr><tr><th>Opcion</th><th>Nit Empresa</th><th>Tipo de Documento</th><th>N° Documento</th><th>Digito De Verificación</th><th>Nombre Empresa</th><th>Tipo Persona</th><th>Regimen</th><th>Pais</th><th>Ciudad</th><th>Cliente</th><th>Avaluador</th><th>Organismo de Transito</th><th>Hacienda</th><th>Nit Multi-Empresa</th><th>Empleado</th><th>Asesor</th><th>Proveedor</th><th>Ent. Bancaria</th></tr></thead><tbody>";
-    for (itemArray in ArrayCliente) {
-        if (ArrayCliente[itemArray].Cliente_ID != 0) {
-
-            var StrCiudad = ArrayCliente[itemArray].DescripCiudad
-            var ArraySplit = StrCiudad.split("_");
-
-            html_Cliente += "<tr><td><select id='Select_" + ArrayCliente[itemArray].Cliente_ID + "' class='Opciones' onchange=\"Select_Option_Cliente(this,'" + ArrayCliente[itemArray].Nit_ID + "','" + ArrayCliente[itemArray].TypeDocument_ID + "','" + ArrayCliente[itemArray].Document_ID + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='E'>Eliminar</option></select></td><td>" + ArrayCliente[itemArray].Nit_ID + "</td><td>" + ArrayCliente[itemArray].DescripTypeDocument + "</td><td>" + ArrayCliente[itemArray].Document_ID + "</td><td>" + ArrayCliente[itemArray].Digito_Verificacion + "</td><td>" + ArrayCliente[itemArray].Nombre + " " + ArrayCliente[itemArray].Nombre_2 + " " + ArrayCliente[itemArray].Apellido_1 + " " + ArrayCliente[itemArray].Apellido_2 + "</td><td>" + ArrayCliente[itemArray].DescripTipoPersona + "</td><td>" + ArrayCliente[itemArray].DescripRegimen + "</td><td>" + ArrayCliente[itemArray].DescripPais + "</td><td>" + ArrayCliente[itemArray].DescripCiudad + "</td><td>" + ArrayCliente[itemArray].OP_Cliente + "</td><td>" + ArrayCliente[itemArray].OP_Avaluador + "</td><td>" + ArrayCliente[itemArray].OP_Transito + "</td><td>" + ArrayCliente[itemArray].OP_Hacienda + "</td><td>" + ArrayCliente[itemArray].OP_Empresa + "</td><td>" + ArrayCliente[itemArray].OP_Empleado + "</td><td>" + ArrayCliente[itemArray].OP_Asesor + "</td><td>" + ArrayCliente[itemArray].Other_1 + "</td><td>" + ArrayCliente[itemArray].Other_2 + "</td></tr>";
-
-        }
-    }
-
-    html_Cliente += "</tbody></table>";
-    $("#container_TCliente").html("");
-    $("#container_TCliente").html(html_Cliente);
-
-    $(".Eliminar").click(function () {
-    });
-
-    $(".Ver").click(function () {
-    });
-
-    $("#TCliente").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-
 
 //selecciona que tipo de operacion desea con el registro seleccionado
-function Select_Option_Cliente(Select_control, Nit_ID, TypeDocument_ID, Document_ID, Type) {
+function Select_Option_Cliente(Select_control, Index_Cliente, Type) {
 
     var Select_Value = $(Select_control).val();
+    var Index_Pos = parseInt(Index_Cliente) - 1;
 
     switch (Select_Value) {
         case "M": //modificar
-            Editar(Nit_ID, TypeDocument_ID, Document_ID, Type);
+            Editar(Index_Pos, Type);
             break;
 
         case "V": //visualizar
-            Ver(Nit_ID, TypeDocument_ID, Document_ID);
+            Ver(Index_Pos);
             break;
 
         case "E": //eliminar
-            Eliminar(Nit_ID, TypeDocument_ID, Document_ID);
+            Eliminar(Index_Pos);
             break;
 
     }
 }
 
 
-
 // muestra el registro a ver
-function Ver(index_Nit, index_TDocumento, index_Documento) {
+function Ver(Index_Cliente) {
 
-    D_Nit = index_Nit;
-    D_TDocumento = index_TDocumento;
-    D_Documento = index_Documento;
-
-    Editar(index_Nit, index_TDocumento, index_Documento, "V");
+    Editar(Index_Cliente, "V");
 
 }
 
@@ -625,14 +595,7 @@ var StrPolitica;
 var StrGrpdocumento;
 
 // muestra el registro a editar
-function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
-
-    OpcWordComplementos = Type;
-    D_Nit = index_Nit;
-    D_TDocumento = index_TDocumento;
-    D_Documento = index_Documento;
-
-    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento);
+function Editar(Index_Cliente, Type) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#Controls").css("display", "inline-table");
@@ -640,143 +603,68 @@ function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
 
     $("#TablaConsulta").css("display", "none");
 
-    for (itemArray in ArrayCliente) {
-        if (index_Nit == ArrayCliente[itemArray].Nit_ID && index_TDocumento == ArrayCliente[itemArray].TypeDocument_ID && index_Documento == ArrayCliente[itemArray].Document_ID) {
+    OpcWordComplementos = Type;
 
-            editNit_ID = ArrayCliente[itemArray].Nit_ID;
-            editType_Document_ID = ArrayCliente[itemArray].TypeDocument_ID;
-            editDocument_ID = ArrayCliente[itemArray].Document_ID;
+    D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
+    D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    D_Documento = ArrayCliente[Index_Cliente].Document_ID;
+    editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
+    editType_Document_ID = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    editDocument_ID = ArrayCliente[Index_Cliente].Document_ID;
 
-            D_String_Contacto = ArrayCliente[itemArray].Nombre;
+    D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
 
-            $("#Select_EmpresaNit").val(ArrayCliente[itemArray].Nit_ID);
-            $("#Select_Documento").val(ArrayCliente[itemArray].TypeDocument_ID);
-            $("#Select_Pais").val(ArrayCliente[itemArray].Pais_ID);
-            $("#Select_TPersona").val(ArrayCliente[itemArray].TipoPersona);
-            $("#Select_Acceso").val(ArrayCliente[itemArray].AccesoSistema);
+    $("#Select_EmpresaNit").val(ArrayCliente[Index_Cliente].Nit_ID);
+    $("#Select_Documento").val(ArrayCliente[Index_Cliente].TypeDocument_ID);
+    $("#Select_Pais").val(ArrayCliente[Index_Cliente].Pais_ID);
+    $("#Select_TPersona").val(ArrayCliente[Index_Cliente].TipoPersona);
+    $("#Select_Acceso").val(ArrayCliente[Index_Cliente].AccesoSistema);
 
-            StrCiudad = ArrayCliente[itemArray].Ciudad_ID;
-            StrDocCiudad = ArrayCliente[itemArray].DocCiudad;
-            StrRegimen = ArrayCliente[itemArray].Regimen;
-            StrArea = ArrayCliente[itemArray].Area_ID;
-            StrCargo = ArrayCliente[itemArray].Cargo_ID;
-            StrPolitica = ArrayCliente[itemArray].Cargo_ID;
-            StrDocJefe = ArrayCliente[itemArray].Document_ID_Jefe;
-            StrGrpdocumento = ArrayCliente[itemArray].GrpDocumentos;
-            
-            if (StrPolitica == 0)
-                $("#Select_Politica").val("-1");
-            else
-                $("#Select_Politica").val(StrPolitica);
+    $("#Txt_Ident").val(ArrayCliente[Index_Cliente].Document_ID);
+    $("#TxtVerif").val(ArrayCliente[Index_Cliente].Digito_Verificacion);
 
-            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
-            setTimeout("$('#Select_Pais').trigger('change');", 200);
-            setTimeout("$('#Select_TPersona').trigger('change');", 200);
-
-            $("#Txt_Ident").val(ArrayCliente[itemArray].Document_ID);
-            $("#TxtVerif").val(ArrayCliente[itemArray].Digito_Verificacion);
-
-            if (ArrayCliente[itemArray].TypeDocument_ID == "2") {
-                $("#TxtNombreNit").val(ArrayCliente[itemArray].Nombre);
-                $("#TR_Nit").css("display", "inline-block");
-                $(".Desvanecer").css("display", "none");
-                ValidatorCampos = 2;
-            }
-            else {
-                $("#TxtNombre").val(ArrayCliente[itemArray].Nombre);
-                $(".Desvanecer").css("display", "inline-block");
-                $(".TR_1").css("width", "150%");
-                $("#TR_Nit").css("display", "none");
-                ValidatorCampos = 1;
-            }
-
-            $("#TxtNombre_2").val(ArrayCliente[itemArray].Nombre_2);
-            $("#Txt_Ape_1").val(ArrayCliente[itemArray].Apellido_1);
-            $("#Txt_Ape_2").val(ArrayCliente[itemArray].Apellido_2);
-            $("#Txt_CodBank").val(ArrayCliente[itemArray].Cod_Bank);
-
-            if (ArrayCliente[itemArray].OP_Cliente == "S")
-                $("#Check_Cliente").prop("checked", true);
-            else
-                $("#Check_Cliente").prop("checked", false);
-
-            if (ArrayCliente[itemArray].OP_Avaluador == "S")
-                $("#Check_Avaluador").prop("checked", true);
-            else
-                $("#Check_Avaluador").prop("checked", false);
-
-            if (ArrayCliente[itemArray].OP_Transito == "S")
-                $("#Check_Transito").prop("checked", true);
-            else
-                $("#Check_Transito").prop("checked", false);
-
-            if (ArrayCliente[itemArray].OP_Hacienda == "S")
-                $("#Check_Hacienda").prop("checked", true);
-            else
-                $("#Check_Hacienda").prop("checked", false);
-
-            if (ArrayCliente[itemArray].OP_Empresa == "S")
-                $("#Check_MultiEmpresa").prop("checked", true);
-            else
-                $("#Check_MultiEmpresa").prop("checked", false);
-
-            if (ArrayCliente[itemArray].OP_Asesor == "S")
-                $("#Check_Asesor").prop("checked", true);
-            else
-                $("#Check_Asesor").prop("checked", false);
-
-            if (ArrayCliente[itemArray].Other_1 == "S")
-                $("#Check_Proveedor").prop("checked", true);
-            else
-                $("#Check_Proveedor").prop("checked", false);
-
-            if (ArrayCliente[itemArray].Other_2 == "S") {
-                $("#Check_EntBancaria").prop("checked", true);
-                $("#Anexos").css("display", "inline-table");
-                $("#C_Banco").css("display", "inline-table");
-            }
-            else {
-                $("#Check_EntBancaria").prop("checked", false);
-                $("#C_Banco").css("display", "none");
-            }
-
-            if (ArrayCliente[itemArray].OP_Empleado == "S") {
-                $("#Check_Empleado").prop("checked", true);
-                $("#Anexos").css("display", "inline-table");
-                $("#C_Empleado").css("display", "inline-table");
-                setTimeout("EditEmpleado();", 300);
-
-            }
-            else {
-                $("#Check_Empleado").prop("checked", false);
-                $("#C_Empleado").css("display", "none");
-            }
-
-            $("#Btnguardar").attr("value", "Actualizar");
-
-            $("#Select_EmpresaNit").attr("disabled", "disabled");
-            $("#Select_Documento").attr("disabled", "disabled");
-
-            $("#Txt_Nit").attr("disabled", "disabled");
-            $("#Txt_Ident").attr("disabled", "disabled");
-            $("#Complementos").css("display", "inline-table");
-            $("#Admin_Anexos").css("display", "inline-table");
-
-            setTimeout("ChargeCiudad(StrCiudad);", 300);
-
-            if (StrDocCiudad != 0)
-                setTimeout("ChargeDocCiudad(StrDocCiudad);", 300);
-
-            if (StrRegimen != "")
-                setTimeout("ChargeRegimen(StrRegimen);", 300);
-
-            if (StrGrpdocumento != 0)
-                setTimeout("ChargeGrpDocumentos(StrGrpdocumento);", 400);
-
-            $('.C_Chosen').trigger('chosen:updated');
-
-        }
+    if (ArrayCliente[Index_Cliente].TypeDocument_ID == "2") {
+        $("#TxtNombreNit").val(ArrayCliente[Index_Cliente].Nombre);
+        $("#TR_Nit").css("display", "inline-block");
+        $(".Desvanecer").css("display", "none");
+        ValidatorCampos = 2;
     }
+    else {
+        $("#TxtNombre").val(ArrayCliente[Index_Cliente].Nombre);
+        $(".Desvanecer").css("display", "inline-block");
+        $(".TR_1").css("width", "150%");
+        $("#TR_Nit").css("display", "none");
+        ValidatorCampos = 1;
+    }
+
+    $("#TxtNombre_2").val(ArrayCliente[Index_Cliente].Nombre_2);
+    $("#Txt_Ape_1").val(ArrayCliente[Index_Cliente].Apellido_1);
+    $("#Txt_Ape_2").val(ArrayCliente[Index_Cliente].Apellido_2);
+    $("#Txt_CodBank").val(ArrayCliente[Index_Cliente].Cod_Bank);
+
+    if (StrPolitica == 0)
+        $("#Select_Politica").val("-1");
+    else
+        $("#Select_Politica").val(StrPolitica);
+
+   
+    StrCiudad = ArrayCliente[Index_Cliente].Ciudad_ID;
+    StrDocCiudad = ArrayCliente[Index_Cliente].DocCiudad;
+    StrRegimen = ArrayCliente[Index_Cliente].Regimen;
+    StrArea = ArrayCliente[Index_Cliente].Area_ID;
+    StrCargo = ArrayCliente[Index_Cliente].Cargo_ID;
+    StrPolitica = ArrayCliente[Index_Cliente].Cargo_ID;
+    StrDocJefe = ArrayCliente[Index_Cliente].Document_ID_Jefe;
+    StrGrpdocumento = ArrayCliente[Index_Cliente].GrpDocumentos;
+
+
+    $("#Select_EmpresaNit").attr("disabled", "disabled");
+    $("#Select_Documento").attr("disabled", "disabled");
+
+    $("#Txt_Nit").attr("disabled", "disabled");
+    $("#Txt_Ident").attr("disabled", "disabled");
+    $("#Complementos").css("display", "inline-table");
+    $("#Admin_Anexos").css("display", "inline-table");
 
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
@@ -784,82 +672,163 @@ function Editar(index_Nit, index_TDocumento, index_Documento, Type) {
     }
     else {
         $("#Btnguardar").css("display", "inline-table");
+        $("#Btnguardar").attr("value", "Actualizar");
     }
+
+    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente);
+
+    $('.C_Chosen').trigger('chosen:updated');
+
+}
+
+
+//carga las relaciones ademas llama los combos que son dependientes
+function Carga_Relaciones(Index_Cliente) {
+
+    if (ArrayCliente[Index_Cliente].OP_Cliente == "S")
+        $("#Check_Cliente").prop("checked", true);
+    else
+        $("#Check_Cliente").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Avaluador == "S")
+        $("#Check_Avaluador").prop("checked", true);
+    else
+        $("#Check_Avaluador").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Transito == "S")
+        $("#Check_Transito").prop("checked", true);
+    else
+        $("#Check_Transito").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Hacienda == "S")
+        $("#Check_Hacienda").prop("checked", true);
+    else
+        $("#Check_Hacienda").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Empresa == "S")
+        $("#Check_MultiEmpresa").prop("checked", true);
+    else
+        $("#Check_MultiEmpresa").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].OP_Asesor == "S")
+        $("#Check_Asesor").prop("checked", true);
+    else
+        $("#Check_Asesor").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].Other_1 == "S")
+        $("#Check_Proveedor").prop("checked", true);
+    else
+        $("#Check_Proveedor").prop("checked", false);
+
+    if (ArrayCliente[Index_Cliente].Other_2 == "S") {
+        $("#Check_EntBancaria").prop("checked", true);
+        $("#Anexos").css("display", "inline-table");
+        $("#C_Banco").css("display", "inline-table");
+    }
+    else {
+        $("#Check_EntBancaria").prop("checked", false);
+        $("#C_Banco").css("display", "none");
+    }
+
+    if (ArrayCliente[Index_Cliente].OP_Empleado == "S") {
+        $("#Check_Empleado").prop("checked", true);
+        $("#Anexos").css("display", "inline-table");
+        $("#C_Empleado").css("display", "inline-table");
+        EditEmpleado();
+
+    }
+    else {
+        $("#Check_Empleado").prop("checked", false);
+        $("#C_Empleado").css("display", "none");
+    }
+
+    ChargeCiudad(StrCiudad);
+
+    if (StrDocCiudad != 0)
+        ChargeDocCiudad(StrDocCiudad);
+
+    if (StrRegimen != "")
+        ChargeRegimen(StrRegimen);
+
+    if (StrGrpdocumento != 0)
+        ChargeGrpDocumentos(StrGrpdocumento);
 
 }
 
 //para cargar edicion de los combos de empleados
 function EditEmpleado() {
 
-    setTimeout("ChargeArea(StrArea);", 300);
-    setTimeout("ChargeCargo(StrCargo);", 300);
+    ChargeArea(StrArea);
+    ChargeCargo(StrCargo);
 
     if (StrDocJefe != 0)
-        setTimeout("ChargeJefe(StrDocJefe);", 300);
+        ChargeJefe(StrDocJefe);
 }
 
 //funcion de carga de la cuidad para edicion
 function ChargeGrpDocumentos(index) {
     $('#Select_GrpDocument').val(index);
+    $("#Select_GrpDocument").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga de la cuidad para edicion
 function ChargeCiudad(index) {
     $('#Select_Ciudad').val(index);
+    $("#Select_Ciudad").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga de la ciudad del documento para edicion
 function ChargeDocCiudad(index) {
     $('#Select_Ciudad_Doc').val(index);
+    $("#Select_Ciudad_Doc").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga del area para edicion
 function ChargeArea(index) {
     $('#Select_Area').val(index);
+    $("#Select_Area").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga del cargo para edicion
 function ChargeCargo(index) {
     $('#Select_Cargo').val(index);
+    $("#Select_Cargo").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga del jefe imediato para edicion
 function ChargeJefe(index) {
     $('#Select_Jefe').val(index);
+    $("#Select_Jefe").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //funcion de carga de el regimen para edicion
 function ChargeRegimen(index) {
     $('#Select_Regimen').val(index);
+    $("#Select_Regimen").trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 }
 
 //muestra el registro a eliminar
-function Eliminar(index_Nit, index_TDocumento, index_Documento) {
+function Eliminar(Index_Cliente) {
 
-    D_Nit = index_Nit;
-    D_TDocumento = index_TDocumento;
-    D_Documento = index_Documento;
+    D_Nit = ArrayCliente[Index_Cliente].Nit_ID;
+    D_TDocumento = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    D_Documento = ArrayCliente[Index_Cliente].Document_ID;
 
-    for (itemArray in ArrayCliente) {
-        if (index_Nit == ArrayCliente[itemArray].Nit_ID && index_TDocumento == ArrayCliente[itemArray].TypeDocument_ID && index_Documento == ArrayCliente[itemArray].Document_ID) {
+    editNit_ID = ArrayCliente[Index_Cliente].Nit_ID;
+    editType_Document_ID = ArrayCliente[Index_Cliente].TypeDocument_ID;
+    editDocument_ID = ArrayCliente[Index_Cliente].Document_ID;
 
-            editNit_ID = ArrayCliente[itemArray].Nit_ID;
-            editType_Document_ID = ArrayCliente[itemArray].TypeDocument_ID;
-            editDocument_ID = ArrayCliente[itemArray].Document_ID;
+    D_String_Contacto = ArrayCliente[Index_Cliente].Nombre;
 
-            D_String_Contacto = ArrayCliente[itemArray].Nombre;
-
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
 
 }
 

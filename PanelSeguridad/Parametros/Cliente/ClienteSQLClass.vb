@@ -66,8 +66,9 @@ Public Class ClienteSQLClass
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
                               " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos " & _
-                        " FROM CLIENTE CLI " & _
+                              " CLI_GrpDocumentos, " & _
+                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
+                   " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
@@ -120,8 +121,9 @@ Public Class ClienteSQLClass
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
                               " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos " & _
-                        " FROM CLIENTE CLI " & _
+                              " CLI_GrpDocumentos, " & _
+                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
+                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
@@ -172,7 +174,8 @@ Public Class ClienteSQLClass
                               " A.A_Descripcion, " & _
                               " CA.C_Descripcion, " & _
                               " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos " & _
+                              " CLI_GrpDocumentos, " & _
+                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -774,6 +777,8 @@ Public Class ClienteSQLClass
             If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objCliente.DescripSeguridad = ReadConsulta.GetValue(40) Else objCliente.DescripSeguridad = ""
 
             If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(41) Else objCliente.GrpDocumentos = 0
+
+            objCliente.Index = ReadConsulta.GetValue(42)
 
             'agregamos a la lista
             ObjListCliente.Add(objCliente)

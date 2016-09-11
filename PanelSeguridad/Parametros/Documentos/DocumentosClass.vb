@@ -21,7 +21,6 @@
 
     Private _DescripDocument As String
     Private _DescripFormato As String
-
 #End Region
 
 #Region "Propiedades"
@@ -165,4 +164,74 @@
         End Set
     End Property
 #End Region
+
+#Region "Campos_Carga"
+    Private _id As Integer
+    Private _namefile As String
+#End Region
+
+#Region "Propiedades_Carga"
+    Public Property id() As Integer
+        Get
+            Return Me._id
+        End Get
+        Set(ByVal value As Integer)
+            Me._id = value
+        End Set
+    End Property
+    Public Property namefile() As String
+        Get
+            Return Me._namefile
+        End Get
+        Set(ByVal value As String)
+            Me._namefile = value
+        End Set
+    End Property
+#End Region
+
+
+#Region "FUNCIONES"
+
+    Public Function UpLoad_Document(ByVal vp_H_files As HttpFileCollection, ByVal vp_S_Ruta As String)
+
+        Dim strFileName() As String
+        Dim fileName As String = String.Empty
+        Dim DocumentsTmpList As New List(Of DocumentosClass)
+        Dim Up_Document As Integer = 0
+       
+        'Se recorre la lista de archivos cargados al servidor
+        For i As Integer = 0 To vp_H_files.Count - 1
+
+            Dim file As HttpPostedFile = vp_H_files(i)
+
+            If file.ContentLength > 0 Then
+
+                strFileName = file.FileName.Split("\".ToCharArray)
+
+                ' dar nombre al anexo
+                fileName = strFileName(strFileName.Length - 1)
+
+                ' determinanado la ruta destino
+                Dim sFullPath As String = vp_S_Ruta & fileName
+
+                'Subiendo el archivo al server
+                file.SaveAs(sFullPath)
+
+                'Se instancia un objeto de tipo documento y se pobla con la info. reuqerida.
+                Dim objDocument As New DocumentosClass()
+                objDocument.namefile = fileName
+
+                'Se agrega el objeto de tipo documento a la lista de documentos
+                DocumentsTmpList.Add(objDocument)
+
+               End If
+
+        Next
+
+        Return fileName
+
+    End Function
+
+#End Region
+
 End Class

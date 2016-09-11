@@ -23,6 +23,7 @@
     <link href="../../css/Dialog/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/Dialog/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.fileupload.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <div id="Container_title_Form">
@@ -341,7 +342,7 @@
                             </td>
                             <td style="width: 122px;">
                             </td>
-                              <td style="width: 150px;" class="Label_Bold">
+                            <td style="width: 150px;" class="Label_Bold">
                                 Grupo de Documentos
                             </td>
                             <td>
@@ -1170,6 +1171,56 @@
             <input id="BtnAddBank" type="button" value="Agregar" onclick="InsertAddBank()" />
         </div>
     </div>
+    <div id="Dialog_C_R_U_D_Document">
+        <table style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
+            <tr>
+                <td class="Label_Bold">
+                    Nit Empresa
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_Nit_Doc_2" maxlength="20" readonly="readonly" style="width: 100px;" />
+                        <span class="Spam_ACI"></span></span>
+                </td>
+                <td class="Label_Bold">
+                    Tipo identificación
+                </td>
+                <td>
+                    <span class="cssToolTip_Form">
+                        <input type="text" id="Txt_TypeIden_Doc_2" maxlength="20" readonly="readonly" />
+                        <span class="Spam_ACI"></span></span>
+                </td>
+                <td class="Label_Bold">
+                    Identificación
+                </td>
+                <td>
+                    <span class="cssToolTip_Form_L">
+                        <input type="text" id="Txt_Ident_Doc_2" maxlength="20" readonly="readonly" style="width: 100px;" />
+                        <span class="Spam_ACI"></span></span>
+                </td>
+            </tr>
+        </table>
+        <div id="Controls_File" style="width: 100%; margin-top: 20px;">
+            <table id="Table1" style="width: 100%;">
+                <tr>
+                    <td class="Label_Bold" style="width: 100px;">
+                        <input id="fileupload" type="file" name="files[]" />
+                        <a id="lnkAttch" style="cursor: pointer" onclick="AddFileInput(F1)" visible="false">
+                        </a>
+                    </td>
+                    <td style="padding-bottom: 25px;">
+                        <input id="Btncharge_file" type="button" value="Adjuntar un archivo" name="Add_files"
+                            onclick="UpLoad_Document('Cliente','fileupload')" />
+                    </td>
+                </tr>
+            </table>
+            <div id="Container_Visual">
+            </div>
+        </div>
+        <div style="width: 100%; text-align: center; margin-top: 20px;">
+            <input id="Button1" type="button" value="Agregar" onclick="InsertAddBank()" />
+        </div>
+    </div>
     <div id="Dialog_Documentos">
         <div id="Div3" style="width: 100%; text-align: center; font: 12px/20px Verdana,sans-serif;">
             <table style="width: 100%">
@@ -1243,5 +1294,14 @@
         <div id="Div7" style="width: 100%; text-align: center; margin-top: 25px; font: 12px/20px Verdana,sans-serif;">
             <input id="BtnSave_Document_A" type="button" value="Guardar" onclick="BtnSave_Document_A_Client()" />
         </div>
+    </div>
+    <div id="Dialog_Visor">
+        <table style="width: 100%;height: 100%;">
+            <tr>
+                <td>
+                    <iframe id="IF_Visor" src=""></iframe>
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>

@@ -877,7 +877,11 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
 
 /*------------------------------ CONSULTA ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Foto(State, Nit, TypeDoc, Doc) {
+function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente) {
+
+    $('#Select_EmpresaNit').trigger('change');
+    $('#Select_Pais').trigger('change');
+    $('#Select_TPersona').trigger('change');
 
     ArrayFoto = [];
 
@@ -892,6 +896,8 @@ function transacionAjax_Foto(State, Nit, TypeDoc, Doc) {
         },
         //Transaccion Ajax en proceso
         success: function (result) {
+
+            Carga_Relaciones(Index_Cliente);
             if (result == "") {
                 ArrayFoto = [];
             }

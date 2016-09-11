@@ -71,16 +71,18 @@ function Tabla_General_Document(Opc_Link) {
     for (itemArray in ArrayDocument) {
         if (ArrayDocument[itemArray].TypeDoc_ID != "") {
 
+            var StrRutadocument = ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato;
+
             switch (Opc_Link) {
                 case "V":
                     if (estado == "eliminar")
-                        html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
+                        html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/ onclick=\"VerDocumento('" + StrRutadocument + "','" + ArrayDocument[itemArray].DescripDocument + "') ;\" ><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     else
-                        html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
+                        html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option></select></td><td><span class='cssToolTip_ver'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/ onclick=\"VerDocumento('" + StrRutadocument + "','" + ArrayDocument[itemArray].DescripDocument + "') ;\" ><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     break;
 
                 case "U":
-                    html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><a target='_blank' href='" + ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato + "'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/></a><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
+                    html += "<tr><td><select id='Select_" + ArrayDocument[itemArray].DocExist_ID + "' class='Opciones' onchange=\"Select_Option_Document(this,'" + ArrayDocument[itemArray].DocExist_ID + "','" + ArrayDocument[itemArray].Formato + "','" + ArrayDocument[itemArray].Cuenta + "');\"><option value='S'>Seleccione...</option><option value='V'>Ver</option><option value='R'>Retirar</option></select></td><td><span class='cssToolTip_ver'><img alt='Doc' height='20px' width='20px' src='../../images/Descarga.png'/ onclick=\"VerDocumento('" + StrRutadocument + "','" + ArrayDocument[itemArray].DescripDocument + "') ;\" ><span>Ver Documento</span></span></td><td>" + ArrayDocument[itemArray].DescripDocument + "</td><td>" + ArrayDocument[itemArray].DescripFormato + "</td><td>" + ArrayDocument[itemArray].UsuarioCreacion + "</td><td>" + ArrayDocument[itemArray].FechaCreacion + "</td><td>" + ArrayDocument[itemArray].UsuarioActualizacion + "</td><td>" + ArrayDocument[itemArray].FechaActualizacion + "</td></tr>";
                     break;
             }
 
@@ -102,6 +104,18 @@ function Tabla_General_Document(Opc_Link) {
         "bDestroy": true
     });
 }
+
+function VerDocumento(RutaDocumento, Documento) {
+
+    $("#IF_Visor").attr("width", "100%");
+    $("#IF_Visor").attr("height", "100%");
+    $("#IF_Visor").attr("src", RutaDocumento);
+
+    $("#Dialog_Visor").dialog("open");
+    $("#Dialog_Visor").dialog("option", "title", Documento + " de: " + Nombre_Persona);
+}
+
+
 
 /*---------------------------------------------------------------------------------------------------------------*/
 /*                      CASOS DE LLAMADO SEGUN LA OPERACION DE DOCUMENTOS                             */
@@ -171,7 +185,7 @@ function AddDocument() {
     ClearDocument();
     Enabled_Document();
     $("#Dialog_C_R_U_D_Document").dialog("open");
-    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Nueva Entidad Financiera de: " + Nombre_Persona);
+    $("#Dialog_C_R_U_D_Document").dialog("option", "title", "Nuevo Documento de: " + Nombre_Persona);
     $("#BtnAddDocument").attr("value", "Agregar");
 }
 
