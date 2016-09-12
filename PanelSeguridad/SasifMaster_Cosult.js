@@ -2,6 +2,7 @@
 var ArraySasif = [];
 var ArrayMensajes = [];
 var ArrayAyudas = [];
+var ListDocument = [];
 /*--------------- region de variables globales --------------------*/
 
 //evento load de los master page
@@ -41,6 +42,33 @@ function transacionAjax_Titulo(State, TypeMaster) {
         }
     });
 }
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transacionAjax_EraseDocument(State) {
+
+    ListDocument = JSON.stringify(ArrayDocument);
+
+    $.ajax({
+        url: "../procesos_generales/SasifMasterAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "ListDocument": ListDocument
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "OK") {
+        
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist

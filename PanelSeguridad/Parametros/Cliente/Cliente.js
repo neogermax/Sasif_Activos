@@ -355,6 +355,7 @@ function BtnRelacion() {
 
 //salida del formulario
 function btnSalir() {
+    transacionAjax_EraseDocument('EraseDocument');
     window.location = "../../Menu/menu.aspx?User=" + $("#User").html() + "&L_L=" + Link;
 }
 

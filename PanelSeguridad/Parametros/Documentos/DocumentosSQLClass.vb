@@ -119,6 +119,13 @@ Public Class DocumentosSQLClass
                     obj.DescripDocument = ReadConsulta.GetValue(15)
                     obj.DescripFormato = ReadConsulta.GetValue(16)
 
+                    Dim StrArchivo As String = obj.DescripDocument & "." & obj.DescripFormato
+
+                    obj.RutaDocumentoDestino = "Y:/Sasif_Activos/PanelSeguridad/Repository_Document/"
+                    obj.RutaRelativaDocumento = "../../Repository_Document/"
+
+                    obj.Copy_Document_Folder_View(obj.RutaDocumento, obj.RutaDocumentoDestino, StrArchivo)
+
                     'agregamos a la lista
                     ObjList.Add(obj)
                 End While

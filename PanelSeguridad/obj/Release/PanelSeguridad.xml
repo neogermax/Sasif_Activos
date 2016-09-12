@@ -2862,6 +2862,36 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_O_Obj"></param>
 	<returns></returns>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.UpLoad_Document(System.Web.HttpFileCollection,System.String)">
+	<summary>
+ subir documentos al servidor
+ </summary>
+	<param name="vp_H_files"></param>
+	<param name="vp_S_Ruta"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.Copy_Document_Folder_View(System.String,System.String,System.String)">
+	<summary>
+ copiar documentos a la ruta fisica del aplicativo para la ruta relativa
+ </summary>
+	<param name="vp_S_RutaOrigen"></param>
+	<param name="vp_S_RutaDestino"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.Delete_Document_Folder_View(System.String,System.String)">
+	<summary>
+ Borrar documentos a la ruta fisica del aplicativo de la ruta relativa
+ </summary>
+	<param name="vp_S_RutaDestino"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.DocumentosClass.InsertList_Documentos(System.String)">
+	<summary>
+ crea objetoslista de documentos para eliminar de la ruta relativa 
+ </summary>
+	<param name="vp_S_ListDocumentos"></param>
+	<returns></returns>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ProductosSQLClass.Read_AllProductos(System.String,System.String,System.String)">
 	<summary>
  creala consulta para la tabla Productos parametrizada (READ)
@@ -2962,6 +2992,11 @@ To modify move field declaration from designer file to code-behind file.
 </member><member name="M:PanelSeguridad.SasifMasterAjax.ListAyudas">
 	<summary>
  funcion que trae las Ayudas del aplicativo
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.SasifMasterAjax.EraseDocument">
+	<summary>
+ borra documentos de la ruta relativa 
  </summary>
 	<remarks></remarks>
 </member>

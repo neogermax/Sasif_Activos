@@ -19,6 +19,9 @@ Public Class SasifMasterAjax
                 Case "Ayu"
                     ListAyudas()
 
+                Case "EraseDocument"
+                    EraseDocument()
+
             End Select
         End If
 
@@ -38,7 +41,6 @@ Public Class SasifMasterAjax
         Response.Write(JsonConvert.SerializeObject(ObjListGeneral.ToArray()))
 
     End Sub
-
 
     ''' <summary>
     ''' funcion que trae los mensajes de error del aplicativo
@@ -65,6 +67,28 @@ Public Class SasifMasterAjax
 
         ObjList = SQLGeneral.ChargeAyudas()
         Response.Write(JsonConvert.SerializeObject(ObjList.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' borra documentos de la ruta relativa 
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub EraseDocument()
+
+        Dim Doc As New DocumentosClass
+        Dim ListDocument As New List(Of DocumentosClass)
+        Dim vl_S_ListDocument As String = Request.Form("ListDocument")
+
+        ListDocument = Doc.InsertList_Documentos(vl_S_ListDocument)
+
+        If ListDocument.Count > 0 Then
+
+            For Each objDocument As DocumentosClass In ListDocument
+                Dim result = Doc.Delete_Document_Folder_View(objDocument.RutaDocumentoDestino, objDocument.DescripDocument & "." & objDocument.DescripFormato)
+            Next
+
+        End If
 
     End Sub
 

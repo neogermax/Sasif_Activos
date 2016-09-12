@@ -71,7 +71,7 @@ function Tabla_General_Document(Opc_Link) {
     for (itemArray in ArrayDocument) {
         if (ArrayDocument[itemArray].TypeDoc_ID != "") {
 
-            var StrRutadocument = ArrayDocument[itemArray].RutaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato;
+            var StrRutadocument = ArrayDocument[itemArray].RutaRelativaDocumento + ArrayDocument[itemArray].DescripDocument + "." + ArrayDocument[itemArray].DescripFormato;
 
             switch (Opc_Link) {
                 case "V":

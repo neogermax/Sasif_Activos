@@ -354,7 +354,7 @@ Public Class ClienteAjax
             Else
                 result = "ERROR"
             End If
-           
+
         End If
 
         Response.Write(result)
