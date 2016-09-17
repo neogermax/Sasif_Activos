@@ -86,7 +86,7 @@ Public Class CargoSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListCargo = listCargo(StrQuery, Conexion)
+        ObjListCargo = listCargo(StrQuery, Conexion, "List")
 
         Return ObjListCargo
 
@@ -235,8 +235,8 @@ Public Class CargoSQLClass
         Dim SQLGeneral As New GeneralSQLClass
         Dim sql As New StringBuilder
 
-        sql.Append(" SELECT C_Cargo_ID AS ID,CAST(C_Cargo_ID AS NVARCHAR(5)) + ' - ' + C_Descripcion AS DESCRIPCION FROM CARGO " & _
-                   " WHERE  C_Nit_ID = '" & vp_S_NitEmpresa & "'")
+        sql.Append(" SELECT A_area_ID AS ID,CAST(A_area_ID AS NVARCHAR(5)) + ' - ' + A_Descripcion AS DESCRIPCION FROM AREA " & _
+                   " WHERE  A_Nit_ID = '" & vp_S_NitEmpresa & "'")
 
         StrQuery = sql.ToString
 
@@ -282,7 +282,7 @@ Public Class CargoSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listCargo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listCargo(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -300,31 +300,49 @@ Public Class CargoSQLClass
         objcmd.CommandText = vp_S_StrQuery
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
+        Select Case vp_S_TypeList
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
+                    Dim objCargo As New CargoClass
+                    'cargamos datos sobre el objeto de login
+                    objCargo.Nit_ID = ReadConsulta.GetValue(0)
+                    objCargo.Cargo_ID = ReadConsulta.GetValue(1)
+                    objCargo.Descripcion = ReadConsulta.GetValue(2)
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objCargo.CargoDependencia = ReadConsulta.GetValue(3) Else objCargo.CargoDependencia = 0
+                    objCargo.Politica_ID = ReadConsulta.GetValue(4)
 
-            Dim objCargo As New CargoClass
-            'cargamos datos sobre el objeto de login
-            objCargo.Nit_ID = ReadConsulta.GetValue(0)
-            objCargo.Cargo_ID = ReadConsulta.GetValue(1)
-            objCargo.Descripcion = ReadConsulta.GetValue(2)
-            objCargo.CargoDependencia = ReadConsulta.GetValue(3)
-            objCargo.Politica_ID = ReadConsulta.GetValue(4)
+                    objCargo.UsuarioCreacion = ReadConsulta.GetValue(5)
+                    objCargo.FechaCreacion = ReadConsulta.GetValue(6)
+                    objCargo.UsuarioActualizacion = ReadConsulta.GetValue(7)
+                    objCargo.FechaActualizacion = ReadConsulta.GetValue(8)
 
-            objCargo.UsuarioCreacion = ReadConsulta.GetValue(5)
-            objCargo.FechaCreacion = ReadConsulta.GetValue(6)
-            objCargo.UsuarioActualizacion = ReadConsulta.GetValue(7)
-            objCargo.FechaActualizacion = ReadConsulta.GetValue(8)
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCargo.DescripCargoDepen = ReadConsulta.GetValue(9) Else objCargo.DescripCargoDepen = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCargo.DescripPolitica = ReadConsulta.GetValue(10) Else objCargo.DescripPolitica = ""
+                    objCargo.DescripEmpresa = ReadConsulta.GetValue(11)
 
-            If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objCargo.DescripCargoDepen = ReadConsulta.GetValue(9) Else objCargo.DescripCargoDepen = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objCargo.DescripPolitica = ReadConsulta.GetValue(10) Else objCargo.DescripPolitica = ""
-            objCargo.DescripEmpresa = ReadConsulta.GetValue(11)
+                    'agregamos a la lista
+                    ObjListCargo.Add(objCargo)
 
-            'agregamos a la lista
-            ObjListCargo.Add(objCargo)
+                End While
 
-        End While
+            Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCargo As New CargoClass
+                    'cargamos datos sobre el objeto de login
+                    objCargo.Cargo_ID = ReadConsulta.GetValue(0)
+                    objCargo.Descripcion = ReadConsulta.GetValue(1)
+                    objCargo.Nit_ID = ReadConsulta.GetValue(2)
+                   
+                    'agregamos a la lista
+                    ObjListCargo.Add(objCargo)
+
+                End While
+
+        End Select
 
         'cerramos conexiones
         ReadConsulta.Close()
@@ -361,6 +379,29 @@ Public Class CargoSQLClass
         Result = conex.IDis(StrQuery, "2")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de Areas
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Cargo()
+
+        Dim ObjList As New List(Of CargoClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT C_Cargo_ID AS ID,CAST(C_Cargo_ID AS NVARCHAR(5)) + ' - ' + C_Descripcion AS DESCRIPCION, C_Nit_ID FROM CARGO  " & _
+                   " ORDER BY C_Cargo_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listCargo(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
     End Function
 
 #End Region

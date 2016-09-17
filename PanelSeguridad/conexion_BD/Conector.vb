@@ -34,11 +34,18 @@ Public Class Conector
         Dim vl_S_processUpdate As String
 
         Dim Select_BD As String
-        If vp_S_TypeConex = 1 Then
-            Select_BD = vg_S_StrConexion
-        Else
-            Select_BD = vg_S_StrConexion_2
-        End If
+        Select Case vp_S_TypeConex
+
+            Case 1
+                Select_BD = vg_S_StrConexion
+            Case 2
+                Select_BD = vg_S_StrConexion_2
+            Case 3
+                Select_BD = vg_S_StrConexion_3
+            Case Else
+                Select_BD = vg_S_StrConexion
+
+        End Select
 
         Try
             objConexBD = New OleDbConnection(Select_BD)
@@ -56,6 +63,7 @@ Public Class Conector
             vl_S_processUpdate = "Exito"
 
         Catch ex As Exception
+
             vl_S_processUpdate = "Error"
         End Try
         Return vl_S_processUpdate
@@ -71,11 +79,18 @@ Public Class Conector
     Public Function IDis(ByVal vp_S_StrQuery As String, ByVal vp_S_TypeConex As String)
 
         Dim Select_BD As String
-        If vp_S_TypeConex = 1 Then
-            Select_BD = vg_S_StrConexion
-        Else
-            Select_BD = vg_S_StrConexion_2
-        End If
+        Select Case vp_S_TypeConex
+
+            Case 1
+                Select_BD = vg_S_StrConexion
+            Case 2
+                Select_BD = vg_S_StrConexion_2
+            Case 3
+                Select_BD = vg_S_StrConexion_3
+            Case Else
+                Select_BD = vg_S_StrConexion
+
+        End Select
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing

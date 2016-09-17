@@ -63,7 +63,7 @@ function RevisarAyudas() {
     $(".Spam_ACliente").html(ArrayAyudas[20].Ayudas_ID + ": " + ArrayAyudas[20].Descripcion);
     $(".Spam_AT5").html(ArrayAyudas[21].Ayudas_ID + ": " + ArrayAyudas[21].Descripcion);
     $(".Spam_ARel").html(ArrayAyudas[22].Ayudas_ID + ": " + ArrayAyudas[22].Descripcion);
-    
+
     $(".Spam_CT1").html(ArrayAyudas[6].Descripcion);
     $(".Spam_CT2").html(ArrayAyudas[7].Descripcion);
     $(".Spam_CT4").html(ArrayAyudas[19].Descripcion);
@@ -93,6 +93,25 @@ function charge_CatalogList(objCatalog, nameList, selector) {
     //recorremos para llenar el combo de
     for (itemArray in objCatalog) {
         objList[0].options[itemArray] = new Option(objCatalog[itemArray].descripcion, objCatalog[itemArray].ID);
+    };
+
+    //validamos si el combo lleva seleccione y posicionamos en el
+    if (selector == 1) {
+        $("#" + nameList).append("<option value='-1'>Seleccione...</option>");
+        $("#" + nameList + " option[value= '-1'] ").attr("selected", true);
+    }
+    $("#" + nameList).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+}
+
+//cargar combos dese la vista
+function Charge_CatalogList_Matriz(objCatalog, nameList, StrID, StrDescripcion, selector) {
+
+    var objList = $('[id$=' + nameList + ']');
+    //recorremos para llenar el combo de
+    for (itemArray in objCatalog) {
+        console.log(objCatalog[itemArray].StrDescripcion);
+        objList[0].options[itemArray] = new Option(objCatalog[itemArray].StrDescripcion, objCatalog[itemArray].StrID);
     };
 
     //validamos si el combo lleva seleccione y posicionamos en el
@@ -308,7 +327,6 @@ function UpLoad_Document(NameAjax, NameFile_ID) {
                 $("#" + NameFile_ID).val("");
 
                 $('#ctl00_cphPrincipal_gif_charge_Container').css("display", "none");
-                $("#ctl00_cphPrincipal_Txtdecription").val("");
 
             },
             error: function (error) {
@@ -325,6 +343,6 @@ function UpLoad_Document(NameAjax, NameFile_ID) {
 }
 
 
-function load_Document(Ruta) { 
- 
+function load_Document(Ruta) {
+
 }

@@ -39,7 +39,7 @@ Public Class CiudadesSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListCiudades = listCiudades(StrQuery, Conexion)
+        ObjListCiudades = listCiudades(StrQuery, Conexion, "List")
 
         Return ObjListCiudades
 
@@ -199,7 +199,7 @@ Public Class CiudadesSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listCiudades(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listCiudades(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_s_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -218,22 +218,43 @@ Public Class CiudadesSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
 
-            Dim objCiudades As New CiudadesClass
-            'cargamos datos sobre el objeto de login
-            objCiudades.Ciudades_ID = ReadConsulta.GetValue(0)
-            objCiudades.Descripcion = ReadConsulta.GetString(1)
-            objCiudades.FechaActualizacion = ReadConsulta.GetString(2)
-            objCiudades.Usuario = ReadConsulta.GetString(3)
-            objCiudades.Pais_ID = ReadConsulta.GetValue(4)
-            objCiudades.DescripPais = ReadConsulta.GetValue(5)
+        Select Case vp_s_TypeList
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-            'agregamos a la lista
-            ObjListCiudades.Add(objCiudades)
+                    Dim objCiudades As New CiudadesClass
+                    'cargamos datos sobre el objeto de login
+                    objCiudades.Ciudades_ID = ReadConsulta.GetValue(0)
+                    objCiudades.Descripcion = ReadConsulta.GetString(1)
+                    objCiudades.FechaActualizacion = ReadConsulta.GetString(2)
+                    objCiudades.Usuario = ReadConsulta.GetString(3)
+                    objCiudades.Pais_ID = ReadConsulta.GetValue(4)
+                    objCiudades.DescripPais = ReadConsulta.GetValue(5)
 
-        End While
+                    'agregamos a la lista
+                    ObjListCiudades.Add(objCiudades)
+
+                End While
+            Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCiudades As New CiudadesClass
+                    'cargamos datos sobre el objeto de login
+                    objCiudades.Pais_ID = ReadConsulta.GetValue(0)
+                    objCiudades.DescripPais = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objCiudades.Ciudades_ID = ReadConsulta.GetValue(2) Else objCiudades.Ciudades_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objCiudades.Descripcion = ReadConsulta.GetValue(3) Else objCiudades.Descripcion = ""
+
+                    'agregamos a la lista
+                    ObjListCiudades.Add(objCiudades)
+
+                End While
+        End Select
+
+
 
         'cerramos conexiones
         ReadConsulta.Close()
@@ -272,6 +293,29 @@ Public Class CiudadesSQLClass
         Return Result
     End Function
 
+   
+    ''' <summary>
+    ''' lee la matriz de ciudades
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Ciudad()
+
+        Dim ObjList As New List(Of CiudadesClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT P_Cod, CAST(P_Cod AS NVARCHAR(15)) + ' - ' + P_Name AS DescripPais ,C_Ciudad_ID, CAST(C_Ciudad_ID AS NVARCHAR(15)) + ' - ' + C_Descripcion AS DescripCiudad  FROM PAISES P " & _
+                   " LEFT JOIN CIUDADES C ON P.P_Cod = C.C_Pais_ID " & _
+                   " ORDER BY P_Cod,C_Ciudad_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+    
+        ObjList = listCiudades(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+    End Function
 #End Region
 
 End Class

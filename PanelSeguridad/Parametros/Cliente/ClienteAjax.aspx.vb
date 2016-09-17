@@ -27,6 +27,15 @@ Public Class ClienteAjax
 
             Select Case vl_S_option_login
 
+                Case "MATRIX_PAIS_CIUDAD"
+                    Carga_Matriz_PaisCiudad()
+
+                Case "MATRIX_AREA"
+                    Carga_Matrix_Area()
+
+                Case "MATRIX_CARGO"
+                    Carga_Matrix_Cargo()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -50,12 +59,6 @@ Public Class ClienteAjax
 
                 Case "Seguridad"
                     CargarSeguridad()
-
-                Case "Pais"
-                    CargarPaises()
-
-                Case "Ciudad"
-                    CargarCiudad()
 
                 Case "Documento"
                     CargarDocumento()
@@ -505,6 +508,52 @@ Public Class ClienteAjax
 #Region "DROP LIST"
 
     ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matriz_PaisCiudad()
+
+        Dim SQLC As New CiudadesSQLClass
+     
+        Dim ObjList_MatrixCiudad As New List(Of CiudadesClass)
+        ObjList_MatrixCiudad = SQLC.Read_Matrix_Ciudad()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixCiudad.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_Area()
+
+        Dim SQLC As New AreaSQLClass
+
+        Dim ObjList_MatrixArea As New List(Of AreaClass)
+        ObjList_MatrixArea = SQLC.Read_Matrix_Area()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixArea.ToArray()))
+
+    End Sub
+
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_Cargo()
+
+        Dim SQLC As New CargoSQLClass
+
+        Dim ObjList_MatrixCargo As New List(Of CargoClass)
+        ObjList_MatrixCargo = SQLC.Read_Matrix_Cargo()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixCargo.ToArray()))
+
+    End Sub
+
+    ''' <summary>
     ''' funcion que carga el objeto DDL consulta
     ''' </summary>
     ''' <remarks></remarks>
@@ -561,36 +610,6 @@ Public Class ClienteAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.ReadCharge_DropList(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarPaises()
-
-        Dim SQL As New CiudadesSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Tabla As String = Request.Form("tabla")
-
-        ObjListDroplist = SQL.Charge_DropListPais(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarCiudad()
-
-        Dim SQL As New Inf_ImpuestoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Index As String = Request.Form("Index")
-
-        ObjListDroplist = SQL.Charge_DropListCiudad(vl_S_Index)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

@@ -51,6 +51,12 @@
     Private _DescripArea As String
     Private _DescripCargo As String
     Private _DescripSeguridad As String
+
+    Private _DescripEmpresa As String
+    Private _DescripCiudadDoc As String
+    Private _DescripJefe As String
+    Private _DescripGrupoDocumentos As String
+
 #End Region
 
 #Region "Propiedades"
@@ -406,5 +412,39 @@
             Me._GrpDocumentos = value
         End Set
     End Property
+
+    Public Property DescripEmpresa() As String
+        Get
+            Return Me._DescripEmpresa
+        End Get
+        Set(ByVal value As String)
+            Me._DescripEmpresa = value
+        End Set
+    End Property
+    Public Property DescripCiudadDoc() As String
+        Get
+            Return Me._DescripCiudadDoc
+        End Get
+        Set(ByVal value As String)
+            Me._DescripCiudadDoc = value
+        End Set
+    End Property
+    Public Property DescripJefe() As String
+        Get
+            Return Me._DescripJefe
+        End Get
+        Set(ByVal value As String)
+            Me._DescripJefe = value
+        End Set
+    End Property
+    Public Property DescripGrupoDocumentos() As String
+        Get
+            Return Me._DescripGrupoDocumentos
+        End Get
+        Set(ByVal value As String)
+            Me._DescripGrupoDocumentos = value
+        End Set
+    End Property
+
 #End Region
 End Class

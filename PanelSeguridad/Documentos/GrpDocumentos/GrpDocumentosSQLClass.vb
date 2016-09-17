@@ -36,7 +36,8 @@ Public Class GrpDocumentosSQLClass
                        "       GD_Usuario_Actualizacion, " & _
                        "       GD_FechaActualizacion, " & _
                        "       D1.DDLL_Descripcion AS DescripTGrupo, " & _
-                       "       C.CLI_Nombre " & _
+                       "       C.CLI_Nombre ," & _
+                       "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                        " FROM GRUPO_DOCUMENTO GD" & _
                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
                        " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
@@ -52,7 +53,8 @@ Public Class GrpDocumentosSQLClass
                            "       GD_Usuario_Actualizacion, " & _
                            "       GD_FechaActualizacion, " & _
                            "       D1.DDLL_Descripcion AS DescripTGrupo, " & _
-                           "       C.CLI_Nombre " & _
+                           "       C.CLI_Nombre ," & _
+                           "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                            " FROM GRUPO_DOCUMENTO GD" & _
                            " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
                            " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
@@ -66,7 +68,8 @@ Public Class GrpDocumentosSQLClass
                            "       GD_Usuario_Actualizacion, " & _
                            "       GD_FechaActualizacion, " & _
                            "       D1.DDLL_Descripcion AS DescripTGrupo, " & _
-                           "       C.CLI_Nombre " & _
+                           "       C.CLI_Nombre ," & _
+                           "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                            " FROM GRUPO_DOCUMENTO GD" & _
                            " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
                            " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))" & _
@@ -305,6 +308,7 @@ Public Class GrpDocumentosSQLClass
 
             If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objGrpDocumentos.DescripTipoGrupo = ReadConsulta.GetValue(8) Else objGrpDocumentos.DescripTipoGrupo = ""
             objGrpDocumentos.DescripEmpresa = ReadConsulta.GetValue(9)
+            objGrpDocumentos.Index = ReadConsulta.GetValue(10)
 
             'agregamos a la lista
             ObjListGrpDocumentos.Add(objGrpDocumentos)

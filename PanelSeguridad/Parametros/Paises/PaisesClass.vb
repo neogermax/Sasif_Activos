@@ -1,5 +1,6 @@
 ﻿Public Class PaisesClass
 #Region "Campos"
+    Private _Index As Long
     Private _Cod As Integer
     Private _Name As String
     Private _Moneda As String
@@ -69,6 +70,9 @@
     Private _HoF4_DOM As String
     Private _FechaActualizacion As String
     Private _Usuario As String
+    Private _IndexInicial As Long
+    Private _IndexFinal As Long
+
 #End Region
 
 #Region "Propiedades"
@@ -624,5 +628,31 @@
             Me._Usuario = value
         End Set
     End Property
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
+    Public Property IndexInicial() As Long
+        Get
+            Return Me._IndexInicial
+        End Get
+        Set(ByVal value As Long)
+            Me._IndexInicial = value
+        End Set
+    End Property
+    Public Property IndexFinal() As Long
+        Get
+            Return Me._IndexFinal
+        End Get
+        Set(ByVal value As Long)
+            Me._IndexFinal = value
+        End Set
+    End Property
+
+
 #End Region
 End Class

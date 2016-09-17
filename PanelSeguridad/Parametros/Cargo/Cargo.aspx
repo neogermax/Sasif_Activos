@@ -121,7 +121,7 @@
                     <table id="Tabla_3" style="width: 700px; text-align: left;">
                         <tr>
                             <td style="width: 150px;" class="Label_Bold">
-                                Cargo de Dependencia
+                                Área 
                             </td>
                             <td>
                                 <select id="Select_CargoDepent" class="C_Chosen">

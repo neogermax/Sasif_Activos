@@ -209,6 +209,7 @@
     <Content Include="Parametros\Cliente\Cliente_DocAutorizado.js" />
     <Content Include="Parametros\Cliente\Cliente_Documento.js" />
     <Content Include="Parametros\Cliente\Cliente_EntFinan.js" />
+    <Content Include="Parametros\Cliente\Cliente_Matrix.js" />
     <Content Include="Parametros\Cliente\Cliente_Validacion.js" />
     <Content Include="Parametros\Fasecolda\Fasecolda.aspx" />
     <Content Include="Parametros\Fasecolda\Fasecolda.js" />

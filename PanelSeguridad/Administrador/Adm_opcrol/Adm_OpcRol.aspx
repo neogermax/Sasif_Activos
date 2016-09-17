@@ -12,7 +12,6 @@
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link href="../../css/custom/charge.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
-    <link href="../../css/css_controles.css" rel="stylesheet" type="text/css" />
     <link href="../../css/Chosen/chosen.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery.min.js" type="text/javascript"></script>
     <script src="../../Scripts/Chosen/chosen.jquery.js" type="text/javascript"></script>

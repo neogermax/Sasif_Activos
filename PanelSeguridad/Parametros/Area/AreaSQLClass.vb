@@ -86,7 +86,7 @@ Public Class AreaSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListArea = listArea(StrQuery, Conexion)
+        ObjListArea = listArea(StrQuery, Conexion, "List")
 
         Return ObjListArea
 
@@ -282,7 +282,7 @@ Public Class AreaSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listArea(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listArea(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -301,31 +301,53 @@ Public Class AreaSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
+        Select Case vp_S_TypeList
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
 
-            Dim objArea As New AreaClass
-            'cargamos datos sobre el objeto de login
-            objArea.Nit_ID = ReadConsulta.GetValue(0)
-            objArea.Area_ID = ReadConsulta.GetValue(1)
-            objArea.Descripcion = ReadConsulta.GetValue(2)
-            objArea.AreaDependencia = ReadConsulta.GetValue(3)
-            objArea.Politica_ID = ReadConsulta.GetValue(4)
+                    Dim objArea As New AreaClass
+                    'cargamos datos sobre el objeto de login
+                    objArea.Nit_ID = ReadConsulta.GetValue(0)
+                    objArea.Area_ID = ReadConsulta.GetValue(1)
+                    objArea.Descripcion = ReadConsulta.GetValue(2)
+                    objArea.AreaDependencia = ReadConsulta.GetValue(3)
+                    objArea.Politica_ID = ReadConsulta.GetValue(4)
 
-            objArea.UsuarioCreacion = ReadConsulta.GetValue(5)
-            objArea.FechaCreacion = ReadConsulta.GetValue(6)
-            objArea.UsuarioActualizacion = ReadConsulta.GetValue(7)
-            objArea.FechaActualizacion = ReadConsulta.GetValue(8)
-            
-            If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objArea.DescripAreaDepen = ReadConsulta.GetValue(9) Else objArea.DescripAreaDepen = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objArea.DescripPolitica = ReadConsulta.GetValue(10) Else objArea.DescripPolitica = ""
-            objArea.DescripEmpresa = ReadConsulta.GetValue(11)
+                    objArea.UsuarioCreacion = ReadConsulta.GetValue(5)
+                    objArea.FechaCreacion = ReadConsulta.GetValue(6)
+                    objArea.UsuarioActualizacion = ReadConsulta.GetValue(7)
+                    objArea.FechaActualizacion = ReadConsulta.GetValue(8)
 
-            'agregamos a la lista
-            ObjListArea.Add(objArea)
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objArea.DescripAreaDepen = ReadConsulta.GetValue(9) Else objArea.DescripAreaDepen = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objArea.DescripPolitica = ReadConsulta.GetValue(10) Else objArea.DescripPolitica = ""
+                    objArea.DescripEmpresa = ReadConsulta.GetValue(11)
 
-        End While
+                    'agregamos a la lista
+                    ObjListArea.Add(objArea)
 
+                End While
+
+            Case "Matrix"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objArea As New AreaClass
+                    'cargamos datos sobre el objeto de login
+                    objArea.Area_ID = ReadConsulta.GetValue(0)
+                    objArea.Descripcion = ReadConsulta.GetValue(1)
+                    objArea.Nit_ID = ReadConsulta.GetValue(2)
+                    
+                    'agregamos a la lista
+                    ObjListArea.Add(objArea)
+
+                End While
+
+        End Select
+
+
+
+        
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
@@ -361,6 +383,29 @@ Public Class AreaSQLClass
         Result = conex.IDis(StrQuery, "2")
 
         Return Result
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de Areas
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Area()
+
+        Dim ObjList As New List(Of AreaClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT A_Area_ID AS ID,CAST(A_Area_ID AS NVARCHAR(5)) + ' - ' + A_Descripcion AS DESCRIPCION, A_Nit_ID FROM AREA  " & _
+                   " ORDER BY A_Area_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = listArea(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
     End Function
 
 #End Region

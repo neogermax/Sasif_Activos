@@ -14,7 +14,6 @@ var editID;
 $(document).ready(function () {
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
     transacionAjax_EmpresaNit('Cliente');
-    transacionAjax_Seguridad('Seguridad');
 
     $("#ESelect").css("display", "none");
     $("#Img1").css("display", "none");
@@ -41,18 +40,9 @@ $(document).ready(function () {
         modal: true
     });
 
-    Change_Select_Nit();
 });
 
 
-//carga el combo de GrpDocumentos dependiente
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        index_ID = $(this).val();
-        $('#Select_GrpDocumentosDepent').empty();
-        transacionAjax_GrpDocumentosDepend('GrpDocumentos_Dep', index_ID);
-    });
-}
 
 //salida del formulario
 function btnSalir() {
@@ -213,82 +203,46 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_GrpDocumentos() {
 
+    var html_GrpDocumentos;
+    var Index_Pos = 0;
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Tipo de Grupo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayGrpDocumentos) {
+                if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
+                    html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + ArrayGrpDocumentos[itemArray].TipoGrupo + " - " + ArrayGrpDocumentos[itemArray].DescripTipoGrupo + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Tipo de Grupo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayGrpDocumentos) {
+                if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
+                    Index_Pos = parseInt(ArrayGrpDocumentos[itemArray].Index) - 1;
+                    html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + Index_Pos + "')\"></input></td><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + ArrayGrpDocumentos[itemArray].TipoGrupo + " - " + ArrayGrpDocumentos[itemArray].DescripTipoGrupo + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Tipo de Grupo</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayGrpDocumentos) {
+                if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
+                    Index_Pos = parseInt(ArrayGrpDocumentos[itemArray].Index) - 1;
+                    html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + Index_Pos + "')\"></input></td><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + ArrayGrpDocumentos[itemArray].TipoGrupo + " - " + ArrayGrpDocumentos[itemArray].DescripTipoGrupo + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>GrpDocumentos Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayGrpDocumentos) {
-        if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
-            var dependencia;
-
-            if (ArrayGrpDocumentos[itemArray].GrpDocumentosDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayGrpDocumentos[itemArray].DescripGrpDocumentosDepen;
-
-            html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayGrpDocumentos[itemArray].Nit_ID + "','" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "')\"></input></td><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayGrpDocumentos[itemArray].DescripPolitica + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
     html_GrpDocumentos += "</tbody></table>";
     $("#container_TGrpDocumentos").html("");
     $("#container_TGrpDocumentos").html(html_GrpDocumentos);
 
     $(".Eliminar").click(function () {
     });
-
-    $("#TGrpDocumentos").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
-
-//muestra el registro a eliminar
-function Eliminar(index_Nit, index_GrpDocumentos) {
-
-    for (itemArray in ArrayGrpDocumentos) {
-        if (index_Nit == ArrayGrpDocumentos[itemArray].Nit_ID && index_GrpDocumentos == ArrayGrpDocumentos[itemArray].GrpDocumentos_ID) {
-            editID = ArrayGrpDocumentos[itemArray].GrpDocumentos_ID;
-            $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
-            $("#dialog_eliminar").dialog("open");
-        }
-    }
-
-}
-
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>GrpDocumentos Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayGrpDocumentos) {
-        if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
-            var dependencia;
-
-            if (ArrayGrpDocumentos[itemArray].GrpDocumentosDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayGrpDocumentos[itemArray].DescripGrpDocumentosDepen;
-
-            html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayGrpDocumentos[itemArray].Nit_ID + "','" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "')\"></input></td><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayGrpDocumentos[itemArray].DescripPolitica + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_GrpDocumentos += "</tbody></table>";
-    $("#container_TGrpDocumentos").html("");
-    $("#container_TGrpDocumentos").html(html_GrpDocumentos);
 
     $(".Editar").click(function () {
     });
@@ -297,73 +251,41 @@ function Tabla_modificar() {
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
+
+}
+
+
+//muestra el registro a eliminar
+function Eliminar(Index_GrpDocumento) {
+
+    editNit_ID = ArrayGrpDocumentos[Index_GrpDocumento].Nit_ID;
+    editID = ArrayGrpDocumentos[Index_GrpDocumento].GrpDocumentos_ID;
+
+    $("#dialog_eliminar").dialog("option", "title", "Eliminar?");
+    $("#dialog_eliminar").dialog("open");
+
 }
 
 // muestra el registro a editar
-function Editar(index_Nit, index_GrpDocumentos) {
+function Editar(Index_GrpDocumento) {
 
     $("#TablaDatos_D").css("display", "inline-table");
     $("#TablaConsulta").css("display", "none");
+    
+    editNit_ID = ArrayGrpDocumentos[Index_GrpDocumento].Nit_ID;
+    editID = ArrayGrpDocumentos[Index_GrpDocumento].GrpDocumentos_ID;
 
-    for (itemArray in ArrayGrpDocumentos) {
-        if (index_Nit == ArrayGrpDocumentos[itemArray].Nit_ID && index_GrpDocumentos == ArrayGrpDocumentos[itemArray].GrpDocumentos_ID) {
+    $("#Select_EmpresaNit").val(ArrayGrpDocumentos[Index_GrpDocumento].Nit_ID);
+    $("#Txt_ID").val(ArrayGrpDocumentos[Index_GrpDocumento].GrpDocumentos_ID);
+    $("#TxtDescription").val(ArrayGrpDocumentos[Index_GrpDocumento].Descripcion);
+    $("#Select_TGrupo").val(ArrayGrpDocumentos[Index_GrpDocumento].TipoGrupo);
+ 
+    $("#Select_EmpresaNit").attr("disabled", "disabled");
+    $("#Txt_ID").attr("disabled", "disabled");
 
-            editNit_ID = ArrayGrpDocumentos[itemArray].Nit_ID;
-            editID = ArrayGrpDocumentos[itemArray].GrpDocumentos_ID;
-            
-            $("#Select_EmpresaNit").val(ArrayGrpDocumentos[itemArray].Nit_ID);
-            $("#Txt_ID").val(ArrayGrpDocumentos[itemArray].GrpDocumentos_ID);
+    $("#Btnguardar").attr("value", "Actualizar");
 
-            setTimeout("$('#Select_EmpresaNit').trigger('change');", 200);
-
-            $("#Select_EmpresaNit").attr("disabled", "disabled");
-            $("#Txt_ID").attr("disabled", "disabled");
-
-            $("#TxtDescription").val(ArrayGrpDocumentos[itemArray].Descripcion);
-                       
-            if (ArrayGrpDocumentos[itemArray].Politica_ID == 0)
-                $("#Select_Politica").val("-1");
-            else
-                $("#Select_Politica").val(ArrayGrpDocumentos[itemArray].Politica_ID);
-          
-            $("#Btnguardar").attr("value", "Actualizar");
-
-            $('.C_Chosen').trigger('chosen:updated');
-        }
-    }
-}
-
-
-//funcion de carga de la dependecia para edicion
-function ChargeDependencia(index) {
-    $('#Select_GrpDocumentosDepent').val(index);
     $('.C_Chosen').trigger('chosen:updated');
-}
-
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_GrpDocumentos = "<table id='TGrpDocumentos' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>GrpDocumentos Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayGrpDocumentos) {
-
-        if (ArrayGrpDocumentos[itemArray].GrpDocumentos_ID != 0) {
-            var dependencia;
-
-            if (ArrayGrpDocumentos[itemArray].GrpDocumentosDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayGrpDocumentos[itemArray].DescripGrpDocumentosDepen;
-
-            html_GrpDocumentos += "<tr id= 'TGrpDocumentos_" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "'><td>" + ArrayGrpDocumentos[itemArray].Nit_ID + " - " + ArrayGrpDocumentos[itemArray].DescripEmpresa + "</td><td>" + ArrayGrpDocumentos[itemArray].GrpDocumentos_ID + "</td><td>" + ArrayGrpDocumentos[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayGrpDocumentos[itemArray].DescripPolitica + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaCreacion + "</td><td>" + ArrayGrpDocumentos[itemArray].UsuarioActualizacion + "</td><td>" + ArrayGrpDocumentos[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_GrpDocumentos += "</tbody></table>";
-    $("#container_TGrpDocumentos").html("");
-    $("#container_TGrpDocumentos").html(html_GrpDocumentos);
-
-    $("#TGrpDocumentos").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
 }
 
 //evento del boton salir
@@ -377,7 +299,7 @@ function Clear() {
     $("#Txt_ID").val("");
     $("#TxtDescription").val("");
     $("#Select_TGrupo").val("-1");
-     
+
     $("#TxtRead").val("");
     $("#DDLColumns").val("-1");
 

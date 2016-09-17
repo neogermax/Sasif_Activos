@@ -283,7 +283,7 @@ Public Class DocumentosClass
         Dim NewCopy As String = vp_S_RutaDestino & vp_S_archivo
 
         Try
-       
+
             ' confirmamos de que el destino existe.
             If File.Exists(vp_S_RutaDestino) Then
                 File.Delete(vp_S_RutaDestino)
@@ -305,7 +305,7 @@ Public Class DocumentosClass
     ''' <summary>
     ''' Borrar documentos a la ruta fisica del aplicativo de la ruta relativa
     ''' </summary>
-     ''' <param name="vp_S_RutaDestino"></param>
+    ''' <param name="vp_S_RutaDestino"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function Delete_Document_Folder_View(ByVal vp_S_RutaDestino As String, ByVal vp_S_archivo As String)
@@ -314,13 +314,13 @@ Public Class DocumentosClass
         Dim FileToErase As String = vp_S_RutaDestino & vp_S_archivo
 
         Try
-           
+
             If System.IO.File.Exists(FileToErase) = True Then
                 System.IO.File.Delete(FileToErase)
                 Valida_Borrado = 0
             End If
 
-                   Catch e As Exception
+        Catch e As Exception
             Valida_Borrado = 1
         End Try
 

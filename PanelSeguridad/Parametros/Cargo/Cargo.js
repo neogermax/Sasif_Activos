@@ -6,7 +6,7 @@ var ArraySeguridad = [];
 
 var estado;
 var editNit_ID;
-var index_ID; 
+var index_ID;
 var editID;
 /*--------------- region de variables globales --------------------*/
 
@@ -46,14 +46,14 @@ $(document).ready(function () {
 
 //carga el combo de Cargo dependiente
 function Change_Select_Nit() {
-         
+
     $("#Select_EmpresaNit").change(function () {
         index_ID = $(this).val();
         $('#Select_CargoDepent').empty();
         transacionAjax_CargoDepend('Cargo_Dep', index_ID);
     });
 
-  
+
 }
 
 //salida del formulario
@@ -206,38 +206,60 @@ function ValidarDroplist() {
 // crea la tabla en el cliente
 function Table_Cargo() {
 
+    var html_Cargo;
+
     switch (estado) {
 
         case "buscar":
-            Tabla_consulta();
+            html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Área</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCargo) {
+
+                if (ArrayCargo[itemArray].Cargo_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayCargo[itemArray].CargoDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayCargo[itemArray].DescripCargoDepen;
+
+                    html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "modificar":
-            Tabla_modificar();
+            html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Área</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCargo) {
+                if (ArrayCargo[itemArray].Cargo_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayCargo[itemArray].CargoDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayCargo[itemArray].DescripCargoDepen;
+
+                    html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
 
         case "eliminar":
-            Tabla_eliminar();
+            html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Área</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
+            for (itemArray in ArrayCargo) {
+                if (ArrayCargo[itemArray].Cargo_ID != 0) {
+                    var dependencia;
+
+                    if (ArrayCargo[itemArray].CargoDependencia == 0)
+                        dependencia = "";
+                    else
+                        dependencia = ArrayCargo[itemArray].DescripCargoDepen;
+
+                    html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
+                }
+            }
             break;
     }
 
-}
-
-//grid con el boton eliminar
-function Tabla_eliminar() {
-    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Eliminar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCargo) {
-        if (ArrayCargo[itemArray].Cargo_ID != 0) {
-            var dependencia;
-
-            if (ArrayCargo[itemArray].CargoDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
-
-            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Eliminar' name='eliminar' onclick=\"Eliminar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
     html_Cargo += "</tbody></table>";
     $("#container_TCargo").html("");
     $("#container_TCargo").html(html_Cargo);
@@ -245,11 +267,15 @@ function Tabla_eliminar() {
     $(".Eliminar").click(function () {
     });
 
+    $(".Editar").click(function () {
+    });
+
     $("#TCargo").dataTable({
         "bJQueryUI": true, "iDisplayLength": 1000,
         "bDestroy": true
     });
 }
+
 
 //muestra el registro a eliminar
 function Eliminar(index_Nit, index_Cargo) {
@@ -264,33 +290,6 @@ function Eliminar(index_Nit, index_Cargo) {
 
 }
 
-//grid con el boton editar
-function Tabla_modificar() {
-    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Editar</th><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCargo) {
-        if (ArrayCargo[itemArray].Cargo_ID != 0) {
-            var dependencia;
-
-            if (ArrayCargo[itemArray].CargoDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
-
-            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td><input type ='radio' class= 'Editar' name='editar' onclick=\"Editar('" + ArrayCargo[itemArray].Nit_ID + "','" + ArrayCargo[itemArray].Cargo_ID + "')\"></input></td><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_Cargo += "</tbody></table>";
-    $("#container_TCargo").html("");
-    $("#container_TCargo").html(html_Cargo);
-
-    $(".Editar").click(function () {
-    });
-
-    $("#TCargo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
 
 // muestra el registro a editar
 function Editar(index_Nit, index_Cargo) {
@@ -303,7 +302,7 @@ function Editar(index_Nit, index_Cargo) {
 
             editNit_ID = ArrayCargo[itemArray].Nit_ID;
             editID = ArrayCargo[itemArray].Cargo_ID;
-            
+
             $("#Select_EmpresaNit").val(ArrayCargo[itemArray].Nit_ID);
             $("#Txt_ID").val(ArrayCargo[itemArray].Cargo_ID);
 
@@ -323,7 +322,7 @@ function Editar(index_Nit, index_Cargo) {
                 $("#Select_Politica").val("-1");
             else
                 $("#Select_Politica").val(ArrayCargo[itemArray].Politica_ID);
-          
+
             $("#Btnguardar").attr("value", "Actualizar");
 
             $('.C_Chosen').trigger('chosen:updated');
@@ -338,31 +337,6 @@ function ChargeDependencia(index) {
     $('.C_Chosen').trigger('chosen:updated');
 }
 
-//grid sin botones para ver resultado
-function Tabla_consulta() {
-    var html_Cargo = "<table id='TCargo' border='1' cellpadding='1' cellspacing='1'  style='width: 100%'><thead><tr><th>Empresa</th><th>Codigo</th><th>Descripción</th><th>Cargo Que Depende</th><th>Politica de Seguridad</th><th>Usuario Creación</th><th>Fecha Creación</th><th>Ultimo Usuario</th><th>Fecha Ultima Actualización</th></tr></thead><tbody>";
-    for (itemArray in ArrayCargo) {
-
-        if (ArrayCargo[itemArray].Cargo_ID != 0) {
-            var dependencia;
-
-            if (ArrayCargo[itemArray].CargoDependencia == 0)
-                dependencia = "";
-            else
-                dependencia = ArrayCargo[itemArray].DescripCargoDepen;
-
-            html_Cargo += "<tr id= 'TCargo_" + ArrayCargo[itemArray].Cargo_ID + "'><td>" + ArrayCargo[itemArray].Nit_ID + " - " + ArrayCargo[itemArray].DescripEmpresa + "</td><td>" + ArrayCargo[itemArray].Cargo_ID + "</td><td>" + ArrayCargo[itemArray].Descripcion + "</td><td>" + dependencia + "</td><td>" + ArrayCargo[itemArray].DescripPolitica + "</td><td>" + ArrayCargo[itemArray].UsuarioCreacion + "</td><td>" + ArrayCargo[itemArray].FechaCreacion + "</td><td>" + ArrayCargo[itemArray].UsuarioActualizacion + "</td><td>" + ArrayCargo[itemArray].FechaActualizacion + "</td></tr>";
-        }
-    }
-    html_Cargo += "</tbody></table>";
-    $("#container_TCargo").html("");
-    $("#container_TCargo").html(html_Cargo);
-
-    $("#TCargo").dataTable({
-        "bJQueryUI": true, "iDisplayLength": 1000,
-        "bDestroy": true
-    });
-}
 
 //evento del boton salir
 function x() {

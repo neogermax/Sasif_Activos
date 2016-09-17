@@ -11,6 +11,7 @@
     <script src="Cliente_Direccion.js" type="text/javascript"></script>
     <script src="Cliente_EntFinan.js" type="text/javascript"></script>
     <script src="Cliente_Documento.js" type="text/javascript"></script>
+    <script src="Cliente_Matrix.js" type="text/javascript"></script>
     <script src="Cliente_DocAutorizado.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
@@ -361,6 +362,223 @@
                             <td style="width: 195px;">
                                 <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
                                     <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Imgrelations"
+                                        src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="TablaDatos_D_Vista">
+                    <table id="Table2" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Multi - Empresa
+                            </td>
+                            <td id="Con_EmpresaNit">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 180px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table3" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Tipo identificación
+                            </td>
+                            <td id="Con_Documento">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 350px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table4" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td class="Label_Bold" style="width: 120px;">
+                                Pais
+                            </td>
+                            <td id="Con_Pais">
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold">
+                                Ciudad
+                            </td>
+                            <td id="Con_Ciudad">
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table5" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Identificación
+                            </td>
+                            <td id="Con_Ident" style="width: 110px;">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 40px;">
+                            </td>
+                            <td class="Label_Bold" style="width: 50px;">
+                                Digito
+                            </td>
+                            <td id="ConVerif">
+                            </td>
+                            <td class="Label_Bold Desvanecer" style="width: 40px;">
+                                de
+                            </td>
+                            <td id="Con_Ciudad_Doc" class="Desvanecer" style="width: 200px;">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 40px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table6" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Tipo Persona
+                            </td>
+                            <td id="Con_TPersona" align="center">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 400px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table7" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Regimen
+                            </td>
+                            <td id="Con_Regimen" align="center">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 300px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table8" style="width: 700px; text-align: left;">
+                        <tr id="TR_Nit_C">
+                            <td id="TD1" class="Label_Bold " style="width: 120px;">
+                                Nombre
+                            </td>
+                            <td id="ConNombreNit" class="TD_2" style="width: 150px;">
+                            </td>
+                            <td style="width: 35px; padding-bottom: 25px;">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                            </td>
+                        </tr>
+                        <tr class="Desvanecer TR_1">
+                            <td id="TD2" class="Label_Bold TD_1" style="width: 120px;">
+                                Primer Nombre
+                            </td>
+                            <td id="ConNombre" class="TD_2" style="width: 150px;">
+                            </td>
+                            <td style="width: 35px; padding-bottom: 25px;">
+                            </td>
+                            <td class="Label_Bold " style="width: 120px;">
+                                Segundo Nombre
+                            </td>
+                            <td id="ConNombre_2">
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                            </td>
+                        </tr>
+                        <tr class="Desvanecer TR_1">
+                            <td class="Label_Bold" style="width: 120px;">
+                                Primer Apellido
+                            </td>
+                            <td id="Con_Ape_1" class="T120px">
+                            </td>
+                            <td style="width: 35px; padding-bottom: 25px;">
+                            </td>
+                            <td class="Label_Bold T120px" style="width: 120px;">
+                                Segundo Apellido
+                            </td>
+                            <td id="Con_Ape_2" class="T120px">
+                            </td>
+                            <td style="padding-bottom: 25px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table9" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Acceso al Sistema
+                            </td>
+                            <td id="Con_Acceso" style="width: 70px;">
+                            </td>
+                            <td style="width: 122px;">
+                            </td>
+                            <td style="width: 150px;" class="Label_Bold">
+                                Grupo de Documentos
+                            </td>
+                            <td id="Con_GrpDocument">
+                            </td>
+                            <td style="width: 50px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="C_Banco_Vista" style="width: 100%">
+                        <tr>
+                            <td class="Label_Bold " style="width: 100px;">
+                                Codigo Banco
+                            </td>
+                            <td id="Con_CodBank">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 700px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="C_Empleado_Vista" style="width: 100%">
+                        <tr>
+                            <td class="Label_Bold " style="width: 100px;">
+                                Área
+                            </td>
+                            <td id="Con_Area">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 200px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Label_Bold " style="width: 100px;">
+                                Cargo
+                            </td>
+                            <td id="Con_Cargo">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 200px;">
+                            </td>
+                        </tr>
+                        <tr class="Empleado">
+                            <td class="Label_Bold " style="width: 100px;">
+                                jefe Inmediato
+                            </td>
+                            <td id="Con_Jefe">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 200px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px;" class="Label_Bold">
+                                Politica de Seguridad
+                            </td>
+                            <td id="Con_Politica">
+                            </td>
+                            <td style="padding-bottom: 25px; width: 200px;">
+                            </td>
+                        </tr>
+                    </table>
+                    <table id="Table10" style="width: 700px; text-align: left;">
+                        <tr>
+                            <td style="width: 120px;" class="Label_Bold">
+                                Tipo de Relación
+                            </td>
+                            <td style="width: 195px;">
+                                <span class="cssToolTip_Form_L"><a href="javascript:BtnRelacion();">
+                                    <img alt="error" title="" style="padding-left: 1em; height: 50px; width: 50px;" id="Img18"
                                         src="../../images/relations.png" /></a> <span class="Spam_ARel"></span></span>
                             </td>
                         </tr>
@@ -1296,12 +1514,26 @@
         </div>
     </div>
     <div id="Dialog_Visor">
-        <table style="width: 100%;height: 100%;">
+        <table style="width: 100%; height: 100%;">
             <tr>
                 <td>
                     <iframe id="IF_Visor" src=""></iframe>
                 </td>
             </tr>
         </table>
+    </div>
+    <div id="Dialog_Charge" style="width: 100%; text-align: center;">
+        <div class="cssload-circle">
+            <div class="cssload-up">
+                <div class="cssload-innera">
+                </div>
+            </div>
+            <div class="cssload-down">
+                <div class="cssload-innerb">
+                </div>
+            </div>
+        </div>
+        <h5>
+            Procesando información espere un momento...</h5>
     </div>
 </asp:Content>

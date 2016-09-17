@@ -50,60 +50,7 @@ function transacionAjax_EmpresaNit(State) {
     });
 }
 
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_GrpDocumentosDepend(State, Index) {
-    
-    $.ajax({
-        url: "GrpDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Index": Index,
-            "tabla": 'GrpDocumentos'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayGrpDocumentosDep = [];
-            }
-            else {
-                ArrayGrpDocumentosDep = JSON.parse(result);
-                charge_CatalogList(ArrayGrpDocumentosDep, "Select_GrpDocumentosDepent", 1);
-            }
-        },
-        error: function () {
 
-        }
-    });
-}
-
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Seguridad(State) {
-    $.ajax({
-        url: "GrpDocumentosAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "tabla": 'SEGURIDAD'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArraySeguridad = [];
-            }
-            else {
-                ArraySeguridad = JSON.parse(result);
-                charge_CatalogList(ArraySeguridad, "Select_Politica", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -149,15 +96,10 @@ function transacionAjax_GrpDocumentos_create(State) {
 
     var ID;
     var Nit_ID;
-    var GrpDocumentosDepen = 0;
+    var GrpDocumentos = 0;
     var Politica = 0;
 
-    if ($("#Select_GrpDocumentosDepent").val() != "-1")
-        GrpDocumentosDepen = $("#Select_GrpDocumentosDepent").val();
-
-    if ($("#Select_Politica").val() != "-1")
-        Politica = $("#Select_Politica").val();
-
+     
     if (State == "modificar") {
         Nit_ID = editNit_ID;
         ID = editID;
@@ -175,8 +117,7 @@ function transacionAjax_GrpDocumentos_create(State) {
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
-            "GrpDocumentosDependencia": GrpDocumentosDepen,
-            "Politica": Politica,
+            "TipoGrupo": $("#Select_TGrupo").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -218,7 +159,6 @@ function transacionAjax_GrpDocumentos_create(State) {
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
                         $("#WE").css("display", "none");
-                        transacionAjax_GrpDocumentosDepend('GrpDocumentos_Dep', index_ID);
                         Clear();
                     }
                     break;

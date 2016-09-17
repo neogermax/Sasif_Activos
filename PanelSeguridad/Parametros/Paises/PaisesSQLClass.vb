@@ -242,7 +242,7 @@ Public Class PaisesSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListPaises = listPaises(StrQuery, conexion)
+        ObjListPaises = listPaises(StrQuery, conexion, "List")
 
         Return ObjListPaises
 
@@ -595,7 +595,7 @@ Public Class PaisesSQLClass
     ''' <param name="vg_S_StrConexion"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function listPaises(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
+    Public Function listPaises(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_Type As String)
 
         'inicializamos conexiones a la BD
         Dim objcmd As OleDbCommand = Nothing
@@ -614,86 +614,106 @@ Public Class PaisesSQLClass
         'ejecutamos consulta
         ReadConsulta = objcmd.ExecuteReader()
 
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
 
-            Dim objPaises As New PaisesClass
-            'cargamos datos sobre el objeto de login
-            objPaises.Cod = ReadConsulta.GetValue(0)
-            objPaises.Name = ReadConsulta.GetValue(1)
-            If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Est_LUN = ReadConsulta.GetValue(2) Else objPaises.Est_LUN = "L"
-            If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.Est_MAR = ReadConsulta.GetValue(3) Else objPaises.Est_MAR = "L"
-            If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.Est_MIE = ReadConsulta.GetValue(4) Else objPaises.Est_MIE = "L"
-            If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objPaises.Est_JUE = ReadConsulta.GetValue(5) Else objPaises.Est_JUE = "L"
-            If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objPaises.Est_VIE = ReadConsulta.GetValue(6) Else objPaises.Est_VIE = "L"
-            If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objPaises.Est_SAB = ReadConsulta.GetValue(7) Else objPaises.Est_SAB = "F"
-            If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objPaises.Est_DOM = ReadConsulta.GetValue(8) Else objPaises.Est_DOM = "F"
-            If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objPaises.HoF1_LUN = ReadConsulta.GetValue(9) Else objPaises.HoF1_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objPaises.HoI1_LUN = ReadConsulta.GetValue(10) Else objPaises.HoI1_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objPaises.HoI2_LUN = ReadConsulta.GetValue(11) Else objPaises.HoI2_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objPaises.HoF2_LUN = ReadConsulta.GetValue(12) Else objPaises.HoF2_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objPaises.HoI3_LUN = ReadConsulta.GetValue(13) Else objPaises.HoI3_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objPaises.HoF3_LUN = ReadConsulta.GetValue(14) Else objPaises.HoF3_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objPaises.HoI4_LUN = ReadConsulta.GetValue(15) Else objPaises.HoI4_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objPaises.HoF4_LUN = ReadConsulta.GetValue(16) Else objPaises.HoF4_LUN = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(17))) Then objPaises.HoI1_MAR = ReadConsulta.GetValue(17) Else objPaises.HoI1_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objPaises.HoF1_MAR = ReadConsulta.GetValue(18) Else objPaises.HoF1_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objPaises.HoI2_MAR = ReadConsulta.GetValue(19) Else objPaises.HoI2_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objPaises.HoF2_MAR = ReadConsulta.GetValue(20) Else objPaises.HoF2_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objPaises.HoI3_MAR = ReadConsulta.GetValue(21) Else objPaises.HoI3_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objPaises.HoF3_MAR = ReadConsulta.GetValue(22) Else objPaises.HoF3_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objPaises.HoI4_MAR = ReadConsulta.GetValue(23) Else objPaises.HoI4_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objPaises.HoF4_MAR = ReadConsulta.GetValue(24) Else objPaises.HoF4_MAR = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objPaises.HoI1_MIE = ReadConsulta.GetValue(25) Else objPaises.HoI1_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objPaises.HoF1_MIE = ReadConsulta.GetValue(26) Else objPaises.HoF1_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objPaises.HoI2_MIE = ReadConsulta.GetValue(27) Else objPaises.HoI2_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objPaises.HoF2_MIE = ReadConsulta.GetValue(28) Else objPaises.HoF2_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objPaises.HoI3_MIE = ReadConsulta.GetValue(29) Else objPaises.HoI3_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objPaises.HoF3_MIE = ReadConsulta.GetValue(30) Else objPaises.HoF3_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objPaises.HoI4_MIE = ReadConsulta.GetValue(31) Else objPaises.HoI4_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objPaises.HoF4_MIE = ReadConsulta.GetValue(32) Else objPaises.HoF4_MIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objPaises.HoI1_JUE = ReadConsulta.GetValue(33) Else objPaises.HoI1_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objPaises.HoF1_JUE = ReadConsulta.GetValue(34) Else objPaises.HoF1_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objPaises.HoI2_JUE = ReadConsulta.GetValue(35) Else objPaises.HoI2_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(36))) Then objPaises.HoF2_JUE = ReadConsulta.GetValue(36) Else objPaises.HoF2_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(37))) Then objPaises.HoI3_JUE = ReadConsulta.GetValue(37) Else objPaises.HoI3_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objPaises.HoF3_JUE = ReadConsulta.GetValue(38) Else objPaises.HoF3_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objPaises.HoI4_JUE = ReadConsulta.GetValue(39) Else objPaises.HoI4_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objPaises.HoF4_JUE = ReadConsulta.GetValue(40) Else objPaises.HoF4_JUE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objPaises.HoI1_VIE = ReadConsulta.GetValue(41) Else objPaises.HoI1_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objPaises.HoF1_VIE = ReadConsulta.GetValue(42) Else objPaises.HoF1_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objPaises.HoI2_VIE = ReadConsulta.GetValue(43) Else objPaises.HoI2_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objPaises.HoF2_VIE = ReadConsulta.GetValue(44) Else objPaises.HoF2_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objPaises.HoI3_VIE = ReadConsulta.GetValue(45) Else objPaises.HoI3_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(46))) Then objPaises.HoF3_VIE = ReadConsulta.GetValue(46) Else objPaises.HoF3_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(47))) Then objPaises.HoI4_VIE = ReadConsulta.GetValue(47) Else objPaises.HoI4_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objPaises.HoF4_VIE = ReadConsulta.GetValue(48) Else objPaises.HoF4_VIE = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objPaises.HoI1_SAB = ReadConsulta.GetValue(49) Else objPaises.HoI1_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objPaises.HoF1_SAB = ReadConsulta.GetValue(50) Else objPaises.HoF1_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(51))) Then objPaises.HoI2_SAB = ReadConsulta.GetValue(51) Else objPaises.HoI2_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(52))) Then objPaises.HoF2_SAB = ReadConsulta.GetValue(52) Else objPaises.HoF2_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(53))) Then objPaises.HoI3_SAB = ReadConsulta.GetValue(53) Else objPaises.HoI3_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objPaises.HoF3_SAB = ReadConsulta.GetValue(54) Else objPaises.HoF3_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(55))) Then objPaises.HoI4_SAB = ReadConsulta.GetValue(55) Else objPaises.HoI4_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(56))) Then objPaises.HoF4_SAB = ReadConsulta.GetValue(56) Else objPaises.HoF4_SAB = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(57))) Then objPaises.HoI1_DOM = ReadConsulta.GetValue(57) Else objPaises.HoI1_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(58))) Then objPaises.HoF1_DOM = ReadConsulta.GetValue(58) Else objPaises.HoF1_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(59))) Then objPaises.HoI2_DOM = ReadConsulta.GetValue(59) Else objPaises.HoI2_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(60))) Then objPaises.HoF2_DOM = ReadConsulta.GetValue(60) Else objPaises.HoF2_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(61))) Then objPaises.HoI3_DOM = ReadConsulta.GetValue(61) Else objPaises.HoI3_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(62))) Then objPaises.HoF3_DOM = ReadConsulta.GetValue(62) Else objPaises.HoF3_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(63))) Then objPaises.HoI4_DOM = ReadConsulta.GetValue(63) Else objPaises.HoI4_DOM = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(64))) Then objPaises.HoF4_DOM = ReadConsulta.GetValue(64) Else objPaises.HoF4_DOM = ""
-            objPaises.FechaActualizacion = ReadConsulta.GetString(65)
-            objPaises.Usuario = ReadConsulta.GetString(66)
-            If Not (IsDBNull(ReadConsulta.GetValue(67))) Then objPaises.Moneda = ReadConsulta.GetValue(67) Else objPaises.Moneda = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(68))) Then objPaises.SWIFT = ReadConsulta.GetValue(68) Else objPaises.SWIFT = ""
+        Select Case vp_S_Type
 
-            'agregamos a la lista
-            ObjListPaises.Add(objPaises)
+            Case "Matrix"
+                While ReadConsulta.Read
 
-        End While
+                    Dim objPaises As New PaisesClass
 
+                    objPaises.Cod = ReadConsulta.GetValue(0)
+                    objPaises.Name = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.IndexInicial = ReadConsulta.GetValue(2) Else objPaises.IndexInicial = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.IndexFinal = ReadConsulta.GetValue(3) Else objPaises.IndexFinal = 0
+                    'agregamos a la lista
+                    ObjListPaises.Add(objPaises)
+
+                End While
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objPaises As New PaisesClass
+                    'cargamos datos sobre el objeto de login
+                    objPaises.Cod = ReadConsulta.GetValue(0)
+                    objPaises.Name = ReadConsulta.GetValue(1)
+                    If Not (IsDBNull(ReadConsulta.GetValue(2))) Then objPaises.Est_LUN = ReadConsulta.GetValue(2) Else objPaises.Est_LUN = "L"
+                    If Not (IsDBNull(ReadConsulta.GetValue(3))) Then objPaises.Est_MAR = ReadConsulta.GetValue(3) Else objPaises.Est_MAR = "L"
+                    If Not (IsDBNull(ReadConsulta.GetValue(4))) Then objPaises.Est_MIE = ReadConsulta.GetValue(4) Else objPaises.Est_MIE = "L"
+                    If Not (IsDBNull(ReadConsulta.GetValue(5))) Then objPaises.Est_JUE = ReadConsulta.GetValue(5) Else objPaises.Est_JUE = "L"
+                    If Not (IsDBNull(ReadConsulta.GetValue(6))) Then objPaises.Est_VIE = ReadConsulta.GetValue(6) Else objPaises.Est_VIE = "L"
+                    If Not (IsDBNull(ReadConsulta.GetValue(7))) Then objPaises.Est_SAB = ReadConsulta.GetValue(7) Else objPaises.Est_SAB = "F"
+                    If Not (IsDBNull(ReadConsulta.GetValue(8))) Then objPaises.Est_DOM = ReadConsulta.GetValue(8) Else objPaises.Est_DOM = "F"
+                    If Not (IsDBNull(ReadConsulta.GetValue(9))) Then objPaises.HoF1_LUN = ReadConsulta.GetValue(9) Else objPaises.HoF1_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(10))) Then objPaises.HoI1_LUN = ReadConsulta.GetValue(10) Else objPaises.HoI1_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(11))) Then objPaises.HoI2_LUN = ReadConsulta.GetValue(11) Else objPaises.HoI2_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(12))) Then objPaises.HoF2_LUN = ReadConsulta.GetValue(12) Else objPaises.HoF2_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objPaises.HoI3_LUN = ReadConsulta.GetValue(13) Else objPaises.HoI3_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objPaises.HoF3_LUN = ReadConsulta.GetValue(14) Else objPaises.HoF3_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(15))) Then objPaises.HoI4_LUN = ReadConsulta.GetValue(15) Else objPaises.HoI4_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(16))) Then objPaises.HoF4_LUN = ReadConsulta.GetValue(16) Else objPaises.HoF4_LUN = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(17))) Then objPaises.HoI1_MAR = ReadConsulta.GetValue(17) Else objPaises.HoI1_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(18))) Then objPaises.HoF1_MAR = ReadConsulta.GetValue(18) Else objPaises.HoF1_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(19))) Then objPaises.HoI2_MAR = ReadConsulta.GetValue(19) Else objPaises.HoI2_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(20))) Then objPaises.HoF2_MAR = ReadConsulta.GetValue(20) Else objPaises.HoF2_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objPaises.HoI3_MAR = ReadConsulta.GetValue(21) Else objPaises.HoI3_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objPaises.HoF3_MAR = ReadConsulta.GetValue(22) Else objPaises.HoF3_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objPaises.HoI4_MAR = ReadConsulta.GetValue(23) Else objPaises.HoI4_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objPaises.HoF4_MAR = ReadConsulta.GetValue(24) Else objPaises.HoF4_MAR = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objPaises.HoI1_MIE = ReadConsulta.GetValue(25) Else objPaises.HoI1_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objPaises.HoF1_MIE = ReadConsulta.GetValue(26) Else objPaises.HoF1_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objPaises.HoI2_MIE = ReadConsulta.GetValue(27) Else objPaises.HoI2_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objPaises.HoF2_MIE = ReadConsulta.GetValue(28) Else objPaises.HoF2_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objPaises.HoI3_MIE = ReadConsulta.GetValue(29) Else objPaises.HoI3_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objPaises.HoF3_MIE = ReadConsulta.GetValue(30) Else objPaises.HoF3_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objPaises.HoI4_MIE = ReadConsulta.GetValue(31) Else objPaises.HoI4_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objPaises.HoF4_MIE = ReadConsulta.GetValue(32) Else objPaises.HoF4_MIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objPaises.HoI1_JUE = ReadConsulta.GetValue(33) Else objPaises.HoI1_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objPaises.HoF1_JUE = ReadConsulta.GetValue(34) Else objPaises.HoF1_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objPaises.HoI2_JUE = ReadConsulta.GetValue(35) Else objPaises.HoI2_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(36))) Then objPaises.HoF2_JUE = ReadConsulta.GetValue(36) Else objPaises.HoF2_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(37))) Then objPaises.HoI3_JUE = ReadConsulta.GetValue(37) Else objPaises.HoI3_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objPaises.HoF3_JUE = ReadConsulta.GetValue(38) Else objPaises.HoF3_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objPaises.HoI4_JUE = ReadConsulta.GetValue(39) Else objPaises.HoI4_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objPaises.HoF4_JUE = ReadConsulta.GetValue(40) Else objPaises.HoF4_JUE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objPaises.HoI1_VIE = ReadConsulta.GetValue(41) Else objPaises.HoI1_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objPaises.HoF1_VIE = ReadConsulta.GetValue(42) Else objPaises.HoF1_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objPaises.HoI2_VIE = ReadConsulta.GetValue(43) Else objPaises.HoI2_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objPaises.HoF2_VIE = ReadConsulta.GetValue(44) Else objPaises.HoF2_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objPaises.HoI3_VIE = ReadConsulta.GetValue(45) Else objPaises.HoI3_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(46))) Then objPaises.HoF3_VIE = ReadConsulta.GetValue(46) Else objPaises.HoF3_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(47))) Then objPaises.HoI4_VIE = ReadConsulta.GetValue(47) Else objPaises.HoI4_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(48))) Then objPaises.HoF4_VIE = ReadConsulta.GetValue(48) Else objPaises.HoF4_VIE = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(49))) Then objPaises.HoI1_SAB = ReadConsulta.GetValue(49) Else objPaises.HoI1_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(50))) Then objPaises.HoF1_SAB = ReadConsulta.GetValue(50) Else objPaises.HoF1_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(51))) Then objPaises.HoI2_SAB = ReadConsulta.GetValue(51) Else objPaises.HoI2_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(52))) Then objPaises.HoF2_SAB = ReadConsulta.GetValue(52) Else objPaises.HoF2_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(53))) Then objPaises.HoI3_SAB = ReadConsulta.GetValue(53) Else objPaises.HoI3_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(54))) Then objPaises.HoF3_SAB = ReadConsulta.GetValue(54) Else objPaises.HoF3_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(55))) Then objPaises.HoI4_SAB = ReadConsulta.GetValue(55) Else objPaises.HoI4_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(56))) Then objPaises.HoF4_SAB = ReadConsulta.GetValue(56) Else objPaises.HoF4_SAB = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(57))) Then objPaises.HoI1_DOM = ReadConsulta.GetValue(57) Else objPaises.HoI1_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(58))) Then objPaises.HoF1_DOM = ReadConsulta.GetValue(58) Else objPaises.HoF1_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(59))) Then objPaises.HoI2_DOM = ReadConsulta.GetValue(59) Else objPaises.HoI2_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(60))) Then objPaises.HoF2_DOM = ReadConsulta.GetValue(60) Else objPaises.HoF2_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(61))) Then objPaises.HoI3_DOM = ReadConsulta.GetValue(61) Else objPaises.HoI3_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(62))) Then objPaises.HoF3_DOM = ReadConsulta.GetValue(62) Else objPaises.HoF3_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(63))) Then objPaises.HoI4_DOM = ReadConsulta.GetValue(63) Else objPaises.HoI4_DOM = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(64))) Then objPaises.HoF4_DOM = ReadConsulta.GetValue(64) Else objPaises.HoF4_DOM = ""
+                    objPaises.FechaActualizacion = ReadConsulta.GetString(65)
+                    objPaises.Usuario = ReadConsulta.GetString(66)
+                    If Not (IsDBNull(ReadConsulta.GetValue(67))) Then objPaises.Moneda = ReadConsulta.GetValue(67) Else objPaises.Moneda = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(68))) Then objPaises.SWIFT = ReadConsulta.GetValue(68) Else objPaises.SWIFT = ""
+
+                    'agregamos a la lista
+                    ObjListPaises.Add(objPaises)
+
+                End While
+
+        End Select
+
+   
         'cerramos conexiones
         ReadConsulta.Close()
         objConexBD.Close()
@@ -701,6 +721,11 @@ Public Class PaisesSQLClass
         Return ObjListPaises
 
     End Function
+
+#End Region
+
+#Region "OTRAS FUNCIONES"
+
 
 #End Region
 End Class

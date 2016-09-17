@@ -105,7 +105,7 @@ function transacionAjax_TCuenta(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Pais(State) {
+function transaccionAjax_MPaises_Ciudades(State) {
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
@@ -116,14 +116,12 @@ function transacionAjax_Pais(State) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayPais = [];
+                Matrix_Ciudad = [];
             }
             else {
-                ArrayPais = JSON.parse(result);
-                charge_CatalogList(ArrayPais, "Select_Pais", 1);
-                charge_CatalogList(ArrayPais, "Select_Pais_D", 1);
+                Matrix_Ciudad = JSON.parse(result);
+                F_Matrix_pais();
             }
-
         },
         error: function () {
 
@@ -133,24 +131,22 @@ function transacionAjax_Pais(State) {
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Ciudad(State, Index) {
+function transaccionAjax_MArea(State) {
+
     $.ajax({
         url: "ClienteAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "Index": Index,
-            "tabla": 'CIUDADES'
+             "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayCiudades = [];
+                Matrix_Area = [];
             }
             else {
-                ArrayCiudades = JSON.parse(result);
-                charge_CatalogList(ArrayCiudades, "Select_Ciudad", 1);
-                charge_CatalogList(ArrayCiudades, "Select_Ciudad_Doc", 1);
+                Matrix_Area = JSON.parse(result);
             }
         },
         error: function () {
@@ -158,6 +154,33 @@ function transacionAjax_Ciudad(State, Index) {
         }
     });
 }
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MCargo(State) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'AREA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Cargo = [];
+            }
+            else {
+                Matrix_Cargo = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -212,6 +235,8 @@ function transacionAjax_Documento(State) {
         }
     });
 }
+
+
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -877,13 +902,21 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
 
 /*------------------------------ CONSULTA ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente) {
+function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente, Type, Pais, TypePeople, Ciudad, DocCiudad) {
 
-    $('#Select_EmpresaNit').trigger('change');
-    $('#Select_Pais').trigger('change');
-    $('#Select_TPersona').trigger('change');
-
-    ArrayFoto = [];
+    $('#Select_Area').empty();
+    $('#Select_Cargo').empty();
+    $('#Select_Jefe').empty();
+    $('#Select_GrpDocument').empty();
+  
+    transacionAjax_Area('Area', Nit);
+    transacionAjax_Cargo('Cargo', Nit);
+    transacionAjax_Jefe('Jefe', Nit);
+    transacionAjax_GrpDocumentos('GrpDocumentos', Nit);
+      
+    transacionAjax_Ciudad_D('Ciudad', Pais);
+ 
+     ArrayFoto = [];
 
     $.ajax({
         url: "ClienteAjax.aspx",
@@ -897,7 +930,8 @@ function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente) {
         //Transaccion Ajax en proceso
         success: function (result) {
 
-            Carga_Relaciones(Index_Cliente);
+            Carga_Relaciones(Index_Cliente, Type);
+
             if (result == "") {
                 ArrayFoto = [];
             }

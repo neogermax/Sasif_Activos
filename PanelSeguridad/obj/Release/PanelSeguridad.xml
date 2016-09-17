@@ -139,7 +139,7 @@ PanelSeguridad
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.PaisesSQLClass.listPaises(System.String,System.String)">
+</member><member name="M:PanelSeguridad.PaisesSQLClass.listPaises(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Paises para armar la tabla
  </summary>
@@ -642,6 +642,21 @@ PanelSeguridad
  traemos todos los datos para tabla Entidades Financieras DEL CLIENTE SELECCIONADO (READ)
  </summary>
 	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteAjax.Carga_Matriz_PaisCiudad">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteAjax.Carga_Matrix_Area">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.ClienteAjax.Carga_Matrix_Cargo">
+	<summary>
+ funcion que carga La matrix
+ </summary>
+	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteAjax.CargarCliente">
 	<summary>
  funcion que carga el objeto DDL consulta
@@ -658,16 +673,6 @@ PanelSeguridad
  </summary>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.ClienteAjax.CargarDroplist">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ClienteAjax.CargarPaises">
-	<summary>
- funcion que carga el objeto DDL consulta
- </summary>
-	<remarks></remarks>
-</member><member name="M:PanelSeguridad.ClienteAjax.CargarCiudad">
 	<summary>
  funcion que carga el objeto DDL consulta
  </summary>
@@ -1253,7 +1258,7 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CargoSQLClass.listCargo(System.String,System.String)">
+</member><member name="M:PanelSeguridad.CargoSQLClass.listCargo(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Cargo para armar la tabla
  </summary>
@@ -1266,6 +1271,12 @@ To modify move field declaration from designer file to code-behind file.
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CargoSQLClass.Read_Matrix_Cargo">
+	<summary>
+ lee la matriz de Areas
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MensajesSQLClass.Read_AllMensajes(System.String,System.String,System.String)">
@@ -2423,7 +2434,7 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.AreaSQLClass.listArea(System.String,System.String)">
+</member><member name="M:PanelSeguridad.AreaSQLClass.listArea(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Area para armar la tabla
  </summary>
@@ -2436,6 +2447,12 @@ To modify move field declaration from designer file to code-behind file.
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.AreaSQLClass.Read_Matrix_Area">
+	<summary>
+ lee la matriz de Areas
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.AyudasAjax.Consulta_Ayudas">
@@ -2514,7 +2531,7 @@ To modify move field declaration from designer file to code-behind file.
 	<param name="vp_S_Table"></param>
 	<returns></returns>
 	<remarks></remarks>
-</member><member name="M:PanelSeguridad.CiudadesSQLClass.listCiudades(System.String,System.String)">
+</member><member name="M:PanelSeguridad.CiudadesSQLClass.listCiudades(System.String,System.String,System.String)">
 	<summary>
  funcion que trae el listado de Ciudades para armar la tabla
  </summary>
@@ -2527,6 +2544,12 @@ To modify move field declaration from designer file to code-behind file.
  averigua si esta repetido
  </summary>
 	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.CiudadesSQLClass.Read_Matrix_Ciudad">
+	<summary>
+ lee la matriz de ciudades
+ </summary>
 	<returns></returns>
 	<remarks></remarks>
 </member><member name="M:PanelSeguridad.MensajesAjax.Consulta_Mensajes">

@@ -125,6 +125,7 @@
                             </td>
                             <td>
                                 <select id="Select_TGrupo" class="C_Chosen">
+                                   <option value="-1">Seleccione...</option>
                                     <option value="1">Requerido</option>
                                     <option value="2">Otros</option>
                                 </select>

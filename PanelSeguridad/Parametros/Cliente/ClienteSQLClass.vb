@@ -21,161 +21,58 @@ Public Class ClienteSQLClass
         Dim Conexion As String = conex.typeConexion("2")
 
         Dim BD_Admin As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDAdmin").ToString
+        Dim BD_Documentos As String = System.Web.Configuration.WebConfigurationManager.AppSettings("BDDocument").ToString
 
         Dim sql As New StringBuilder
 
         If vp_S_Filtro = "N" And vp_S_Opcion = "ALL" Then
-            sql.Append(" SELECT CLI_Nit_ID, " & _
-                              " CLI_TypeDocument_ID, " & _
-                              " CLI_Document_ID, " & _
-                              " CLI_Digito_Verificacion, " & _
-                              " CLI_Nombre, " & _
-                              " CLI_Ciudad_ID, " & _
-                              " CLI_OP_Cliente, " & _
-                              " CLI_OP_Avaluador, " & _
-                              " CLI_OP_Transito, " & _
-                              " CLI_OP_Hacienda, " & _
-                              " CLI_OP_Empresa, " & _
-                              " CLI_OP_Empleado, " & _
-                              " CLI_OP_Asesor, " & _
-                              " CLI_Other_1, " & _
-                              " CLI_Other_2, " & _
-                              " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario_Creacion, " & _
-                              " C.C_Descripcion, " & _
-                              " TD.TD_Descripcion, " & _
-                              " CLI_Pais_ID, " & _
-                              " P.P_Name, " & _
-                              " CLI_Nombre_2, " & _
-                              " CLI_Apellido_1, " & _
-                              " CLI_Apellido_2, " & _
-                              " CLI_Cod_Bank, " & _
-                              " CLI_DocCiudad, " & _
-                              " CLI_TipoPersona, " & _
-                              " CLI_Regimen, " & _
-                              " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
-                              " CLI_AccesoSistema, " & _
-                              " CLI_Area_ID, " & _
-                              " CLI_Cargo_ID, " & _
-                              " CLI_TypeDocument_ID_Jefe, " & _
-                              " CLI_Document_ID_Jefe, " & _
-                              " CLI_Politica_ID, " & _
-                              " CLI_FechaCreacion, " & _
-                              " CLI_Usuario_Actualizacion, " & _
-                              " A.A_Descripcion, " & _
-                              " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos, " & _
-                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
-                   " FROM CLIENTE CLI " & _
-                        " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
-                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
-                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
-                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID ")
-        Else
-
-            If vp_S_Contenido = "ALL" Then
-                sql.Append(" SELECT CLI_Nit_ID, " & _
-                              " CLI_TypeDocument_ID, " & _
-                              " CLI_Document_ID, " & _
-                              " CLI_Digito_Verificacion, " & _
-                              " CLI_Nombre, " & _
-                              " CLI_Ciudad_ID, " & _
-                              " CLI_OP_Cliente, " & _
-                              " CLI_OP_Avaluador, " & _
-                              " CLI_OP_Transito, " & _
-                              " CLI_OP_Hacienda, " & _
-                              " CLI_OP_Empresa, " & _
-                              " CLI_OP_Empleado, " & _
-                              " CLI_OP_Asesor, " & _
-                              " CLI_Other_1, " & _
-                              " CLI_Other_2, " & _
-                              " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario_Creacion, " & _
-                              " C.C_Descripcion, " & _
-                              " TD.TD_Descripcion, " & _
-                              " CLI_Pais_ID, " & _
-                              " P.P_Name, " & _
-                              " CLI_Nombre_2, " & _
-                              " CLI_Apellido_1, " & _
-                              " CLI_Apellido_2, " & _
-                              " CLI_Cod_Bank, " & _
-                              " CLI_DocCiudad, " & _
-                              " CLI_TipoPersona, " & _
-                              " CLI_Regimen, " & _
-                              " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
-                              " CLI_AccesoSistema, " & _
-                              " CLI_Area_ID, " & _
-                              " CLI_Cargo_ID, " & _
-                              " CLI_TypeDocument_ID_Jefe, " & _
-                              " CLI_Document_ID_Jefe, " & _
-                              " CLI_Politica_ID, " & _
-                              " CLI_FechaCreacion, " & _
-                              " CLI_Usuario_Actualizacion, " & _
-                              " A.A_Descripcion, " & _
-                              " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos, " & _
-                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
-                         " FROM CLIENTE CLI " & _
-                        " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
-                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
-                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
-                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
-                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID ")
-            Else
-                sql.Append(" SELECT CLI_Nit_ID, " & _
-                              " CLI_TypeDocument_ID, " & _
-                              " CLI_Document_ID, " & _
-                              " CLI_Digito_Verificacion, " & _
-                              " CLI_Nombre, " & _
-                              " CLI_Ciudad_ID, " & _
-                              " CLI_OP_Cliente, " & _
-                              " CLI_OP_Avaluador, " & _
-                              " CLI_OP_Transito, " & _
-                              " CLI_OP_Hacienda, " & _
-                              " CLI_OP_Empresa, " & _
-                              " CLI_OP_Empleado, " & _
-                              " CLI_OP_Asesor, " & _
-                              " CLI_Other_1, " & _
-                              " CLI_Other_2, " & _
-                              " CLI_FechaActualizacion, " & _
-                              " CLI_Usuario_Creacion, " & _
-                              " C.C_Descripcion, " & _
-                              " TD.TD_Descripcion, " & _
-                              " CLI_Pais_ID, " & _
-                              " P.P_Name, " & _
-                              " CLI_Nombre_2, " & _
-                              " CLI_Apellido_1, " & _
-                              " CLI_Apellido_2, " & _
-                              " CLI_Cod_Bank, " & _
-                              " CLI_DocCiudad, " & _
-                              " CLI_TipoPersona, " & _
-                              " CLI_Regimen, " & _
-                              " D1.DDLL_Descripcion AS DescripTPersona, " & _
-                              " D2.DDLL_Descripcion AS DescripRegimen, " & _
-                              " CLI_AccesoSistema, " & _
-                              " CLI_Area_ID, " & _
-                              " CLI_Cargo_ID, " & _
-                              " CLI_TypeDocument_ID_Jefe, " & _
-                              " CLI_Document_ID_Jefe, " & _
-                              " CLI_Politica_ID, " & _
-                              " CLI_FechaCreacion, " & _
-                              " CLI_Usuario_Actualizacion, " & _
-                              " A.A_Descripcion, " & _
-                              " CA.C_Descripcion, " & _
-                              " PO.PS_Descripcion, " & _
-                              " CLI_GrpDocumentos, " & _
-                              " ROW_NUMBER() OVER(ORDER BY CLI_Nit_ID DESC) AS Index_Cliente " & _
+            sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID, " & _
+                        "       CLI.CLI_Document_ID, " & _
+                        "       CLI.CLI_Digito_Verificacion, " & _
+                        "       CLI.CLI_Nombre, " & _
+                        "       CLI.CLI_Ciudad_ID, " & _
+                        "       CLI.CLI_OP_Cliente, " & _
+                        "       CLI.CLI_OP_Avaluador, " & _
+                        "       CLI.CLI_OP_Transito, " & _
+                        "       CLI.CLI_OP_Hacienda, " & _
+                        "       CLI.CLI_OP_Empresa, " & _
+                        "       CLI.CLI_OP_Empleado, " & _
+                        "       CLI.CLI_OP_Asesor, " & _
+                        "       CLI.CLI_Other_1, " & _
+                        "       CLI.CLI_Other_2, " & _
+                        "       CLI.CLI_FechaActualizacion, " & _
+                        "       CLI.CLI_Usuario_Creacion, " & _
+                        "       C.C_Descripcion, " & _
+                        "       TD.TD_Descripcion, " & _
+                        "       CLI.CLI_Pais_ID, " & _
+                        "       P.P_Name, " & _
+                        "       CLI.CLI_Nombre_2, " & _
+                        "       CLI.CLI_Apellido_1, " & _
+                        "       CLI.CLI_Apellido_2, " & _
+                        "       CLI.CLI_Cod_Bank, " & _
+                        "       CLI.CLI_DocCiudad, " & _
+                        "       CLI.CLI_TipoPersona, " & _
+                        "       CLI.CLI_Regimen, " & _
+                        "       D1.DDLL_Descripcion AS DescripTPersona, " & _
+                        "       D2.DDLL_Descripcion AS DescripRegimen, " & _
+                        "       CLI.CLI_AccesoSistema, " & _
+                        "       CLI.CLI_Area_ID, " & _
+                        "       CLI.CLI_Cargo_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID_Jefe, " & _
+                        "       CLI.CLI_Document_ID_Jefe, " & _
+                        "       CLI.CLI_Politica_ID, " & _
+                        "       CLI.CLI_FechaCreacion, " & _
+                        "       CLI.CLI_Usuario_Actualizacion, " & _
+                        "        A.A_Descripcion, " & _
+                        "       CA.C_Descripcion, " & _
+                        "        PO.PS_Descripcion, " & _
+                        "       CLI.CLI_GrpDocumentos, " & _
+                        "       CLI_2.CLI_Nombre, " & _
+                        "       C2.C_Descripcion, " & _
+                        "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
+                        "      	GD.GD_Descripcion, " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
                         " FROM CLIENTE CLI " & _
                         " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
                         " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
@@ -185,6 +82,134 @@ Public Class ClienteSQLClass
                         " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
                         " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
                         " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI_2.CLI_Nit_ID,0,LEN(CLI_2.CLI_Nit_ID)) " & _
+                        " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos ")
+        Else
+
+            If vp_S_Contenido = "ALL" Then
+                sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID, " & _
+                        "       CLI.CLI_Document_ID, " & _
+                        "       CLI.CLI_Digito_Verificacion, " & _
+                        "       CLI.CLI_Nombre, " & _
+                        "       CLI.CLI_Ciudad_ID, " & _
+                        "       CLI.CLI_OP_Cliente, " & _
+                        "       CLI.CLI_OP_Avaluador, " & _
+                        "       CLI.CLI_OP_Transito, " & _
+                        "       CLI.CLI_OP_Hacienda, " & _
+                        "       CLI.CLI_OP_Empresa, " & _
+                        "       CLI.CLI_OP_Empleado, " & _
+                        "       CLI.CLI_OP_Asesor, " & _
+                        "       CLI.CLI_Other_1, " & _
+                        "       CLI.CLI_Other_2, " & _
+                        "       CLI.CLI_FechaActualizacion, " & _
+                        "       CLI.CLI_Usuario_Creacion, " & _
+                        "       C.C_Descripcion, " & _
+                        "       TD.TD_Descripcion, " & _
+                        "       CLI.CLI_Pais_ID, " & _
+                        "       P.P_Name, " & _
+                        "       CLI.CLI_Nombre_2, " & _
+                        "       CLI.CLI_Apellido_1, " & _
+                        "       CLI.CLI_Apellido_2, " & _
+                        "       CLI.CLI_Cod_Bank, " & _
+                        "       CLI.CLI_DocCiudad, " & _
+                        "       CLI.CLI_TipoPersona, " & _
+                        "       CLI.CLI_Regimen, " & _
+                        "       D1.DDLL_Descripcion AS DescripTPersona, " & _
+                        "       D2.DDLL_Descripcion AS DescripRegimen, " & _
+                        "       CLI.CLI_AccesoSistema, " & _
+                        "       CLI.CLI_Area_ID, " & _
+                        "       CLI.CLI_Cargo_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID_Jefe, " & _
+                        "       CLI.CLI_Document_ID_Jefe, " & _
+                        "       CLI.CLI_Politica_ID, " & _
+                        "       CLI.CLI_FechaCreacion, " & _
+                        "       CLI.CLI_Usuario_Actualizacion, " & _
+                        "        A.A_Descripcion, " & _
+                        "       CA.C_Descripcion, " & _
+                        "        PO.PS_Descripcion, " & _
+                        "       CLI.CLI_GrpDocumentos, " & _
+                        "       CLI_2.CLI_Nombre, " & _
+                        "       C2.C_Descripcion, " & _
+                        "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
+                        "      	GD.GD_Descripcion, " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        " FROM CLIENTE CLI " & _
+                        " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
+                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI_2.CLI_Nit_ID,0,LEN(CLI_2.CLI_Nit_ID)) " & _
+                        " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos ")
+            Else
+                sql.Append(" SELECT CLI.CLI_Nit_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID, " & _
+                        "       CLI.CLI_Document_ID, " & _
+                        "       CLI.CLI_Digito_Verificacion, " & _
+                        "       CLI.CLI_Nombre, " & _
+                        "       CLI.CLI_Ciudad_ID, " & _
+                        "       CLI.CLI_OP_Cliente, " & _
+                        "       CLI.CLI_OP_Avaluador, " & _
+                        "       CLI.CLI_OP_Transito, " & _
+                        "       CLI.CLI_OP_Hacienda, " & _
+                        "       CLI.CLI_OP_Empresa, " & _
+                        "       CLI.CLI_OP_Empleado, " & _
+                        "       CLI.CLI_OP_Asesor, " & _
+                        "       CLI.CLI_Other_1, " & _
+                        "       CLI.CLI_Other_2, " & _
+                        "       CLI.CLI_FechaActualizacion, " & _
+                        "       CLI.CLI_Usuario_Creacion, " & _
+                        "       C.C_Descripcion, " & _
+                        "       TD.TD_Descripcion, " & _
+                        "       CLI.CLI_Pais_ID, " & _
+                        "       P.P_Name, " & _
+                        "       CLI.CLI_Nombre_2, " & _
+                        "       CLI.CLI_Apellido_1, " & _
+                        "       CLI.CLI_Apellido_2, " & _
+                        "       CLI.CLI_Cod_Bank, " & _
+                        "       CLI.CLI_DocCiudad, " & _
+                        "       CLI.CLI_TipoPersona, " & _
+                        "       CLI.CLI_Regimen, " & _
+                        "       D1.DDLL_Descripcion AS DescripTPersona, " & _
+                        "       D2.DDLL_Descripcion AS DescripRegimen, " & _
+                        "       CLI.CLI_AccesoSistema, " & _
+                        "       CLI.CLI_Area_ID, " & _
+                        "       CLI.CLI_Cargo_ID, " & _
+                        "       CLI.CLI_TypeDocument_ID_Jefe, " & _
+                        "       CLI.CLI_Document_ID_Jefe, " & _
+                        "       CLI.CLI_Politica_ID, " & _
+                        "       CLI.CLI_FechaCreacion, " & _
+                        "       CLI.CLI_Usuario_Actualizacion, " & _
+                        "        A.A_Descripcion, " & _
+                        "       CA.C_Descripcion, " & _
+                        "        PO.PS_Descripcion, " & _
+                        "       CLI.CLI_GrpDocumentos, " & _
+                        "       CLI_2.CLI_Nombre, " & _
+                        "       C2.C_Descripcion, " & _
+                        "       CLI_3.CLI_Nombre + ' ' + CLI_3.CLI_Nombre_2 + ' ' + CLI_3.CLI_Apellido_1 + ' ' + CLI_3.CLI_Apellido_2, " & _
+                        "      	GD.GD_Descripcion, " & _
+                        "      	ROW_NUMBER() OVER(ORDER BY CLI.CLI_Nit_ID DESC) AS Index_Cliente  " & _
+                        " FROM CLIENTE CLI " & _
+                        " INNER JOIN PAISES P ON P.P_Cod = CLI.CLI_Pais_ID " & _
+                        " INNER JOIN CIUDADES C ON C.C_Ciudad_ID = CLI.CLI_Ciudad_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_TIPO_DOCUMENTO TD ON TD.TD_ID_TDoc = CLI.CLI_TypeDocument_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = CLI.CLI_TipoPersona AND D1.DDL_Tabla = 'TIPO_PERSONA' " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D2 ON D2.DDL_ID = CLI.CLI_Regimen AND D2.DDL_Tabla = 'REGIMEN' " & _
+                        " LEFT JOIN AREA A ON A.A_Area_ID = CLI.CLI_Area_ID " & _
+                        " LEFT JOIN CARGO CA ON CA.C_Cargo_ID = CLI.CLI_Cargo_ID " & _
+                        " LEFT JOIN " & BD_Admin & ".dbo.POLITICA_SEGURIDAD PO ON PO.PS_Politica_ID = CLI.CLI_Politica_ID " & _
+                        " INNER JOIN CLIENTE CLI_2 ON CLI_2.CLI_Document_ID = SUBSTRING(CLI_2.CLI_Nit_ID,0,LEN(CLI_2.CLI_Nit_ID)) " & _
+                        " LEFT JOIN CIUDADES C2 ON C2.C_Ciudad_ID = CLI.CLI_DocCiudad  " & _
+                        " LEFT JOIN CLIENTE CLI_3 ON CLI_3.CLI_Document_ID = CLI.CLI_Document_ID_Jefe " & _
+                        " LEFT JOIN " & BD_Documentos & ".dbo.GRUPO_DOCUMENTO GD ON GD.GD_Grp_Documento_ID = CLI.CLI_GrpDocumentos " & _
                         " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If
@@ -691,6 +716,30 @@ Public Class ClienteSQLClass
         Return Result
     End Function
 
+
+    ''' <summary>
+    ''' lee la matriz de Jefe
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_Jefe()
+
+        Dim ObjList As New List(Of ClienteClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("2")
+
+        Dim sql As New StringBuilder
+
+        sql.Append(" SELECT CLI_Document_ID AS ID,CAST(CLI_TypeDocument_ID AS NVARCHAR(3)) + ' - ' +  CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' +  CLI_Nombre + ' ' + CLI_Nombre_2 + ' ' + CLI_Apellido_1 + ' ' +  CLI_Apellido_2 AS Descripcion, CLI_Nit_ID FROM CLIENTE  " & _
+                   " WHERE CLI_OP_Empleado = 'S' ORDER BY CLI_Document_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ' ObjList = listCliente(StrQuery, Conexion, "Matrix")
+
+        Return ObjList
+
+    End Function
+
 #End Region
 
 #Region "CARGAR LISTAS"
@@ -778,7 +827,12 @@ Public Class ClienteSQLClass
 
             If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(41) Else objCliente.GrpDocumentos = 0
 
-            objCliente.Index = ReadConsulta.GetValue(42)
+            If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objCliente.DescripEmpresa = ReadConsulta.GetValue(42) Else objCliente.DescripEmpresa = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objCliente.DescripCiudadDoc = ReadConsulta.GetValue(43) Else objCliente.DescripCiudadDoc = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objCliente.DescripJefe = ReadConsulta.GetValue(44) Else objCliente.DescripJefe = ""
+            If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objCliente.DescripGrupoDocumentos = ReadConsulta.GetValue(45) Else objCliente.DescripGrupoDocumentos = ""
+
+            objCliente.Index = ReadConsulta.GetValue(46)
 
             'agregamos a la lista
             ObjListCliente.Add(objCliente)

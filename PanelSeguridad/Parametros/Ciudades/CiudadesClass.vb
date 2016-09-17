@@ -1,5 +1,6 @@
 ﻿Public Class CiudadesClass
 #Region "campos"
+    Private _Index As Long
     Private _Pais_ID As Integer
     Private _Ciudades_ID As Integer
     Private _Descripcion As String
@@ -9,6 +10,14 @@
 #End Region
 
 #Region "proiedades"
+    Public Property Index() As Long
+        Get
+            Return Me._Index
+        End Get
+        Set(ByVal value As Long)
+            Me._Index = value
+        End Set
+    End Property
     Public Property Pais_ID() As Integer
         Get
             Return Me._Pais_ID
