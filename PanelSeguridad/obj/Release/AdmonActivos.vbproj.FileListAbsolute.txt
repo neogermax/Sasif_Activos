@@ -47,3 +47,12 @@ Y:\Sasif_Activos\PanelSeguridad\obj\Release\GenerateResource.write.1.tlog
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.dll
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.xml
 Y:\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.pdb
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.dll
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.pdb
+D:\SASIF\Sasif_Activos\PanelSeguridad\bin\PanelSeguridad.xml
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbprojResolveAssemblyReference.cache
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.Resources.resources
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\AdmonActivos.vbproj.GenerateResource.Cache
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.dll
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.xml
+D:\SASIF\Sasif_Activos\PanelSeguridad\obj\Release\PanelSeguridad.pdb

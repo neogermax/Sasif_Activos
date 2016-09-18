@@ -111,7 +111,6 @@ function Charge_CatalogList_Matriz_Depend(M1, M2, Select_Pais, selector, type, S
 
 }
 
-
 //carga el combo de regimen
 function Change_Select_TPersona(index, Regimen) {
 
@@ -131,7 +130,6 @@ function Change_Select_TPersona(index, Regimen) {
                 }
                 $("#Select_Regimen").append("<option value='-1'>Seleccione...</option>");
                 $("#Select_Regimen option[value= '-1'] ").attr("selected", true);
-                  
             }
             else {
                 for (Item_N in ArrayRegimen) {
@@ -171,8 +169,57 @@ function Change_Select_TPersona(index, Regimen) {
         }
         $("#Select_Regimen").trigger("liszt:updated");
         $('.C_Chosen').trigger('chosen:updated');
-
     }
-
 }
 
+//carga los combps dependiendo del nit
+function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
+
+    $('#' + Selector).empty();
+    var objList = $("[id$='" + Selector + "']");
+
+    switch (Selector) {
+        case "Select_Area":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Area_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Cargo":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Cargo_ID + "'>" + Matrix[Item].Descripcion + "</option>");
+                }
+            }
+            break;
+
+        case "Select_Jefe":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].Nombre + "</option>");
+                }
+            }
+            break;
+
+        case "Select_GrpDocument":
+            for (Item in Matrix) {
+                if (Matrix[Item].Nit_ID == Nit) {
+                    $("#" + Selector).append("<option value='" + Matrix[Item].Document_ID + "'>" + Matrix[Item].namefile + "</option>");
+                }
+            }
+            break;
+
+    }
+    $('#' + Selector).append("<option value='-1'>Seleccione...</option>");
+    
+    if (Index_Edit == "")
+        $("#" + Selector + " option[value= '-1'] ").attr("selected", true);
+    else
+        $("#" + Selector + " option[value= '" + Index_Edit + "'] ").attr("selected", true);
+        
+    $("#" + Selector).trigger("liszt:updated");
+    $('.C_Chosen').trigger('chosen:updated');
+
+}

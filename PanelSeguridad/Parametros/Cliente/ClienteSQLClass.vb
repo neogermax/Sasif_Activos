@@ -216,7 +216,7 @@ Public Class ClienteSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListCliente = list(StrQuery, Conexion)
+        ObjListCliente = list(StrQuery, Conexion, "List")
 
         Return ObjListCliente
 
@@ -455,31 +455,6 @@ Public Class ClienteSQLClass
     ''' <param name="vp_S_Table"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Public Function Charge_DropListCiudad(ByVal vp_S_Table As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT C_Ciudad_ID AS ID,CAST(C_Ciudad_ID AS NVARCHAR(15)) + ' - ' + C_Descripcion AS DESCRIPCION FROM CIUDADES ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_Table"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
     Public Function Charge_DropListDocumento(ByVal vp_S_Table As String)
 
         Dim ObjListDroplist As New List(Of Droplist_Class)
@@ -491,33 +466,6 @@ Public Class ClienteSQLClass
         Dim sql As New StringBuilder
 
         sql.Append(" SELECT TD_ID_TDoc AS ID, CAST(TD_ID_TDoc AS NVARCHAR(15)) + ' - ' + TD_Descripcion AS Descripcion  FROM TC_TIPO_DOCUMENTO ")
-        StrQuery = sql.ToString
-
-        ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
-
-        Return ObjListDroplist
-
-    End Function
-
-    ''' <summary>
-    ''' crea la consulta para cargar el combo
-    ''' </summary>
-    ''' <param name="vp_S_NitEmpresa"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function Charge_DropListJefe(ByVal vp_S_NitEmpresa As String)
-
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim StrQuery As String = ""
-        Dim conex As New Conector
-        Dim Conexion As String = conex.typeConexion("2")
-
-        Dim SQLGeneral As New GeneralSQLClass
-        Dim sql As New StringBuilder
-
-        sql.Append(" SELECT CLI_Document_ID AS ID,CAST(CLI_TypeDocument_ID AS NVARCHAR(3)) + ' - ' +  CAST(CLI_Document_ID AS NVARCHAR(20)) + ' - ' +  CLI_Nombre + ' ' + CLI_Nombre_2 + ' ' + CLI_Apellido_1 + ' ' +  CLI_Apellido_2 AS Descripcion FROM CLIENTE " & _
-                   " WHERE CLI_OP_Empleado = 'S' AND CLI_Nit_ID = '" & vp_S_NitEmpresa & "'")
-
         StrQuery = sql.ToString
 
         ObjListDroplist = SQLGeneral.listdrop(StrQuery, Conexion)
@@ -629,6 +577,150 @@ Public Class ClienteSQLClass
 
 #End Region
 
+#Region "CARGAR LISTAS"
+
+    ''' <summary>
+    ''' funcion que trae el listado de Cliente para armar la tabla
+    ''' </summary>
+    ''' <param name="vp_S_StrQuery"></param>
+    ''' <param name="vg_S_StrConexion"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String, ByVal vp_S_TypeList As String)
+
+        'inicializamos conexiones a la BD
+        Dim objcmd As OleDbCommand = Nothing
+        Dim objConexBD As OleDbConnection = Nothing
+        objConexBD = New OleDbConnection(vg_S_StrConexion)
+        Dim ReadConsulta As OleDbDataReader = Nothing
+
+        objcmd = objConexBD.CreateCommand
+
+        Dim ObjListCliente As New List(Of ClienteClass)
+        Dim ObjListDoc As New List(Of DocumentosClass)
+
+        'abrimos conexion
+        objConexBD.Open()
+        'cargamos consulta
+        objcmd.CommandText = vp_S_StrQuery
+        'ejecutamos consulta
+        ReadConsulta = objcmd.ExecuteReader()
+
+        Select Case vp_S_TypeList
+            Case "List"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    If Not (IsDBNull(ReadConsulta.GetValue(0))) Then objCliente.Nit_ID = ReadConsulta.GetValue(0) Else objCliente.Nit_ID = ""
+                    objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
+                    objCliente.Document_ID = ReadConsulta.GetValue(2)
+                    objCliente.Digito_Verificacion = ReadConsulta.GetValue(3)
+                    objCliente.Nombre = ReadConsulta.GetValue(4)
+                    objCliente.Ciudad_ID = ReadConsulta.GetValue(5)
+                    objCliente.OP_Cliente = ReadConsulta.GetValue(6)
+                    objCliente.OP_Avaluador = ReadConsulta.GetValue(7)
+                    objCliente.OP_Transito = ReadConsulta.GetValue(8)
+                    objCliente.OP_Hacienda = ReadConsulta.GetValue(9)
+                    objCliente.OP_Empresa = ReadConsulta.GetValue(10)
+                    objCliente.OP_Empleado = ReadConsulta.GetValue(11)
+                    objCliente.OP_Asesor = ReadConsulta.GetValue(12)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objCliente.Other_1 = ReadConsulta.GetValue(13) Else objCliente.Other_1 = "-1"
+                    If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Other_2 = ReadConsulta.GetValue(14) Else objCliente.Other_2 = "-1"
+
+                    objCliente.FechaActualizacion = ReadConsulta.GetValue(15)
+                    objCliente.UsuarioCreacion = ReadConsulta.GetValue(16)
+                    objCliente.DescripCiudad = ReadConsulta.GetValue(17)
+                    objCliente.DescripTypeDocument = ReadConsulta.GetValue(18)
+
+                    objCliente.Pais_ID = ReadConsulta.GetValue(19)
+                    objCliente.DescripPais = ReadConsulta.GetValue(20)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objCliente.Nombre_2 = ReadConsulta.GetValue(21) Else objCliente.Nombre_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objCliente.Apellido_1 = ReadConsulta.GetValue(22) Else objCliente.Apellido_1 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objCliente.Apellido_2 = ReadConsulta.GetValue(23) Else objCliente.Apellido_2 = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objCliente.Cod_Bank = ReadConsulta.GetValue(24) Else objCliente.Cod_Bank = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objCliente.DocCiudad = ReadConsulta.GetValue(25) Else objCliente.DocCiudad = 0
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objCliente.TipoPersona = ReadConsulta.GetValue(26) Else objCliente.TipoPersona = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objCliente.Regimen = ReadConsulta.GetValue(27) Else objCliente.Regimen = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objCliente.DescripTipoPersona = ReadConsulta.GetValue(28) Else objCliente.DescripTipoPersona = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objCliente.DescripRegimen = ReadConsulta.GetValue(29) Else objCliente.DescripRegimen = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objCliente.AccesoSistema = ReadConsulta.GetValue(30) Else objCliente.AccesoSistema = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objCliente.Area_ID = ReadConsulta.GetValue(31) Else objCliente.Area_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objCliente.Cargo_ID = ReadConsulta.GetValue(32) Else objCliente.Cargo_ID = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objCliente.TypeDocument_ID_Jefe = ReadConsulta.GetValue(33) Else objCliente.TypeDocument_ID_Jefe = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objCliente.Document_ID_Jefe = ReadConsulta.GetValue(34) Else objCliente.Document_ID_Jefe = 0
+                    If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objCliente.Politica_ID = ReadConsulta.GetValue(35) Else objCliente.Politica_ID = 0
+
+                    objCliente.FechaCreacion = ReadConsulta.GetValue(36)
+                    objCliente.UsuarioActualizacion = ReadConsulta.GetValue(37)
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objCliente.DescripArea = ReadConsulta.GetValue(38) Else objCliente.DescripArea = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objCliente.DescripCargo = ReadConsulta.GetValue(39) Else objCliente.DescripCargo = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objCliente.DescripSeguridad = ReadConsulta.GetValue(40) Else objCliente.DescripSeguridad = ""
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(41) Else objCliente.GrpDocumentos = 0
+
+                    If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objCliente.DescripEmpresa = ReadConsulta.GetValue(42) Else objCliente.DescripEmpresa = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objCliente.DescripCiudadDoc = ReadConsulta.GetValue(43) Else objCliente.DescripCiudadDoc = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objCliente.DescripJefe = ReadConsulta.GetValue(44) Else objCliente.DescripJefe = ""
+                    If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objCliente.DescripGrupoDocumentos = ReadConsulta.GetValue(45) Else objCliente.DescripGrupoDocumentos = ""
+
+                    objCliente.Index = ReadConsulta.GetValue(46)
+
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
+            Case "Matrix_Jefe"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim objCliente As New ClienteClass
+                    'cargamos datos sobre el objeto de login
+                    objCliente.Document_ID = ReadConsulta.GetValue(0)
+                    objCliente.Nombre = ReadConsulta.GetValue(1)
+                    objCliente.Nit_ID = ReadConsulta.GetValue(2)
+                    'agregamos a la lista
+                    ObjListCliente.Add(objCliente)
+
+                End While
+
+            Case "Matrix_GrpDoc"
+                'recorremos la consulta por la cantidad de datos en la BD
+                While ReadConsulta.Read
+
+                    Dim obj As New DocumentosClass
+                    'cargamos datos sobre el objeto de login
+                    obj.Document_ID = ReadConsulta.GetValue(0)
+                    obj.namefile = ReadConsulta.GetValue(1)
+                    obj.Nit_ID = ReadConsulta.GetValue(2)
+                    'agregamos a la lista
+                    ObjListDoc.Add(obj)
+
+                End While
+        End Select
+
+        'cerramos conexiones
+        ReadConsulta.Close()
+        objConexBD.Close()
+        'retornamos la consulta
+
+        If vp_S_TypeList = "Matrix_GrpDoc" Then
+            Return ObjListDoc
+        Else
+            Return ObjListCliente
+        End If
+      
+    End Function
+
+#End Region
+
 #Region "OTRAS CONSULTAS"
 
     ''' <summary>
@@ -684,7 +776,7 @@ Public Class ClienteSQLClass
 
         StrQuery = sql.ToString
 
-        ObjListCliente = list(StrQuery, Conexion)
+        ObjListCliente = list(StrQuery, Conexion, "List")
 
         Return ObjListCliente
 
@@ -716,7 +808,6 @@ Public Class ClienteSQLClass
         Return Result
     End Function
 
-
     ''' <summary>
     ''' lee la matriz de Jefe
     ''' </summary>
@@ -734,7 +825,30 @@ Public Class ClienteSQLClass
                    " WHERE CLI_OP_Empleado = 'S' ORDER BY CLI_Document_ID ASC ")
         Dim StrQuery As String = sql.ToString
 
-        ' ObjList = listCliente(StrQuery, Conexion, "Matrix")
+        ObjList = list(StrQuery, Conexion, "Matrix_Jefe")
+
+        Return ObjList
+
+    End Function
+
+    ''' <summary>
+    ''' lee la matriz de Grupo documentos
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Read_Matrix_GrpDocumentos()
+
+        Dim ObjList As New List(Of DocumentosClass)
+        Dim conex As New Conector
+        Dim Conexion As String = conex.typeConexion("3")
+
+        Dim sql As New StringBuilder
+
+        sql.Append("  SELECT GD_Grp_Documento_ID AS ID,CAST(GD_Grp_Documento_ID AS NVARCHAR(5)) + ' - ' + GD_Descripcion AS DESCRIPCION, GD_Nit_ID FROM GRUPO_DOCUMENTO  " & _
+                                "  ORDER BY GD_Grp_Documento_ID ASC ")
+        Dim StrQuery As String = sql.ToString
+
+        ObjList = list(StrQuery, Conexion, "Matrix_GrpDoc")
 
         Return ObjList
 
@@ -742,110 +856,4 @@ Public Class ClienteSQLClass
 
 #End Region
 
-#Region "CARGAR LISTAS"
-
-    ''' <summary>
-    ''' funcion que trae el listado de Cliente para armar la tabla
-    ''' </summary>
-    ''' <param name="vp_S_StrQuery"></param>
-    ''' <param name="vg_S_StrConexion"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function list(ByVal vp_S_StrQuery As String, ByVal vg_S_StrConexion As String)
-
-        'inicializamos conexiones a la BD
-        Dim objcmd As OleDbCommand = Nothing
-        Dim objConexBD As OleDbConnection = Nothing
-        objConexBD = New OleDbConnection(vg_S_StrConexion)
-        Dim ReadConsulta As OleDbDataReader = Nothing
-
-        objcmd = objConexBD.CreateCommand
-
-        Dim ObjListCliente As New List(Of ClienteClass)
-
-        'abrimos conexion
-        objConexBD.Open()
-        'cargamos consulta
-        objcmd.CommandText = vp_S_StrQuery
-        'ejecutamos consulta
-        ReadConsulta = objcmd.ExecuteReader()
-
-        'recorremos la consulta por la cantidad de datos en la BD
-        While ReadConsulta.Read
-
-            Dim objCliente As New ClienteClass
-            'cargamos datos sobre el objeto de login
-            If Not (IsDBNull(ReadConsulta.GetValue(0))) Then objCliente.Nit_ID = ReadConsulta.GetValue(0) Else objCliente.Nit_ID = ""
-            objCliente.TypeDocument_ID = ReadConsulta.GetValue(1)
-            objCliente.Document_ID = ReadConsulta.GetValue(2)
-            objCliente.Digito_Verificacion = ReadConsulta.GetValue(3)
-            objCliente.Nombre = ReadConsulta.GetValue(4)
-            objCliente.Ciudad_ID = ReadConsulta.GetValue(5)
-            objCliente.OP_Cliente = ReadConsulta.GetValue(6)
-            objCliente.OP_Avaluador = ReadConsulta.GetValue(7)
-            objCliente.OP_Transito = ReadConsulta.GetValue(8)
-            objCliente.OP_Hacienda = ReadConsulta.GetValue(9)
-            objCliente.OP_Empresa = ReadConsulta.GetValue(10)
-            objCliente.OP_Empleado = ReadConsulta.GetValue(11)
-            objCliente.OP_Asesor = ReadConsulta.GetValue(12)
-
-            If Not (IsDBNull(ReadConsulta.GetValue(13))) Then objCliente.Other_1 = ReadConsulta.GetValue(13) Else objCliente.Other_1 = "-1"
-            If Not (IsDBNull(ReadConsulta.GetValue(14))) Then objCliente.Other_2 = ReadConsulta.GetValue(14) Else objCliente.Other_2 = "-1"
-
-            objCliente.FechaActualizacion = ReadConsulta.GetValue(15)
-            objCliente.UsuarioCreacion = ReadConsulta.GetValue(16)
-            objCliente.DescripCiudad = ReadConsulta.GetValue(17)
-            objCliente.DescripTypeDocument = ReadConsulta.GetValue(18)
-
-            objCliente.Pais_ID = ReadConsulta.GetValue(19)
-            objCliente.DescripPais = ReadConsulta.GetValue(20)
-
-            If Not (IsDBNull(ReadConsulta.GetValue(21))) Then objCliente.Nombre_2 = ReadConsulta.GetValue(21) Else objCliente.Nombre_2 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(22))) Then objCliente.Apellido_1 = ReadConsulta.GetValue(22) Else objCliente.Apellido_1 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(23))) Then objCliente.Apellido_2 = ReadConsulta.GetValue(23) Else objCliente.Apellido_2 = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(24))) Then objCliente.Cod_Bank = ReadConsulta.GetValue(24) Else objCliente.Cod_Bank = 0
-            If Not (IsDBNull(ReadConsulta.GetValue(25))) Then objCliente.DocCiudad = ReadConsulta.GetValue(25) Else objCliente.DocCiudad = 0
-
-            If Not (IsDBNull(ReadConsulta.GetValue(26))) Then objCliente.TipoPersona = ReadConsulta.GetValue(26) Else objCliente.TipoPersona = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(27))) Then objCliente.Regimen = ReadConsulta.GetValue(27) Else objCliente.Regimen = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(28))) Then objCliente.DescripTipoPersona = ReadConsulta.GetValue(28) Else objCliente.DescripTipoPersona = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(29))) Then objCliente.DescripRegimen = ReadConsulta.GetValue(29) Else objCliente.DescripRegimen = ""
-
-            If Not (IsDBNull(ReadConsulta.GetValue(30))) Then objCliente.AccesoSistema = ReadConsulta.GetValue(30) Else objCliente.AccesoSistema = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(31))) Then objCliente.Area_ID = ReadConsulta.GetValue(31) Else objCliente.Area_ID = 0
-            If Not (IsDBNull(ReadConsulta.GetValue(32))) Then objCliente.Cargo_ID = ReadConsulta.GetValue(32) Else objCliente.Cargo_ID = 0
-            If Not (IsDBNull(ReadConsulta.GetValue(33))) Then objCliente.TypeDocument_ID_Jefe = ReadConsulta.GetValue(33) Else objCliente.TypeDocument_ID_Jefe = 0
-            If Not (IsDBNull(ReadConsulta.GetValue(34))) Then objCliente.Document_ID_Jefe = ReadConsulta.GetValue(34) Else objCliente.Document_ID_Jefe = 0
-            If Not (IsDBNull(ReadConsulta.GetValue(35))) Then objCliente.Politica_ID = ReadConsulta.GetValue(35) Else objCliente.Politica_ID = 0
-
-            objCliente.FechaCreacion = ReadConsulta.GetValue(36)
-            objCliente.UsuarioActualizacion = ReadConsulta.GetValue(37)
-
-            If Not (IsDBNull(ReadConsulta.GetValue(38))) Then objCliente.DescripArea = ReadConsulta.GetValue(38) Else objCliente.DescripArea = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(39))) Then objCliente.DescripCargo = ReadConsulta.GetValue(39) Else objCliente.DescripCargo = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(40))) Then objCliente.DescripSeguridad = ReadConsulta.GetValue(40) Else objCliente.DescripSeguridad = ""
-
-            If Not (IsDBNull(ReadConsulta.GetValue(41))) Then objCliente.GrpDocumentos = ReadConsulta.GetValue(41) Else objCliente.GrpDocumentos = 0
-
-            If Not (IsDBNull(ReadConsulta.GetValue(42))) Then objCliente.DescripEmpresa = ReadConsulta.GetValue(42) Else objCliente.DescripEmpresa = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(43))) Then objCliente.DescripCiudadDoc = ReadConsulta.GetValue(43) Else objCliente.DescripCiudadDoc = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(44))) Then objCliente.DescripJefe = ReadConsulta.GetValue(44) Else objCliente.DescripJefe = ""
-            If Not (IsDBNull(ReadConsulta.GetValue(45))) Then objCliente.DescripGrupoDocumentos = ReadConsulta.GetValue(45) Else objCliente.DescripGrupoDocumentos = ""
-
-            objCliente.Index = ReadConsulta.GetValue(46)
-
-            'agregamos a la lista
-            ObjListCliente.Add(objCliente)
-
-        End While
-
-        'cerramos conexiones
-        ReadConsulta.Close()
-        objConexBD.Close()
-        'retornamos la consulta
-        Return ObjListCliente
-
-    End Function
-
-#End Region
 End Class

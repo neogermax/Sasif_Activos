@@ -3,7 +3,10 @@ var Matrix_Pais = [];
 var Matrix_Ciudad = [];
 var Matrix_Area = [];
 var Matrix_Cargo = [];
+var Matrix_Jefe = [];
+var Matrix_GrpDocumentos = [];
 
+var ArrayRegimen= [];
 var ArrayCliente = [];
 var ArrayCombo = [];
 var ArrayPaises = [];
@@ -12,11 +15,7 @@ var ArrayEmpresaNit = [];
 var ArrayEntfinanciera = [];
 var ArrayTcuenta = [];
 var ArrayCli_Relacion = [];
-var ArrayRegimen = [];
-var ArrayArea = [];
-var ArrayCargo = [];
 var ArraySeguridad = [];
-var ArrayJefe = [];
 var ArrayGrpDocumentos = [];
 
 var estado;
@@ -36,7 +35,9 @@ $(document).ready(function () {
     transaccionAjax_MPaises_Ciudades('MATRIX_PAIS_CIUDAD');
     transaccionAjax_MArea('MATRIX_AREA');
     transaccionAjax_MCargo('MATRIX_CARGO');
-   
+    transaccionAjax_MJefe('MATRIX_JEFE');
+    transaccionAjax_MGrpDoc('MATRIX_GRP');
+        
     M_Regimen();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
@@ -279,7 +280,7 @@ $(document).ready(function () {
 
     Format_Adress();
     Change_Select_pais();
-    Change_Select_TPersona("","");
+    Change_Select_TPersona("", "");
     ValideAnexos();
     Change_Select_TDoc();
     Change_Select_Nit();
@@ -291,18 +292,10 @@ $(document).ready(function () {
 function Change_Select_Nit() {
     $("#Select_EmpresaNit").change(function () {
         var index_ID = $(this).val();
-        $('#Select_Area').empty();
-        transacionAjax_Area('Area', index_ID);
-
-        $('#Select_Cargo').empty();
-        transacionAjax_Cargo('Cargo', index_ID);
-
-        $('#Select_Jefe').empty();
-        transacionAjax_Jefe('Jefe', index_ID);
-
-        $('#Select_GrpDocument').empty();
-        transacionAjax_GrpDocumentos('GrpDocumentos', index_ID);
-
+        Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
     });
 }
 
@@ -578,19 +571,15 @@ function Ver(Index_Cliente) {
 
 }
 
-var StrArea;
-var StrCargo;
-var StrDocJefe;
 var StrPolitica;
-var StrGrpdocumento;
 
 // muestra el registro a editar
 function Editar(Index_Cliente, Type) {
 
     Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, ArrayCliente[Index_Cliente].Pais_ID, "Select_Ciudad", 1, ArrayCliente[Index_Cliente].Ciudad_ID);
     Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, ArrayCliente[Index_Cliente].Pais_ID, "Select_Ciudad_Doc", 1, ArrayCliente[Index_Cliente].DocCiudad);
-    Change_Select_TPersona(ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Regimen) 
-      
+    Change_Select_TPersona(ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Regimen);
+    
     if (Type == 'V') {
         $("#TablaDatos_D_Vista").css("display", "inline-table");
         $("#TablaDatos_D").css("display", "none");
@@ -624,6 +613,8 @@ function Editar(Index_Cliente, Type) {
     $("#Select_TPersona").val(ArrayCliente[Index_Cliente].TipoPersona);
     $("#Select_Acceso").val(ArrayCliente[Index_Cliente].AccesoSistema);
 
+    StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
+ 
     if (StrPolitica == 0)
         $("#Select_Politica").val("-1");
     else
@@ -650,13 +641,7 @@ function Editar(Index_Cliente, Type) {
     $("#Txt_Ape_1").val(ArrayCliente[Index_Cliente].Apellido_1);
     $("#Txt_Ape_2").val(ArrayCliente[Index_Cliente].Apellido_2);
     $("#Txt_CodBank").val(ArrayCliente[Index_Cliente].Cod_Bank);
-
-    StrArea = ArrayCliente[Index_Cliente].Area_ID;
-    StrCargo = ArrayCliente[Index_Cliente].Cargo_ID;
-    StrPolitica = ArrayCliente[Index_Cliente].Cargo_ID;
-    StrDocJefe = ArrayCliente[Index_Cliente].Document_ID_Jefe;
-    StrGrpdocumento = ArrayCliente[Index_Cliente].GrpDocumentos;
-
+        
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Select_Documento").attr("disabled", "disabled");
 
@@ -665,7 +650,7 @@ function Editar(Index_Cliente, Type) {
     $("#Complementos").css("display", "inline-table");
     $("#Admin_Anexos").css("display", "inline-table");
 
-    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID, ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Ciudad_ID, ArrayCliente[Index_Cliente].DocCiudad);
+    transacionAjax_Foto('Foto', D_Nit, D_TDocumento, D_Documento, Index_Cliente, Type, ArrayCliente[Index_Cliente].Pais_ID);
 
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
@@ -679,6 +664,11 @@ function Editar(Index_Cliente, Type) {
 
     $('.C_Chosen').trigger('chosen:updated');
 
+    Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Area_ID);
+    Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Cargo_ID);
+    Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Document_ID_Jefe);
+    Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].GrpDocumentos);
+ 
 }
 
 //oculta los combos
@@ -719,9 +709,6 @@ function ConsultaPersona(Index_Cliente) {
     $("#Con_Ciudad_Doc").html(ArrayCliente[Index_Cliente].DescripCiudadDoc);
     $("#Con_Jefe").html(ArrayCliente[Index_Cliente].DescripJefe);
 }
-
-
-
 
 //carga las relaciones ademas llama los combos que son dependientes
 function Carga_Relaciones(Index_Cliente, Type) {
@@ -796,59 +783,7 @@ function Carga_Relaciones(Index_Cliente, Type) {
         $("#C_Empleado_Vista").css("display", "none");
     }
 
-    $(document).ajaxStart(function () {
-        $("#Dialog_Charge").dialog("open");
-    }).ajaxStop(function () {
-
-        if (StrGrpdocumento != 0)
-            ChargeGrpDocumentos(StrGrpdocumento);
-
-        if (ArrayCliente[Index_Cliente].OP_Empleado == "S")
-            EditEmpleado();
-
-        $("#Dialog_Charge").dialog("close");
-    });
-
 }
-
-//para cargar edicion de los combos de empleados
-function EditEmpleado() {
-
-    ChargeArea(StrArea);
-    ChargeCargo(StrCargo);
-
-    if (StrDocJefe != 0)
-        ChargeJefe(StrDocJefe);
-}
-
-//funcion de carga de la cuidad para edicion
-function ChargeGrpDocumentos(index) {
-    $('#Select_GrpDocument').val(index);
-    $("#Select_GrpDocument").trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//funcion de carga del area para edicion
-function ChargeArea(index) {
-    $('#Select_Area').val(index);
-    $("#Select_Area").trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//funcion de carga del cargo para edicion
-function ChargeCargo(index) {
-    $('#Select_Cargo').val(index);
-    $("#Select_Cargo").trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
-//funcion de carga del jefe imediato para edicion
-function ChargeJefe(index) {
-    $('#Select_Jefe').val(index);
-    $("#Select_Jefe").trigger("liszt:updated");
-    $('.C_Chosen').trigger('chosen:updated');
-}
-
 
 //muestra el registro a eliminar
 function Eliminar(Index_Cliente) {

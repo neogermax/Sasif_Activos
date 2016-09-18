@@ -36,6 +36,12 @@ Public Class ClienteAjax
                 Case "MATRIX_CARGO"
                     Carga_Matrix_Cargo()
 
+                Case "MATRIX_JEFE"
+                    Carga_Matrix_Jefe()
+
+                Case "MATRIX_GRP"
+                    Carga_Matrix_GrpDoc()
+
                 Case "Cliente"
                     CargarCliente()
 
@@ -44,15 +50,6 @@ Public Class ClienteAjax
 
                 Case "TCuenta"
                     CargarTCuenta()
-
-                Case "Area"
-                    CargarArea()
-
-                Case "Cargo"
-                    CargarCargo()
-
-                Case "Jefe"
-                    CargarJefe()
 
                 Case "GrpDocumentos"
                     CargarGrpDocumentos()
@@ -537,7 +534,6 @@ Public Class ClienteAjax
 
     End Sub
 
-
     ''' <summary>
     ''' funcion que carga La matrix
     ''' </summary>
@@ -550,6 +546,36 @@ Public Class ClienteAjax
         ObjList_MatrixCargo = SQLC.Read_Matrix_Cargo()
 
         Response.Write(JsonConvert.SerializeObject(ObjList_MatrixCargo.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_Jefe()
+
+        Dim SQLC As New ClienteSQLClass
+
+        Dim ObjList_MatrixJefe As New List(Of ClienteClass)
+        ObjList_MatrixJefe = SQLC.Read_Matrix_Jefe()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixJefe.ToArray()))
+
+    End Sub
+
+    ''' <summary>
+    ''' funcion que carga La matrix
+    ''' </summary>
+    ''' <remarks></remarks>
+    Protected Sub Carga_Matrix_GrpDoc()
+
+        Dim SQLC As New ClienteSQLClass
+
+        Dim ObjList_MatrixGRP As New List(Of DocumentosClass)
+        ObjList_MatrixGRP = SQLC.Read_Matrix_GrpDocumentos()
+
+        Response.Write(JsonConvert.SerializeObject(ObjList_MatrixGRP.ToArray()))
 
     End Sub
 
@@ -625,51 +651,6 @@ Public Class ClienteAjax
         Dim vl_S_Tabla As String = Request.Form("tabla")
 
         ObjListDroplist = SQL.Charge_DropListDocumento(vl_S_Tabla)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarArea()
-
-        Dim SQL As New AreaSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Index As String = Request.Form("Index")
-
-        ObjListDroplist = SQL.Charge_DropListAreaDepend(vl_S_Index)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarCargo()
-
-        Dim SQL As New CargoSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Index As String = Request.Form("Index")
-
-        ObjListDroplist = SQL.Charge_DropListCargoDepend(vl_S_Index)
-        Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
-
-    End Sub
-
-    ''' <summary>
-    ''' funcion que carga el objeto DDL consulta
-    ''' </summary>
-    ''' <remarks></remarks>
-    Protected Sub CargarJefe()
-
-        Dim SQL As New ClienteSQLClass
-        Dim ObjListDroplist As New List(Of Droplist_Class)
-        Dim vl_S_Index As String = Request.Form("Index")
-
-        ObjListDroplist = SQL.Charge_DropListJefe(vl_S_Index)
         Response.Write(JsonConvert.SerializeObject(ObjListDroplist.ToArray()))
 
     End Sub

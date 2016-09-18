@@ -138,7 +138,7 @@ function transaccionAjax_MArea(State) {
         type: "POST",
         //crear json
         data: { "action": State,
-             "tabla": 'AREA'
+            "tabla": 'AREA'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -181,6 +181,57 @@ function transaccionAjax_MCargo(State) {
     });
 }
 
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MJefe(State) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'AREA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_Jefe = [];
+            }
+            else {
+                Matrix_Jefe = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+/*-------------------- carga ---------------------------*/
+//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
+function transaccionAjax_MGrpDoc(State) {
+
+    $.ajax({
+        url: "ClienteAjax.aspx",
+        type: "POST",
+        //crear json
+        data: { "action": State,
+            "tabla": 'AREA'
+        },
+        //Transaccion Ajax en proceso
+        success: function (result) {
+            if (result == "") {
+                Matrix_GrpDocumentos = [];
+            }
+            else {
+                Matrix_GrpDocumentos = JSON.parse(result);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
 
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
@@ -236,120 +287,6 @@ function transacionAjax_Documento(State) {
     });
 }
 
-
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Area(State, Index) {
-
-    $.ajax({
-        url: "ClienteAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Index": Index,
-            "tabla": 'AREA'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayArea = [];
-            }
-            else {
-                ArrayArea = JSON.parse(result);
-                charge_CatalogList(ArrayArea, "Select_Area", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Cargo(State, Index) {
-
-    $.ajax({
-        url: "ClienteAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Index": Index,
-            "tabla": 'Cargo'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayCargo = [];
-            }
-            else {
-                ArrayCargo = JSON.parse(result);
-                charge_CatalogList(ArrayCargo, "Select_Cargo", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_Jefe(State, Index) {
-
-    $.ajax({
-        url: "ClienteAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Index": Index,
-            "tabla": 'Cargo'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayJefe = [];
-            }
-            else {
-                ArrayJefe = JSON.parse(result);
-                charge_CatalogList(ArrayJefe, "Select_Jefe", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
-/*-------------------- carga ---------------------------*/
-//hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
-function transacionAjax_GrpDocumentos(State, Index) {
-
-    $.ajax({
-        url: "ClienteAjax.aspx",
-        type: "POST",
-        //crear json
-        data: { "action": State,
-            "Index": Index,
-            "tabla": 'GrpDocumentos'
-        },
-        //Transaccion Ajax en proceso
-        success: function (result) {
-            if (result == "") {
-                ArrayGrpDocumentos = [];
-            }
-            else {
-                ArrayGrpDocumentos = JSON.parse(result);
-                charge_CatalogList(ArrayGrpDocumentos, "Select_GrpDocument", 1);
-            }
-        },
-        error: function () {
-
-        }
-    });
-}
-
 /*-------------------- carga ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_Seguridad(State) {
@@ -375,8 +312,6 @@ function transacionAjax_Seguridad(State) {
         }
     });
 }
-
-
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
@@ -902,21 +837,11 @@ function transacionAjax_allDocument(State, Nit, TypeDoc, Doc, Opc_Link) {
 
 /*------------------------------ CONSULTA ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente, Type, Pais, TypePeople, Ciudad, DocCiudad) {
+function transacionAjax_Foto(State, Nit, TypeDoc, Doc, Index_Cliente, Type, Pais) {
 
-    $('#Select_Area').empty();
-    $('#Select_Cargo').empty();
-    $('#Select_Jefe').empty();
-    $('#Select_GrpDocument').empty();
-  
-    transacionAjax_Area('Area', Nit);
-    transacionAjax_Cargo('Cargo', Nit);
-    transacionAjax_Jefe('Jefe', Nit);
-    transacionAjax_GrpDocumentos('GrpDocumentos', Nit);
-      
     transacionAjax_Ciudad_D('Ciudad', Pais);
- 
-     ArrayFoto = [];
+
+    ArrayFoto = [];
 
     $.ajax({
         url: "ClienteAjax.aspx",
