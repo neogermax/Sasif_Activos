@@ -6,7 +6,103 @@ PanelSeguridad
 </name>
 </assembly>
 <members>
-<member name="M:PanelSeguridad.Adm_UsuarioAjax.Consulta_User">
+<member name="M:PanelSeguridad.RutaDocumentosSQLClass.Read_AllRutaDocumentos(System.String,System.String,System.String)">
+	<summary>
+ creala consulta para la tabla RutaDocumentos parametrizada (READ)
+ </summary>
+	<param name="vp_S_Filtro"></param>
+	<param name="vp_S_Opcion"></param>
+	<param name="vp_S_Contenido"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.InsertRutaDocumentos(PanelSeguridad.RutaDocumentosClass)">
+	<summary>
+ funcion que crea el query para la insercion de nuevo RutaDocumentos (INSERT)
+ </summary>
+	<param name="vp_Obj_RutaDocumentos"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.UpdateRutaDocumentos(PanelSeguridad.RutaDocumentosClass)">
+	<summary>
+ funcion que crea el query para la modificacion del RutaDocumentos (UPDATE)
+ </summary>
+	<param name="vp_Obj_RutaDocumentos"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.EraseRutaDocumentos(PanelSeguridad.RutaDocumentosClass)">
+	<summary>
+ funcion que crea el query para la eliminacion del RutaDocumentos (DELETE)
+ </summary>
+	<param name="vp_Obj_RutaDocumentos"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.ReadCharge_DropList(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.Charge_DropListRutaDocumentosDepend(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_NitEmpresa"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.Charge_DropListSeguridad(System.String)">
+	<summary>
+ crea la consulta para cargar el combo
+ </summary>
+	<param name="vp_S_Table"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.listRutaDocumentos(System.String,System.String)">
+	<summary>
+ funcion que trae el listado de RutaDocumentos para armar la tabla
+ </summary>
+	<param name="vp_S_StrQuery"></param>
+	<param name="vg_S_StrConexion"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosSQLClass.Consulta_Repetido(PanelSeguridad.RutaDocumentosClass)">
+	<summary>
+ averigua si esta repetido
+ </summary>
+	<param name="vp_O_Obj"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.Consulta_RutaDocumentos">
+	<summary>
+ traemos todos los datos para tabla RutaDocumentos (READ)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.InsertRutaDocumentos">
+	<summary>
+ funcion que inserta en la tabla RutaDocumentos (INSERT)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.UpdateRutaDocumentos">
+	<summary>
+ funcion que actualiza en la tabla RutaDocumentos (UPDATE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.EraseRutaDocumentos">
+	<summary>
+ funcion que elimina en la tabla RutaDocumentos (DELETE)
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.CargarDroplist">
+	<summary>
+ funcion que carga el objeto DDL Links
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.RutaDocumentosAjax.CargarCliente">
+	<summary>
+ funcion que carga el objeto DDL consulta
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PanelSeguridad.Adm_UsuarioAjax.Consulta_User">
 	<summary>
  traemos todos los datos para tabla Usuarios (READ)
  </summary>

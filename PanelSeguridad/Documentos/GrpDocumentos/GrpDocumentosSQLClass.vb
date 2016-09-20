@@ -40,7 +40,7 @@ Public Class GrpDocumentosSQLClass
                        "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                        " FROM GRUPO_DOCUMENTO GD" & _
                        " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
-                       " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
+                       " INNER JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
         Else
 
             If vp_S_Contenido = "ALL" Then
@@ -57,7 +57,7 @@ Public Class GrpDocumentosSQLClass
                            "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                            " FROM GRUPO_DOCUMENTO GD" & _
                            " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
-                           " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
+                           " INNER JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))")
             Else
                 sql.Append(" SELECT GD_Nit_ID," & _
                            "       GD_Grp_Documento_ID," & _
@@ -72,7 +72,7 @@ Public Class GrpDocumentosSQLClass
                            "       ROW_NUMBER() OVER(ORDER BY GD_Nit_ID DESC) AS Index_GrpDocumentos " & _
                            " FROM GRUPO_DOCUMENTO GD" & _
                            " LEFT JOIN " & BD_Admin & ".dbo.TC_DDL_TIPO D1 ON D1.DDL_ID = GD.GD_TipoGrupo AND D1.DDL_Tabla = 'TIPO_GRUPO' " & _
-                           " INNER JOIN PARAMETRIZACION_D.dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))" & _
+                           " INNER JOIN " & BD_Param & ".dbo.CLIENTE C ON C.CLI_Document_ID = SUBSTRING(GD.GD_Nit_ID,0,LEN(GD.GD_Nit_ID))" & _
                            " WHERE " & vp_S_Opcion & " like '%" & vp_S_Contenido & "%'")
             End If
         End If

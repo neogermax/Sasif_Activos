@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Parametros/Sasif_menu.Master"
-    CodeBehind="GrpDocumentos.aspx.vb" Inherits="PanelSeguridad.GrpDocumentos" %>
+    CodeBehind="RutaDocumentos.aspx.vb" Inherits="PanelSeguridad.RutaDocumentos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
     <script src="../../SasifMaster.js" type="text/javascript"></script>
     <script src="../SasifMaster_Cosult.js" type="text/javascript"></script>
-    <script src="GrpDocumentos.js" type="text/javascript"></script>
-    <script src="GrpDocumentosTrasaccionsAjax.js" type="text/javascript"></script>
+    <script src="RutaDocumentos.js" type="text/javascript"></script>
+    <script src="RutaDocumentosTrasaccionsAjax.js" type="text/javascript"></script>
     <link href="../../css/css_login.css" rel="stylesheet" type="text/css" />
     <link href="../../css/css_form.css" rel="stylesheet" type="text/css" />
     <link href="../../css/datatables/jquery.dataTables.css" rel="stylesheet" type="text/css" />
@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div id="container_TGrpDocumentos">
+                            <div id="container_TRutaDocumentos">
                             </div>
                         </td>
                     </tr>
@@ -96,54 +96,40 @@
                                     <input type="text" id="Txt_ID" maxlength="5" class="Numeric" style="width: 70px;" />
                                     <span class="Spam_AN"></span></span>
                             </td>
-                            <td style="padding-bottom: 25px; width: 40px;">
+                            <td style="padding-bottom: 25px; width: 80px;">
                                 <span class="cssToolTip">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img2"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
                             <td class="Label_Bold" style="width: 80px;">
-                                Descripción
+                                Ruta
                             </td>
-                            <td style="width: 200px;">
+                            <td style="width: 400px;">
                                 <span class="cssToolTip_Form">
-                                    <input type="text" id="TxtDescription" maxlength="50" style="width: 200px;" />
+                                    <input type="text" id="TxtDescription" maxlength="200" style="width: 400px;" />
                                     <span class="Spam_AST"></span></span>
                             </td>
                             <td style="padding-bottom: 25px;">
-                                <span class="cssToolTip">
+                                <span class="cssToolTip_L">
                                     <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img3"
                                         src="../../images/error.png" />
                                     <span class="SpamEG"></span></span>
                             </td>
+
                         </tr>
-                    </table>
-                    <table id="Tabla_3" style="width: 700px; text-align: left;">
-                        <tr>
-                            <td style="width: 150px;" class="Label_Bold">
-                                Tipo de Grupo
-                            </td>
-                            <td>
-                                <select id="Select_TGrupo" class="C_Chosen">
-                                   <option value="-1">Seleccione...</option>
-                                    <option value="1">Requerido</option>
-                                    <option value="2">Otros</option>
-                                </select>
-                            </td>
-                            <td style="padding-bottom: 25px; width: 320px;">
-                                <span class="cssToolTip">
-                                    <img alt="error" title="" style="padding-left: 1em; height: 21px; width: 21px;" id="Img5"
-                                        src="../../images/error.png" />
-                                    <span class="SpamEG"></span></span>
-                            </td>
-                        </tr>
-                        <tr>
+                          <tr>
                             <td colspan="4" align="center">
+                            <p></p>
+                            </td>
+                        </tr>
+                          <tr>
+                            <td colspan="6" align="center">
                                 <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
                             </td>
                         </tr>
                     </table>
-                </div>
+                 </div>
             </div>
         </div>
     </div>

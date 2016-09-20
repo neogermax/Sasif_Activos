@@ -2,11 +2,11 @@
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_CargaBusqueda(State) {
     $.ajax({
-        url: "GrpDocumentosAjax.aspx",
+        url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
-            "tabla": 'GrpDocumentos'
+            "tabla": 'RutaDocumentos'
         },
         //Transaccion Ajax en proceso
         success: function (result) {
@@ -28,7 +28,7 @@ function transacionAjax_CargaBusqueda(State) {
 //hacemos la transaccion al code behind por medio de Ajax para cargar el droplist
 function transacionAjax_EmpresaNit(State) {
     $.ajax({
-        url: "GrpDocumentosAjax.aspx",
+        url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -54,7 +54,7 @@ function transacionAjax_EmpresaNit(State) {
 
 /*------------------------------ consulta ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_GrpDocumentos(State, filtro, opcion) {
+function transacionAjax_RutaDocumentos(State, filtro, opcion) {
     var contenido;
 
     if ($("#TxtRead").val() == "") {
@@ -66,7 +66,7 @@ function transacionAjax_GrpDocumentos(State, filtro, opcion) {
 
 
     $.ajax({
-        url: "GrpDocumentosAjax.aspx",
+        url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -77,11 +77,11 @@ function transacionAjax_GrpDocumentos(State, filtro, opcion) {
         //Transaccion Ajax en proceso
         success: function (result) {
             if (result == "") {
-                ArrayGrpDocumentos = [];
+                ArrayRutaDocumentos = [];
             }
             else {
-                ArrayGrpDocumentos = JSON.parse(result);
-                Table_GrpDocumentos();
+                ArrayRutaDocumentos = JSON.parse(result);
+                Table_RutaDocumentos();
             }
         },
         error: function () {
@@ -92,11 +92,11 @@ function transacionAjax_GrpDocumentos(State, filtro, opcion) {
 
 /*------------------------------ crear ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_GrpDocumentos_create(State) {
+function transacionAjax_RutaDocumentos_create(State) {
 
     var ID;
     var Nit_ID;
-    var GrpDocumentos = 0;
+    var RutaDocumentos = 0;
     var Politica = 0;
 
      
@@ -110,14 +110,13 @@ function transacionAjax_GrpDocumentos_create(State) {
     }
 
     $.ajax({
-        url: "GrpDocumentosAjax.aspx",
+        url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
             "Nit_ID": Nit_ID,
             "ID": ID,
             "descripcion": $("#TxtDescription").val(),
-            "TipoGrupo": $("#Select_TGrupo").val(),
             "user": User.toUpperCase()
         },
         //Transaccion Ajax en proceso
@@ -126,7 +125,7 @@ function transacionAjax_GrpDocumentos_create(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se realizo el ingreso del GrpDocumentos!");
+                    $("#Mensaje_alert").text("No se realizo el ingreso del RutaDocumentos!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -145,7 +144,7 @@ function transacionAjax_GrpDocumentos_create(State) {
                 case "Exito":
                     if (estado == "modificar") {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El GrpDocumentos fue modificado exitosamente! ");
+                        $("#Mensaje_alert").text("El RutaDocumentos fue modificado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
@@ -154,7 +153,7 @@ function transacionAjax_GrpDocumentos_create(State) {
                     }
                     else {
                         $("#dialog").dialog("option", "title", "Exito");
-                        $("#Mensaje_alert").text("El GrpDocumentos fue creado exitosamente! ");
+                        $("#Mensaje_alert").text("El RutaDocumentos fue creado exitosamente! ");
                         $("#dialog").dialog("open");
                         $("#DE").css("display", "none");
                         $("#SE").css("display", "block");
@@ -173,10 +172,10 @@ function transacionAjax_GrpDocumentos_create(State) {
 
 /*------------------------------ eliminar ---------------------------*/
 //hacemos la transaccion al code behind por medio de Ajax
-function transacionAjax_GrpDocumentos_delete(State) {
+function transacionAjax_RutaDocumentos_delete(State) {
 
     $.ajax({
-        url: "GrpDocumentosAjax.aspx",
+        url: "RutaDocumentosAjax.aspx",
         type: "POST",
         //crear json
         data: { "action": State,
@@ -190,7 +189,7 @@ function transacionAjax_GrpDocumentos_delete(State) {
 
                 case "Error":
                     $("#dialog").dialog("option", "title", "Disculpenos :(");
-                    $("#Mensaje_alert").text("No se elimino el GrpDocumentos!");
+                    $("#Mensaje_alert").text("No se elimino el RutaDocumentos!");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "block");
                     $("#SE").css("display", "none");
@@ -200,7 +199,7 @@ function transacionAjax_GrpDocumentos_delete(State) {
 
                 case "Exist_O":
                     $("#dialog").dialog("option", "title", "Integridad referencial");
-                    $("#Mensaje_alert").text("No se elimino el GrpDocumentos, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
+                    $("#Mensaje_alert").text("No se elimino el RutaDocumentos, para eliminarlo debe eliminar primero el registro en la tabla Empleado");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "none");
@@ -211,7 +210,7 @@ function transacionAjax_GrpDocumentos_delete(State) {
                 case "Exito":
                     $("#dialog_eliminar").dialog("close");
                     $("#dialog").dialog("option", "title", "Exito");
-                    $("#Mensaje_alert").text("El GrpDocumentos fue eliminado exitosamente! ");
+                    $("#Mensaje_alert").text("El RutaDocumentos fue eliminado exitosamente! ");
                     $("#dialog").dialog("open");
                     $("#DE").css("display", "none");
                     $("#SE").css("display", "block");

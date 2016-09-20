@@ -150,6 +150,10 @@
     <Content Include="Documentos\GrpDocumentos\GrpDocumentosAjax.aspx" />
     <Content Include="Documentos\GrpDocumentos\GrpDocumentosTrasaccionsAjax.js" />
     <Content Include="Documentos\menu.js" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentos.aspx" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentos.js" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx" />
+    <Content Include="Documentos\RutaDocumentos\RutaDocumentosTrasaccionsAjax.js" />
     <Content Include="Documentos\SasifMaster_Cosult.js" />
     <Content Include="images\add.png" />
     <Content Include="images\adress_book.png" />
@@ -534,6 +538,22 @@
     </Compile>
     <Compile Include="Documentos\GrpDocumentos\GrpDocumentosClass.vb" />
     <Compile Include="Documentos\GrpDocumentos\GrpDocumentosSQLClass.vb" />
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentos.aspx.designer.vb">
+      <DependentUpon>RutaDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentos.aspx.vb">
+      <DependentUpon>RutaDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx.designer.vb">
+      <DependentUpon>RutaDocumentosAjax.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosAjax.aspx.vb">
+      <DependentUpon>RutaDocumentosAjax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosClass.vb" />
+    <Compile Include="Documentos\RutaDocumentos\RutaDocumentosSQLClass.vb" />
     <Compile Include="Parametros\Area\Area.aspx.designer.vb">
       <DependentUpon>Area.aspx</DependentUpon>
     </Compile>
