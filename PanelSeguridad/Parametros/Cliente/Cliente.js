@@ -7,6 +7,7 @@ var Matrix_Jefe = [];
 var Matrix_GrpDocumentos = [];
 
 var ArrayRegimen= [];
+
 var ArrayCliente = [];
 var ArrayCombo = [];
 var ArrayPaises = [];
@@ -37,7 +38,7 @@ $(document).ready(function () {
     transaccionAjax_MCargo('MATRIX_CARGO');
     transaccionAjax_MJefe('MATRIX_JEFE');
     transaccionAjax_MGrpDoc('MATRIX_GRP');
-        
+
     M_Regimen();
 
     transacionAjax_CargaBusqueda('cargar_droplist_busqueda');
@@ -286,20 +287,6 @@ $(document).ready(function () {
     Change_Select_Nit();
 
 });
-
-
-//carga el combo de Area dependiente
-function Change_Select_Nit() {
-    $("#Select_EmpresaNit").change(function () {
-        var index_ID = $(this).val();
-        Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
-        Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
-    });
-}
-
-
 
 //revisa el tipo de documento
 function Change_Select_TDoc() {
@@ -573,13 +560,13 @@ function Ver(Index_Cliente) {
 
 var StrPolitica;
 
-// muestra el registro a editar
+
 function Editar(Index_Cliente, Type) {
 
     Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, ArrayCliente[Index_Cliente].Pais_ID, "Select_Ciudad", 1, ArrayCliente[Index_Cliente].Ciudad_ID);
     Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, ArrayCliente[Index_Cliente].Pais_ID, "Select_Ciudad_Doc", 1, ArrayCliente[Index_Cliente].DocCiudad);
     Change_Select_TPersona(ArrayCliente[Index_Cliente].TipoPersona, ArrayCliente[Index_Cliente].Regimen);
-    
+
     if (Type == 'V') {
         $("#TablaDatos_D_Vista").css("display", "inline-table");
         $("#TablaDatos_D").css("display", "none");
@@ -614,7 +601,7 @@ function Editar(Index_Cliente, Type) {
     $("#Select_Acceso").val(ArrayCliente[Index_Cliente].AccesoSistema);
 
     StrPolitica = ArrayCliente[Index_Cliente].Politica_ID;
- 
+
     if (StrPolitica == 0)
         $("#Select_Politica").val("-1");
     else
@@ -641,7 +628,7 @@ function Editar(Index_Cliente, Type) {
     $("#Txt_Ape_1").val(ArrayCliente[Index_Cliente].Apellido_1);
     $("#Txt_Ape_2").val(ArrayCliente[Index_Cliente].Apellido_2);
     $("#Txt_CodBank").val(ArrayCliente[Index_Cliente].Cod_Bank);
-        
+
     $("#Select_EmpresaNit").attr("disabled", "disabled");
     $("#Select_Documento").attr("disabled", "disabled");
 
@@ -654,10 +641,13 @@ function Editar(Index_Cliente, Type) {
 
     if (Type == "V") {
         $("#Btnguardar").css("display", "none");
+        $("#BtnLimpiar").css("display", "none");
+
         ConsultaPersona(Index_Cliente);
         Disabled_Client();
     }
     else {
+        $("#BtnLimpiar").css("display", "inline-table");
         $("#Btnguardar").css("display", "inline-table");
         $("#Btnguardar").attr("value", "Actualizar");
     }
@@ -668,7 +658,7 @@ function Editar(Index_Cliente, Type) {
     Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Cargo_ID);
     Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].Document_ID_Jefe);
     Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", ArrayCliente[Index_Cliente].Nit_ID, ArrayCliente[Index_Cliente].GrpDocumentos);
- 
+
 }
 
 //oculta los combos
@@ -812,6 +802,7 @@ function x() {
 //limpiar campos
 function Clear() {
     $("#Select_Documento").val("-1");
+    $("#Select_Pais").val("-1");
     $("#Select_Ciudad").val("-1");
     $("#Select_EmpresaNit").val("-1");
     $("#Select_Ciudad_Doc").val("-1");
@@ -842,7 +833,9 @@ function Clear() {
 
     $("#Select_TPersona").val("-1");
     $("#Select_Regimen").val("-1");
-
+    $("#Select_Acceso").val("N");
+    $("#Select_GrpDocument").val("-1");
+    
     $('.C_Chosen').trigger('chosen:updated');
 
 }
@@ -896,6 +889,9 @@ function Disabled_Client() {
     $("#Check_Proveedor").attr("disabled", "disabled");
     $("#Check_EntBancaria").attr("disabled", "disabled");
 
+    $("#Select_Acceso").attr("disabled", "disabled");
+    $("#Select_GrpDocument").attr("disabled", "disabled");
+
     $('.C_Chosen').trigger('chosen:updated');
 
 }
@@ -934,6 +930,9 @@ function Enabled_Client() {
     $("#Check_Asesor").removeAttr("disabled");
     $("#Check_Proveedor").removeAttr("disabled");
     $("#Check_EntBancaria").removeAttr("disabled");
+
+    $("#Select_Acceso").removeAttr("disabled");
+    $("#Select_GrpDocument").removeAttr("disabled");
 
     $('.C_Chosen').trigger('chosen:updated');
 
@@ -1005,5 +1004,11 @@ function V2() {
 
     charge_CatalogList(Matrix_Pais, "Select_Pais", 1);
     charge_CatalogList(Matrix_Pais, "Select_Pais_D", 1);
+}
 
+//limpia los campos
+function BtnLimpia() {
+    Clear();
+    Enabled_Client();
+    $("#Anexos").css("display", "none");
 }

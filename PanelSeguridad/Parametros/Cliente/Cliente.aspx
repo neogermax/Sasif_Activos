@@ -55,27 +55,24 @@
                 <div id="Container_Complementos">
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Direcciones');">
                         <div class="C_Image">
-                            <a href="javascript:Direcciones('Default');">
-                                <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="35px"
-                                    width="35px" style="margin-top: 7px;" /></a>
+                            <img alt="Direc" id="Direccion" src="../../images/adress_book.png" height="35px"
+                                width="35px" style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT1 C_Text Label_Bold">
                         </div>
                     </div>
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Banco');">
                         <div class="C_Image">
-                            <a href="javascript:Bancos('Default');">
-                                <img alt="Bank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
-                                    style="margin-top: 3px;" /></a>
+                            <img alt="Bank" id="Bancos" src="../../images/bank.png" height="40px" width="40px"
+                                style="margin-top: 3px;" />
                         </div>
                         <div class="Spam_CT2 C_Text Label_Bold">
                         </div>
                     </div>
                     <div class="Option_Cliente" onclick="javascript:BlockAnexos('Documento');">
                         <div class="C_Image">
-                            <a href="javascript:Documentos('Default');">
-                                <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
-                                    style="margin-top: 7px;" /></a>
+                            <img alt="Bank" id="Documentos" src="../../images/documentos.png" height="35px" width="35px"
+                                style="margin-top: 7px;" />
                         </div>
                         <div class="Spam_CT4 C_Text Label_Bold">
                         </div>
@@ -673,6 +670,7 @@
                     <tr>
                         <td colspan="4" align="center" id="TD_Button">
                             <input id="Btnguardar" type="button" value="Guardar" onclick="BtnCrear();" />
+                            <input id="BtnLimpiar" type="button" value="Limpiar" onclick="BtnLimpia();" />
                         </td>
                     </tr>
                 </table>

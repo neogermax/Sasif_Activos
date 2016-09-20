@@ -28,10 +28,10 @@ function Direcciones(Option_Adress) {
     switch (Option_Adress) {
         case "V":
             $("#Txt_Nit_V").val(D_Nit);
-            $("#Txt_TypeIden_V").val(D_String_TDocumento);
+            $("#Txt_TypeIden_V").val($("#Con_Documento").html());
             $("#Txt_Ident_V").val(D_Documento);
             $("#Txt_Nit_V_2").val(D_Nit);
-            $("#Txt_TypeIden_V_2").val(D_String_TDocumento);
+            $("#Txt_TypeIden_V_2").val($("#Con_Documento").html());
             $("#Txt_Ident_V_2").val(D_Documento);
 
             transacionAjax_allAdress('R_ead_Adress', D_Nit, D_TDocumento, D_Documento, Option_Adress);
@@ -135,7 +135,7 @@ function Add_Array_Adress() {
 
     var Json_Direccion = Convert_and_Valide_Json();
     ArrayDirecciones.push(Json_Direccion);
-    Tabla_General('Default');
+    Tabla_General('U');
 
     $("#dialog").dialog("option", "title", "Exito");
     $("#Mensaje_alert").text("la Nueva direccion fue agregada!");
@@ -205,6 +205,11 @@ function Select_Option(Select_control, Index_Adress) {
             DeleteDirecion(Index_Adress);
             Disabled_Direccion();
             break;
+
+        case "U": //visualizar
+            ReadDirecion(Index_Adress);
+            Disabled_Direccion();
+            break;
     }
 
 }
@@ -231,7 +236,7 @@ function Update_Array_Adress() {
 
     var Json_Direccion = Convert_and_Valide_Json();
     ArrayDirecciones.push(Json_Direccion);
-    Tabla_General('Default');
+    Tabla_General('U');
 
     $("#dialog").dialog("option", "title", "Exito");
     $("#Mensaje_alert").text("la direccion fue Actualizada!");
@@ -280,7 +285,7 @@ function Confirm_Adress(Confirm) {
             ArrayDirecciones[itemArray].Consecutivo = parseInt(itemArray) + 1;
         }
 
-        Tabla_General('Default');
+        Tabla_General('U');
         clearDireccion();
 
     }

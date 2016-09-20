@@ -541,8 +541,6 @@ function transacionAjax_Cliente_create(State) {
                         $("#WE").css("display", "none");
 
                         NitAlter = $("#Select_EmpresaNit").val();
-                        ArrayEmpresaNit = [];
-                        transacionAjax_EmpresaNit('Cliente');
                     }
                     else {
                         $("#dialog").dialog("option", "title", "Exito");
@@ -553,8 +551,6 @@ function transacionAjax_Cliente_create(State) {
                         $("#WE").css("display", "none");
 
                         NitAlter = $("#Select_EmpresaNit").val();
-                        ArrayEmpresaNit = [];
-                        transacionAjax_EmpresaNit('Cliente');
                         $("#Admin_Anexos").css("display", "inline-table");
 
                         Disabled_Client();

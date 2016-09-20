@@ -19,10 +19,10 @@ function Bancos(Option_Bank) {
     switch (Option_Bank) {
         case "V":
             $("#Txt_Nit_B").val(D_Nit);
-            $("#Txt_TypeIden_B").val(D_String_TDocumento);
+            $("#Txt_TypeIden_B").val($("#Con_Documento").html());
             $("#Txt_Ident_B").val(D_Documento);
             $("#Txt_Nit_B_2").val(D_Nit);
-            $("#Txt_TypeIden_B_2").val(D_String_TDocumento);
+            $("#Txt_TypeIden_B_2").val($("#Con_Documento").html());
             $("#Txt_Ident_B_2").val(D_Documento);
 
             transacionAjax_allBank('R_ead_Bank', D_Nit, D_TDocumento, D_Documento, Option_Bank);
@@ -177,7 +177,7 @@ function Add_Array_Bank() {
 
     var Json_Bank = Convert_and_Valide_Json_Bank();
     ArrayBancos.push(Json_Bank);
-    Tabla_General_Bank('Default');
+    Tabla_General_Bank('U');
 
     $("#dialog").dialog("option", "title", "Exito");
     $("#Mensaje_alert").text("la Nueva Entidad Financiera fue agregada!");
@@ -224,7 +224,7 @@ function Confirm_Bank(Confirm) {
             ArrayDirecciones[itemArray].Consecutivo = parseInt(itemArray) + 1;
         }
 
-        Tabla_General_Bank('Default');
+        Tabla_General_Bank('U');
         ClearBank();
 
     }

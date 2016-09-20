@@ -69,8 +69,9 @@ function Change_Select_pais() {
 
     $("#Select_Pais_D").change(function () {
         var Select_Pais = $(this).val();
-        $('#Select_Ciudad').empty();
-        Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, Select_Pais, "Select_Ciudad", 1, "");
+
+        $('#Select_Ciudad_D').empty();
+        Charge_CatalogList_Matriz_Depend(Matrix_Pais, Matrix_Ciudad, Select_Pais, "Select_Ciudad_D", 1, "");
     });
 }
 
@@ -222,4 +223,16 @@ function Charge_Combos_Depend_Nit(Matrix, Selector, Nit, Index_Edit) {
     $("#" + Selector).trigger("liszt:updated");
     $('.C_Chosen').trigger('chosen:updated');
 
+}
+
+
+//carga el combo de Area dependiente
+function Change_Select_Nit() {
+    $("#Select_EmpresaNit").change(function () {
+        var index_ID = $(this).val();
+        Charge_Combos_Depend_Nit(Matrix_Area, "Select_Area", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Cargo, "Select_Cargo", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_Jefe, "Select_Jefe", index_ID, "");
+        Charge_Combos_Depend_Nit(Matrix_GrpDocumentos, "Select_GrpDocument", index_ID, "");
+    });
 }
